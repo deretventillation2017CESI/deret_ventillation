@@ -34,7 +34,12 @@ class Element
      * @ORM\Column(name="obligatoire", type="boolean")
      */
     private $obligatoire;
-
+    
+    /**
+     * @ManyToOne(targetEntity="typeElement")
+     * @JoinColumn(name="id_typeElement", referencedColumnName="id")
+     */
+    private $typeElement;
 
     /**
      * Get id
