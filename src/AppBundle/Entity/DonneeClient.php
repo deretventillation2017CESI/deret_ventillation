@@ -34,8 +34,11 @@ class DonneeClient
      * @ORM\Column(name="parametre", type="string", length=255)
      */
     private $parametre;
-
-
+    /**
+     * @ManyToOne(targetEntity="TypeDonneeClient")
+     * @JoinColumn(name="id_typeDonneClient", referencedColumnName="id")
+     */
+    private $typeDonneeClient;
     /**
      * Get id
      *
