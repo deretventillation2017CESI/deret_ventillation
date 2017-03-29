@@ -23,12 +23,12 @@ class Activite
     
    /**
      * Many Users have Many Groups.
-     * @ManyToMany(targetEntity="Element")
-     * @JoinTable(name="activites_elements",
+     * @ORM\ManyToMany(targetEntity="Element")
+     * @ORM\JoinTable(name="activites_elements",
      *      joinColumns={@JoinColumn(name="id_activite", referencedColumnName="id")},
      *      inverseJoinColumns={@JoinColumn(name="id_element", referencedColumnName="id")}
      *      )
-     */
+     */ 
     private $listeElements;
     /**
      * Get id
