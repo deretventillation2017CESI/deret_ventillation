@@ -34,6 +34,24 @@ class Ventilation
      * @ORM\Column(name="dateSaisie", type="datetime")
      */
     private $dateSaisie;
+    
+    /*
+     * @ORM\ManyToOne(targetEntity="Poste")
+     * @ORM\JoinColumn(name="poste", referencedColumnName="id")
+     */
+    private $poste;
+    
+    /*
+     * @ORM\ManyToOne(targetEntity="Utilisateur")
+     * @ORM\JoinColumn(name="utilisateur", referencedColumnName="id")
+     */
+    private $utilisateur;
+    
+    /*
+     * @ORM\OneToOne(targetEntity="VentilationActivite")
+     * @ORM\JoinColumn(name="ventilation_activite", referencedColumnName="id")
+     */
+    private $ventilationActivite;
 
 
     /**
