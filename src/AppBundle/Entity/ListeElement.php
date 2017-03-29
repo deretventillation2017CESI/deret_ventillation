@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,6 +29,12 @@ class ListeElement
      */
     private $valeur;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Element", mappedBy="listElements")
+     */
+    private $elements;
 
     /**
      * Get id
@@ -62,4 +69,26 @@ class ListeElement
     {
         return $this->valeur;
     }
+
+    function __toString()
+    {
+        return $this->getValeur();
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getElements()
+    {
+        return $this->elements;
+    }
+
+    /**
+     * @param ArrayCollection $elements
+     */
+    public function setElements($elements)
+    {
+        $this->elements = $elements;
+    }
+
 }

@@ -62,4 +62,10 @@ class TypeElement
     {
         return $this->libelle;
     }
+
+    function __toString()
+    {
+        return $this->getLibelle();
+    }
+
 }

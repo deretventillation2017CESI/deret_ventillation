@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,10 +37,18 @@ class Element
     private $obligatoire;
     
     /**
-     * @ORM\ManyToOne(targetEntity="typeElement")
+     * @ORM\ManyToOne(targetEntity="TypeElement")
      * @ORM\JoinColumn(name="id_typeElement", referencedColumnName="id")
-     */
+    */
     private $typeElement;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToOne(targetEntity="ListeElement", inversedBy="elements")
+     * @ORM\JoinColumn(name="id_listElement", referencedColumnName="id")
+     */
+    private $listElements;
 
     /**
      * Get id
@@ -102,11 +111,11 @@ class Element
     /**
      * Set typeElement
      *
-     * @param \AppBundle\Entity\typeElement $typeElement
+     * @param \AppBundle\Entity\TypeElement $typeElement
      *
      * @return Element
      */
-    public function setTypeElement(\AppBundle\Entity\typeElement $typeElement = null)
+    public function setTypeElement(\AppBundle\Entity\TypeElement $typeElement = null)
     {
         $this->typeElement = $typeElement;
 
@@ -122,4 +131,23 @@ class Element
     {
         return $this->typeElement;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getListElements()
+    {
+        return $this->listElements;
+    }
+
+    /**
+     * @param ArrayCollection $listElements
+     */
+    public function setListElements($listElements)
+    {
+        $this->listElements = $listElements;
+    }
+
+
+
 }
