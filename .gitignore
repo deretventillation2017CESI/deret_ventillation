@@ -26,3 +26,4 @@ SymfonyRequirements.php
 /app/bootstrap.php.cache
 /app/console
 /app/phpunit.xml.dist
+/nbproject/project.properties
