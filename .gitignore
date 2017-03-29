@@ -1,4 +1,4 @@
-/app/config/parameters.yml
+app/config/parameters.yml
 /build/
 /phpunit.xml
 /var/*
@@ -17,3 +17,12 @@
 composer.lock
 composer.json
 /nbproject/private/
+
+SymfonyRequirements.php
+/app/config/parameters.yml
+/composer.lock
+/nbproject/project.properties
+/web/config.php
+/app/bootstrap.php.cache
+/app/console
+/app/phpunit.xml.dist
