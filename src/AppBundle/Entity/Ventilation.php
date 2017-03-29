@@ -52,8 +52,7 @@ class Ventilation
      * @ORM\JoinColumn(name="ventilation_activite", referencedColumnName="id")
      */
     private $ventilationActivite;
-
-
+    
     /**
      * Get id
      *
@@ -110,6 +109,30 @@ class Ventilation
     public function getDateSaisie()
     {
         return $this->dateSaisie;
+    }
+    
+    function getPoste() {
+        return $this->poste;
+    }
+
+    function getUtilisateur() {
+        return $this->utilisateur;
+    }
+
+    function getVentilationActivite() {
+        return $this->ventilationActivite;
+    }
+
+    function setPoste($poste) {
+        $this->poste = $poste;
+    }
+
+    function setUtilisateur($utilisateur) {
+        $this->utilisateur = $utilisateur;
+    }
+
+    function setVentilationActivite($ventilationActivite) {
+        $this->ventilationActivite = $ventilationActivite;
     }
 }
 
