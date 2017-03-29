@@ -48,8 +48,7 @@ class Ventilation
     private $utilisateur;
     
     /*
-     * @ORM\OneToOne(targetEntity="VentilationActivite")
-     * @ORM\JoinColumn(name="ventilation_activite", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="VentilationActivite", mappedBy="ventilation")
      */
     private $ventilationActivite;
     
