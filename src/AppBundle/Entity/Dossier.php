@@ -28,6 +28,11 @@ class Dossier
      */
     private $nom;
 
+    /*
+     * @ORM\ManyToOne(targetEntity="Utilisateur")
+     * @ORM\JoinColumn(name="responsable", referencedColumnName="id")
+     */
+    private $responsable;
 
     /**
      * Get id
