@@ -63,4 +63,3 @@ class Poste
         return $this->libelle;
     }
 }
-

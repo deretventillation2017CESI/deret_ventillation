@@ -63,4 +63,3 @@ class TypeElement
         return $this->libelle;
     }
 }
-

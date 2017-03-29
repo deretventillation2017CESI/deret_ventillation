@@ -98,28 +98,5 @@ class Element
     {
         return $this->obligatoire;
     }
-
-    /**
-     * Set typeElement
-     *
-     * @param \AppBundle\Entity\typeElement $typeElement
-     *
-     * @return Element
-     */
-    public function setTypeElement(\AppBundle\Entity\typeElement $typeElement = null)
-    {
-        $this->typeElement = $typeElement;
-
-        return $this;
-    }
-
-    /**
-     * Get typeElement
-     *
-     * @return \AppBundle\Entity\typeElement
-     */
-    public function getTypeElement()
-    {
-        return $this->typeElement;
-    }
 }
+

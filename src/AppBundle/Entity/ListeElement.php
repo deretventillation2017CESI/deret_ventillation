@@ -63,4 +63,3 @@ class ListeElement
         return $this->valeur;
     }
 }
-

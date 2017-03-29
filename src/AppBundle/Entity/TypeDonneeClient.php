@@ -63,4 +63,3 @@ class TypeDonneeClient
         return $this->libelle;
     }
 }
-

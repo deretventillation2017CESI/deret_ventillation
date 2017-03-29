@@ -25,8 +25,8 @@ class Activite
      * Many Users have Many Groups.
      * @ORM\ManyToMany(targetEntity="Element")
      * @ORM\JoinTable(name="activites_elements",
-     *      joinColumns={@JoinColumn(name="id_activite", referencedColumnName="id")},
-     *      inverseJoinColumns={@JoinColumn(name="id_element", referencedColumnName="id")}
+     *      joinColumns={@ORM\JoinColumn(name="id_activite", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id_element", referencedColumnName="id")}
      *      )
      */ 
     private $listeElements;
@@ -39,5 +39,45 @@ class Activite
     {
         return $this->id;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->listeElements = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add listeElement
+     *
+     * @param \AppBundle\Entity\Element $listeElement
+     *
+     * @return Activite
+     */
+    public function addListeElement(\AppBundle\Entity\Element $listeElement)
+    {
+        $this->listeElements[] = $listeElement;
+
+        return $this;
+    }
+
+    /**
+     * Remove listeElement
+     *
+     * @param \AppBundle\Entity\Element $listeElement
+     */
+    public function removeListeElement(\AppBundle\Entity\Element $listeElement)
+    {
+        $this->listeElements->removeElement($listeElement);
+    }
+
+    /**
+     * Get listeElements
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getListeElements()
+    {
+        return $this->listeElements;
+    }
+}

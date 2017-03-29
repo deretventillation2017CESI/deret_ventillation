@@ -96,28 +96,5 @@ class DonneeClient
     {
         return $this->parametre;
     }
-
-    /**
-     * Set typeDonneeClient
-     *
-     * @param \AppBundle\Entity\TypeDonneeClient $typeDonneeClient
-     *
-     * @return DonneeClient
-     */
-    public function setTypeDonneeClient(\AppBundle\Entity\TypeDonneeClient $typeDonneeClient = null)
-    {
-        $this->typeDonneeClient = $typeDonneeClient;
-
-        return $this;
-    }
-
-    /**
-     * Get typeDonneeClient
-     *
-     * @return \AppBundle\Entity\TypeDonneeClient
-     */
-    public function getTypeDonneeClient()
-    {
-        return $this->typeDonneeClient;
-    }
 }
+
