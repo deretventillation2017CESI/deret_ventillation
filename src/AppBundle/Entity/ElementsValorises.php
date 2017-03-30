@@ -2,16 +2,15 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ListeElement
+ * ElementsValorises
  *
- * @ORM\Table(name="liste_element")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ListeElementRepository")
+ * @ORM\Table(name="elements_valorises")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ElementsValorisesRepository")
  */
-class ListeElement
+class ElementsValorises
 {
     /**
      * @var int
@@ -28,13 +27,14 @@ class ListeElement
      * @ORM\Column(name="valeur", type="string", length=255)
      */
     private $valeur;
-
+    
     /**
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Element", mappedBy="listElements")
      */
     private $elements;
+
 
     /**
      * Get id
@@ -51,7 +51,7 @@ class ListeElement
      *
      * @param string $valeur
      *
-     * @return ListeElement
+     * @return ElementsValorises
      */
     public function setValeur($valeur)
     {
@@ -69,26 +69,5 @@ class ListeElement
     {
         return $this->valeur;
     }
-
-    function __toString()
-    {
-        return $this->getValeur();
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getElements()
-    {
-        return $this->elements;
-    }
-
-    /**
-     * @param ArrayCollection $elements
-     */
-    public function setElements($elements)
-    {
-        $this->elements = $elements;
-    }
-
 }
+

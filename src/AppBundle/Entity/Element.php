@@ -45,10 +45,10 @@ class Element
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToOne(targetEntity="ListeElement", inversedBy="elements")
-     * @ORM\JoinColumn(name="id_listElement", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="ElementsValorises", inversedBy="elements")
+     * @ORM\JoinColumn(name="id_elements_valorises", referencedColumnName="id")
      */
-    private $listElements;
+    private $elementsValorises;
 
     /**
      * Get id
@@ -132,22 +132,13 @@ class Element
         return $this->typeElement;
     }
 
-    /**
-     * @return ArrayCollection
-     */
-    public function getListElements()
-    {
-        return $this->listElements;
+    function getElementsValorises() {
+        return $this->elementsValorises;
     }
 
-    /**
-     * @param ArrayCollection $listElements
-     */
-    public function setListElements($listElements)
-    {
-        $this->listElements = $listElements;
+    function setElementsValorises(ArrayCollection $elementsValorises) {
+        $this->elementsValorises = $elementsValorises;
     }
-
 
 
 }

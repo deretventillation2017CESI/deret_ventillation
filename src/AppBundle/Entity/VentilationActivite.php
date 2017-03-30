@@ -34,13 +34,13 @@ class VentilationActivite
     private $activite;
     
     /*
-     * @ORM\ManyToMany(targetEntity="ListeElement")
-     * @ORM\JoinTable(name="ventilation_activite_liste_element",
+     * @ORM\ManyToMany(targetEntity="ElementsValorises")
+     * @ORM\JoinTable(name="ventilation_activite_elements_valorises",
      *      joinColumns={@ORM\JoinColumn(name="ventilation_activite", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="liste_element", referencedColumnName="id", unique=true)}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="elements_valorises", referencedColumnName="id", unique=true)}
      *      )
      */
-    private $listeElement;
+    private $elementsValorises;
     
     
     /* Constructeur */
@@ -66,10 +66,6 @@ class VentilationActivite
         return $this->activite;
     }
 
-    function getListeElement() {
-        return $this->listeElement;
-    }
-
     function setVentilation($ventilation) {
         $this->ventilation = $ventilation;
     }
@@ -77,9 +73,13 @@ class VentilationActivite
     function setActivite($activite) {
         $this->activite = $activite;
     }
+    
+    function getElementsValorises() {
+        return $this->elementsValorises;
+    }
 
-    function setListeElement($listeElement) {
-        $this->listeElement = $listeElement;
+    function setElementsValorises($elementsValorises) {
+        $this->elementsValorises = $elementsValorises;
     }
 
 }
