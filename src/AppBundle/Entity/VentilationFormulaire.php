@@ -33,63 +33,30 @@ class VentilationFormulaire
      */
     private $formulaire;
 
-
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
+    function getId() {
         return $this->id;
     }
 
-    /**
-     * Set ventilation
-     *
-     * @param integer $ventilation
-     *
-     * @return VentilationFormulaire
-     */
-    public function setVentilation($ventilation)
-    {
-        $this->ventilation = $ventilation;
-
-        return $this;
-    }
-
-    /**
-     * Get ventilation
-     *
-     * @return int
-     */
-    public function getVentilation()
-    {
+    function getVentilation() {
         return $this->ventilation;
     }
 
-    /**
-     * Set formulaire
-     *
-     * @param integer $formulaire
-     *
-     * @return VentilationFormulaire
-     */
-    public function setFormulaire($formulaire)
-    {
-        $this->formulaire = $formulaire;
-
-        return $this;
-    }
-
-    /**
-     * Get formulaire
-     *
-     * @return int
-     */
-    public function getFormulaire()
-    {
+    function getFormulaire() {
         return $this->formulaire;
     }
+
+    function setId($id) {
+        $this->id = $id;
+    }
+
+    function setVentilation($ventilation) {
+        $this->ventilation = $ventilation;
+    }
+
+    function setFormulaire($formulaire) {
+        $this->formulaire = $formulaire;
+    }
+
+
 }
 

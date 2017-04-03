@@ -38,63 +38,30 @@ class Formulaire
      */
     private $listeElements;
 
-
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
+    function getId() {
         return $this->id;
     }
 
-    /**
-     * Set libelle
-     *
-     * @param string $libelle
-     *
-     * @return Formulaire
-     */
-    public function setLibelle($libelle)
-    {
-        $this->libelle = $libelle;
-
-        return $this;
-    }
-
-    /**
-     * Get libelle
-     *
-     * @return string
-     */
-    public function getLibelle()
-    {
+    function getLibelle() {
         return $this->libelle;
     }
 
-    /**
-     * Set listeElements
-     *
-     * @param string $listeElements
-     *
-     * @return Formulaire
-     */
-    public function setListeElements($listeElements)
-    {
-        $this->listeElements = $listeElements;
-
-        return $this;
-    }
-
-    /**
-     * Get listeElements
-     *
-     * @return string
-     */
-    public function getListeElements()
-    {
+    function getListeElements() {
         return $this->listeElements;
     }
+
+    function setId($id) {
+        $this->id = $id;
+    }
+
+    function setLibelle($libelle) {
+        $this->libelle = $libelle;
+    }
+
+    function setListeElements($listeElements) {
+        $this->listeElements = $listeElements;
+    }
+
+
 }
 
