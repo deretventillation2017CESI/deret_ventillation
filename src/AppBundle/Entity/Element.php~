@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,26 +35,11 @@ class Element
      */
     private $obligatoire;
     
-    /*
-     * @var string
-     *
-     * @ORM\Column(name="default", type="string", length=100) 
-     */
-    private $default;
-    
     /**
-     * @ORM\ManyToOne(targetEntity="TypeElement")
+     * @ORM\ManyToOne(targetEntity="typeElement")
      * @ORM\JoinColumn(name="id_typeElement", referencedColumnName="id")
-    */
-    private $typeElement;
-
-    /**
-     * @var ArrayCollection
-     *
-     * @ORM\ManyToOne(targetEntity="ElementsValorises", inversedBy="elements")
-     * @ORM\JoinColumn(name="id_elements_valorises", referencedColumnName="id")
      */
-    private $elementsValorises;
+    private $typeElement;
 
     /**
      * Get id
@@ -114,47 +98,5 @@ class Element
     {
         return $this->obligatoire;
     }
-
-    /**
-     * Set typeElement
-     *
-     * @param \AppBundle\Entity\TypeElement $typeElement
-     *
-     * @return Element
-     */
-    public function setTypeElement(\AppBundle\Entity\TypeElement $typeElement = null)
-    {
-        $this->typeElement = $typeElement;
-
-        return $this;
-    }
-
-    /**
-     * Get typeElement
-     *
-     * @return \AppBundle\Entity\typeElement
-     */
-    public function getTypeElement()
-    {
-        return $this->typeElement;
-    }
-
-    function getElementsValorises() {
-        return $this->elementsValorises;
-    }
-
-    function setElementsValorises(ArrayCollection $elementsValorises) {
-        $this->elementsValorises = $elementsValorises;
-    }
-
-    function getDefault() {
-        return $this->default;
-    }
-
-    function setDefault($default) {
-        $this->default = $default;
-    }
-
-
-
 }
+

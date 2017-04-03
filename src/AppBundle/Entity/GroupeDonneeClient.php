@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * TypeActivite
+ * GroupeDonneeClient
  *
- * @ORM\Table(name="type_activite")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\TypeActiviteRepository")
+ * @ORM\Table(name="groupe_donnee_client")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\GroupeDonneeClientRepository")
  */
-class TypeActivite
+class GroupeDonneeClient
 {
     /**
      * @var int
@@ -24,7 +24,7 @@ class TypeActivite
     /**
      * @var string
      *
-     * @ORM\Column(name="libelle", type="string", length=100)
+     * @ORM\Column(name="libelle", type="string", length=255)
      */
     private $libelle;
 
@@ -44,7 +44,7 @@ class TypeActivite
      *
      * @param string $libelle
      *
-     * @return TypeActivite
+     * @return GroupeDonneeClient
      */
     public function setLibelle($libelle)
     {
@@ -63,3 +63,4 @@ class TypeActivite
         return $this->libelle;
     }
 }
+

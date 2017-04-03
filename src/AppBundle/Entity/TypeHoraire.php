@@ -63,4 +63,3 @@ class TypeHoraire
         return $this->libelle;
     }
 }
-

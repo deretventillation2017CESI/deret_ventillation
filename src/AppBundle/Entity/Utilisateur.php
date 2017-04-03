@@ -91,4 +91,172 @@ class Utilisateur extends BaseUser {
      */
     private $dossier;
 
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     *
+     * @return Utilisateur
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set prenom
+     *
+     * @param string $prenom
+     *
+     * @return Utilisateur
+     */
+    public function setPrenom($prenom)
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    /**
+     * Get prenom
+     *
+     * @return string
+     */
+    public function getPrenom()
+    {
+        return $this->prenom;
+    }
+
+    /**
+     * Set statut
+     *
+     * @param boolean $statut
+     *
+     * @return Utilisateur
+     */
+    public function setStatut($statut)
+    {
+        $this->statut = $statut;
+
+        return $this;
+    }
+
+    /**
+     * Get statut
+     *
+     * @return boolean
+     */
+    public function getStatut()
+    {
+        return $this->statut;
+    }
+
+    /**
+     * Set identifiantIGE
+     *
+     * @param integer $identifiantIGE
+     *
+     * @return Utilisateur
+     */
+    public function setIdentifiantIGE($identifiantIGE)
+    {
+        $this->identifiantIGE = $identifiantIGE;
+
+        return $this;
+    }
+
+    /**
+     * Get identifiantIGE
+     *
+     * @return integer
+     */
+    public function getIdentifiantIGE()
+    {
+        return $this->identifiantIGE;
+    }
+
+    /**
+     * Set responsabe
+     *
+     * @param boolean $responsabe
+     *
+     * @return Utilisateur
+     */
+    public function setResponsabe($responsabe)
+    {
+        $this->responsabe = $responsabe;
+
+        return $this;
+    }
+
+    /**
+     * Get responsabe
+     *
+     * @return boolean
+     */
+    public function getResponsabe()
+    {
+        return $this->responsabe;
+    }
+
+    /**
+     * Set nbHeureTheoriqueSession
+     *
+     * @param string $nbHeureTheoriqueSession
+     *
+     * @return Utilisateur
+     */
+    public function setNbHeureTheoriqueSession($nbHeureTheoriqueSession)
+    {
+        $this->nbHeureTheoriqueSession = $nbHeureTheoriqueSession;
+
+        return $this;
+    }
+
+    /**
+     * Get nbHeureTheoriqueSession
+     *
+     * @return string
+     */
+    public function getNbHeureTheoriqueSession()
+    {
+        return $this->nbHeureTheoriqueSession;
+    }
+
+    /**
+     * Set dateCreation
+     *
+     * @param \DateTime $dateCreation
+     *
+     * @return Utilisateur
+     */
+    public function setDateCreation($dateCreation)
+    {
+        $this->dateCreation = $dateCreation;
+
+        return $this;
+    }
+
+    /**
+     * Get dateCreation
+     *
+     * @return \DateTime
+     */
+    public function getDateCreation()
+    {
+        return $this->dateCreation;
+    }
 }

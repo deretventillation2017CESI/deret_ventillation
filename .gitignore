@@ -17,7 +17,7 @@ app/config/parameters.yml
 composer.lock
 composer.json
 /nbproject/private/
-
+/.idea
 SymfonyRequirements.php
 /app/config/parameters.yml
 /composer.lock

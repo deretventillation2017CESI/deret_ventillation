@@ -25,8 +25,8 @@ class Activite
      * Many Users have Many Groups.
      * @ORM\ManyToMany(targetEntity="Element")
      * @ORM\JoinTable(name="activites_elements",
-     *      joinColumns={@JoinColumn(name="id_activite", referencedColumnName="id")},
-     *      inverseJoinColumns={@JoinColumn(name="id_element", referencedColumnName="id")}
+     *      joinColumns={@ORM\JoinColumn(name="id_activite", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id_element", referencedColumnName="id")}
      *      )
      */ 
     private $listeElements;

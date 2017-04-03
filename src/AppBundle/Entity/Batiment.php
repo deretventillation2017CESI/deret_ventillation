@@ -63,4 +63,3 @@ class Batiment
         return $this->libelle;
     }
 }
-

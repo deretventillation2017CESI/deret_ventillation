@@ -63,3 +63,4 @@ class TypeActivite
         return $this->libelle;
     }
 }
+
