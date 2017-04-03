@@ -27,6 +27,13 @@ class Ventilation
      * @ORM\Column(name="tempsPasse", type="integer")
      */
     private $tempsPasse;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="validation", type="boolean")
+     */
+    private $validation;
 
     /**
      * @var \DateTime
@@ -133,6 +140,12 @@ class Ventilation
     function setVentilationFormulaire($ventilationFormulaire) {
         $this->ventilationFormulaire = $ventilationFormulaire;
     }
+    
+    function getValidation() {
+        return $this->validation;
+    }
 
-
+    function setValidation($validation) {
+        $this->validation = $validation;
+    }
 }
