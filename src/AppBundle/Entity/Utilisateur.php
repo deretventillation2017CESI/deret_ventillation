@@ -43,7 +43,12 @@ class Utilisateur extends BaseUser {
 
     /** @ORM\Column(type="datetime") */
     private $dateCreation;
-
+    
+/*
+     * @ORM\ManyToOne(targetEntity="Utilisateur")
+     * @ORM\JoinColumn(name="responsableN1", referencedColumnName="id")
+     */
+    private $responsableN1;
     /*
      * @ORM\ManyToOne(targetEntity="TypeContrat")
      * @ORM\JoinColumn(name="type_contrat", referencedColumnName="id")

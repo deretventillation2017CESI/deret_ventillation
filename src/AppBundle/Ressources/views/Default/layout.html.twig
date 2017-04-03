@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Titre de la page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% stylesheets
+            'bundles/app/css/default.css'
+            'bundles/app/css/bootstrap.css'
+            'bundles/app/css/jquery.dataTables.min.css'
+            'bundles/app/css/dataTables.bootstrap.min.css'
+            filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+    </head>
+    <body><div class="container-fluid">
+            <div class="row">
+                {% block header %}
+                    {% include 'AppBundle:Default:header.html.twig' %}
+                {% endblock %}
+            </div>
+            <div class="alert alert-success" style="opacity: 500; display: none;"></div>
+            <div class="alert alert-info" style="opacity: 500; display: none;"></div>
+            <div class="alert alert-warning" style="opacity: 500; display: none;"></div>
+            <div class="alert alert-danger" style="opacity: 500; display: none;"></div>
+            <div class="container">
+
+                {% block main   %}
+                {% endblock %}
+            </div>
+            <div class="row">
+                {% block footer %}
+                    {% include 'AppBundle:Default:footer.html.twig' %}
+                {% endblock %}
+            </div>
+        </div>
+
+    </body>
+    {% block javascripts %}
+        {% javascripts 
+        '@AppBundle/Resources/public/js/default.js'
+        %}
+        <script src="{{ asset('public/js/jquery.js') }}"></script>
+        <script src="{{ asset('public/js/bootstrap.js') }}"></script>
+        <script src="{{ asset('bundles/app/js/dataTable.js') }}"></script>
+        <script src="{{ asset('bundles/app/js/dataTables.bootstrap.min.js') }}"></script>
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+        <script src="{{ asset('bundles/app/js/dataTablesAll.js') }}"></script>
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}
+</html>
