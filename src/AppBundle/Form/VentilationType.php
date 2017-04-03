@@ -13,7 +13,7 @@ class VentilationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('tempsPasse')->add('validation')->add('dateSaisie');
+        $builder->add('tempsPasse')->add('validation');
     }
     
     /**

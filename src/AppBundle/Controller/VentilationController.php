@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Ventilation;
+use AppBundle\Entity\Formulaire;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -25,9 +26,11 @@ class VentilationController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $ventilations = $em->getRepository('AppBundle:Ventilation')->findAll();
+        $formulaires = $em->getRepository('AppBundle:Formulaire')->findAll();
 
         return $this->render('ventilation/index.html.twig', array(
             'ventilations' => $ventilations,
+            'formulaires'  => $formulaires,
         ));
     }
 
@@ -39,6 +42,12 @@ class VentilationController extends Controller
      */
     public function newAction(Request $request)
     {
+        /*
+         * @var Formulaire $activite
+         */
+        $activite = $request->get('activite');
+        $elements = $activite->getListeElements();
+        
         $ventilation = new Ventilation();
         $form = $this->createForm('AppBundle\Form\VentilationType', $ventilation);
         $form->handleRequest($request);
@@ -46,6 +55,7 @@ class VentilationController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($ventilation);
+            $ventilation->setDateSaisie(new \DateTime);
             $em->flush();
 
             return $this->redirectToRoute('ventilation_show', array('id' => $ventilation->getId()));

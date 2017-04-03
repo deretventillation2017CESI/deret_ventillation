@@ -34,10 +34,14 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('ventilation_new') }}">Create a new ventilation</a>
-        </li>
-    </ul>
+        
+    <form action="{{ path('ventilation_new') }}" method="post">
+        <label for="activite">Activité </label>
+        <select id="activite" name="activite">
+            {% for activite in formulaires %}
+                <option value="{{ activite.id }}">{{ activite.libelle }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Saisir" />
+    </form>
 {% endblock %}
