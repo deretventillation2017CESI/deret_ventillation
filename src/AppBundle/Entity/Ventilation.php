@@ -48,9 +48,9 @@ class Ventilation
     private $utilisateur;
     
     /*
-     * @ORM\OneToOne(targetEntity="VentilationActivite", mappedBy="ventilation")
+     * @ORM\OneToOne(targetEntity="VentilationFormulaire", mappedBy="ventilation")
      */
-    private $ventilationActivite;
+    private $ventilationFormulaire;
     
     /**
      * Get id
@@ -118,10 +118,6 @@ class Ventilation
         return $this->utilisateur;
     }
 
-    function getVentilationActivite() {
-        return $this->ventilationActivite;
-    }
-
     function setPoste($poste) {
         $this->poste = $poste;
     }
@@ -129,8 +125,14 @@ class Ventilation
     function setUtilisateur($utilisateur) {
         $this->utilisateur = $utilisateur;
     }
-
-    function setVentilationActivite($ventilationActivite) {
-        $this->ventilationActivite = $ventilationActivite;
+    
+    function getVentilationFormulaire() {
+        return $this->ventilationFormulaire;
     }
+
+    function setVentilationFormulaire($ventilationFormulaire) {
+        $this->ventilationFormulaire = $ventilationFormulaire;
+    }
+
+
 }

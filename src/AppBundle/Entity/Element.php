@@ -36,6 +36,13 @@ class Element
      */
     private $obligatoire;
     
+    /*
+     * @var string
+     *
+     * @ORM\Column(name="default", type="string", length=100) 
+     */
+    private $default;
+    
     /**
      * @ORM\ManyToOne(targetEntity="TypeElement")
      * @ORM\JoinColumn(name="id_typeElement", referencedColumnName="id")
@@ -139,6 +146,15 @@ class Element
     function setElementsValorises(ArrayCollection $elementsValorises) {
         $this->elementsValorises = $elementsValorises;
     }
+
+    function getDefault() {
+        return $this->default;
+    }
+
+    function setDefault($default) {
+        $this->default = $default;
+    }
+
 
 
 }

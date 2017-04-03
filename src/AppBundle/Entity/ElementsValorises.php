@@ -34,6 +34,11 @@ class ElementsValorises
      * @ORM\OneToMany(targetEntity="Element", mappedBy="listElements")
      */
     private $elements;
+    
+    /*
+     * @var int
+     */
+    private $id_donnee_client;
 
 
     /**
@@ -69,5 +74,23 @@ class ElementsValorises
     {
         return $this->valeur;
     }
+    
+    function getElements() {
+        return $this->elements;
+    }
+
+    function getId_donnee_client() {
+        return $this->id_donnee_client;
+    }
+
+    function setElements(ArrayCollection $elements) {
+        $this->elements = $elements;
+    }
+
+    function setId_donnee_client($id_donnee_client) {
+        $this->id_donnee_client = $id_donnee_client;
+    }
+
+
 }
 
