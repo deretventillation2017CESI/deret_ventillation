@@ -1,0 +1,73 @@
+body{
+    background-color: #fdd26e;
+    font-family: Calibri, sans-serif;
+}
+.header{
+
+}
+.navbar{
+background: #f2f6f8;
+background: -moz-linear-gradient(top, #f2f6f8 0%, #d8e1e7 44%, #e0eff9 100%);
+background: -webkit-gradient(left top, left bottom, color-stop(0%, #f2f6f8), color-stop(44%, #d8e1e7), color-stop(100%, #e0eff9));
+background: -webkit-linear-gradient(top, #f2f6f8 0%, #d8e1e7 44%, #e0eff9 100%);
+background: -o-linear-gradient(top, #f2f6f8 0%, #d8e1e7 44%, #e0eff9 100%);
+background: -ms-linear-gradient(top, #f2f6f8 0%, #d8e1e7 44%, #e0eff9 100%);
+background: linear-gradient(to bottom, #f2f6f8 0%, #d8e1e7 44%, #e0eff9 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f6f8', endColorstr='#e0eff9', GradientType=0 ); GradientType=0 );
+}
+.navbar-brand{
+    width: 100px;
+}
+
+.logo{
+ background-image: url("../images/logo.png");
+ background-size: contain;
+ background-repeat: no-repeat;
+}
+.login{
+     color: #64DD17;
+    background-color: white;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.titre{
+    color: #002e5d;
+    font-weight: bold;
+
+}
+
+
+.ligne{
+    background-color: #64DD17;
+}
+.table{
+    background-color: white;
+}
+
+.container{
+    background-color: white;
+    margin-top: 50px;
+    padding-bottom: 50px;
+}
+
+.alert{
+    position: fixed;
+    left:15px;
+    right:15px;
+}
+
+
+
+.rouge_deret{
+     color:#da291c;
+}
+.bleu_fonce_deret{
+    color: #002e5d;
+}
+.bleu_clair_deret{
+    color  :#00a3e0;
+}
+.creme_deret{
+    color: #fdd26e;
+}

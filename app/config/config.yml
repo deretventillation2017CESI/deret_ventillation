@@ -22,6 +22,7 @@ framework:
     templating:
         engines: ['twig']
     default_locale:  "%locale%"
+    translator:      { fallback: %locale% }
     trusted_hosts:   ~
     trusted_proxies: ~
     session:
@@ -76,3 +77,44 @@ fos_user:
     from_email:
         address: "fabien.berger@ymail.com"
         sender_name: "Fabien BERGER"
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: false
+    bundles:        [AppBundle]
+    filters:
+        cssrewrite: ~
+    assets: 
+        css_default :
+            inputs:
+                - %kernel.root_dir%/Resources/public/css/default.css
+            filters: [cssrewrite]
+        js_default:
+            inputs:
+                - %kernel.root_dir%/Resources/public/js/default.js
+        bootstrap_js:
+            inputs:
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.js
+        bootstrap_css:
+            inputs:
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.css
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap-theme.css
+            filters: [cssrewrite]
+        bootstrap_glyphicons_ttf:
+            inputs:
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf
+            output: "fonts/glyphicons-halflings-regular.ttf"
+        bootstrap_glyphicons_eot:
+            inputs:
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/fonts/glyphicons-halflings-regular.eot
+            output: "fonts/glyphicons-halflings-regular.eot"
+        bootstrap_glyphicons_svg:
+            inputs:
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/fonts/glyphicons-halflings-regular.svg
+            output: "fonts/glyphicons-halflings-regular.svg"
+        bootstrap_glyphicons_woff:
+            inputs:
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/fonts/glyphicons-halflings-regular.woff
+            output: "fonts/glyphicons-halflings-regular.woff"
+        jquery:
+            inputs:
+                - %kernel.root_dir%/../vendor/components/jquery/jquery.js

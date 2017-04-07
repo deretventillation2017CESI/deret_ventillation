@@ -4,11 +4,8 @@
         <meta charset="utf-8">
         <title>Titre de la page</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        {% stylesheets
-            'bundles/app/css/default.css'
-            'bundles/app/css/bootstrap.css'
-            'bundles/app/css/jquery.dataTables.min.css'
-            'bundles/app/css/dataTables.bootstrap.min.css'
+        {% stylesheets '@css_default'
+                       '@bootstrap_css'
             filter='cssrewrite' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
@@ -16,7 +13,7 @@
     <body><div class="container-fluid">
             <div class="row">
                 {% block header %}
-                    {% include 'AppBundle:Default:header.html.twig' %}
+                    {% include 'default/header.html.twig' %}
                 {% endblock %}
             </div>
             <div class="alert alert-success" style="opacity: 500; display: none;"></div>
@@ -30,7 +27,7 @@
             </div>
             <div class="row">
                 {% block footer %}
-                    {% include 'AppBundle:Default:footer.html.twig' %}
+                    {% include 'default/footer.html.twig' %}
                 {% endblock %}
             </div>
         </div>
@@ -38,15 +35,9 @@
     </body>
     {% block javascripts %}
         {% javascripts 
-        '@AppBundle/Resources/public/js/default.js'
+        '@js_default'
+        '@bootstrap_css'
         %}
-        <script src="{{ asset('public/js/jquery.js') }}"></script>
-        <script src="{{ asset('public/js/bootstrap.js') }}"></script>
-        <script src="{{ asset('bundles/app/js/dataTable.js') }}"></script>
-        <script src="{{ asset('bundles/app/js/dataTables.bootstrap.min.js') }}"></script>
-        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-        <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-        <script src="{{ asset('bundles/app/js/dataTablesAll.js') }}"></script>
         <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
     {% endblock %}
