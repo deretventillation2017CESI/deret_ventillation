@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ventilationformulaires list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ventilationFormulaire in ventilationFormulaires %}
+            <tr>
+                <td><a href="{{ path('ventilationformulaire_show', { 'id': ventilationFormulaire.id }) }}">{{ ventilationFormulaire.id }}</a></td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('ventilationformulaire_show', { 'id': ventilationFormulaire.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('ventilationformulaire_edit', { 'id': ventilationFormulaire.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('ventilationformulaire_new') }}">Create a new ventilationFormulaire</a>
+        </li>
+    </ul>
+{% endblock %}

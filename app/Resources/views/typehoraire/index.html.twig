@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Typehoraires list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libelle</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for typeHoraire in typeHoraires %}
+            <tr>
+                <td><a href="{{ path('typeHoraire_show', { 'id': typeHoraire.id }) }}">{{ typeHoraire.id }}</a></td>
+                <td>{{ typeHoraire.libelle }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('typeHoraire_show', { 'id': typeHoraire.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('typeHoraire_edit', { 'id': typeHoraire.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('typeHoraire_new') }}">Create a new typeHoraire</a>
+        </li>
+    </ul>
+{% endblock %}

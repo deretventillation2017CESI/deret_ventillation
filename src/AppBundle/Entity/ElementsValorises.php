@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,11 +41,18 @@ class ElementsValorises
      */
     private $id_donnee_client;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->elements = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -74,23 +82,38 @@ class ElementsValorises
     {
         return $this->valeur;
     }
-    
-    function getElements() {
+
+    /**
+     * Add element
+     *
+     * @param \AppBundle\Entity\Element $element
+     *
+     * @return ElementsValorises
+     */
+    public function addElement(\AppBundle\Entity\Element $element)
+    {
+        $this->elements[] = $element;
+
+        return $this;
+    }
+
+    /**
+     * Remove element
+     *
+     * @param \AppBundle\Entity\Element $element
+     */
+    public function removeElement(\AppBundle\Entity\Element $element)
+    {
+        $this->elements->removeElement($element);
+    }
+
+    /**
+     * Get elements
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getElements()
+    {
         return $this->elements;
     }
-
-    function getId_donnee_client() {
-        return $this->id_donnee_client;
-    }
-
-    function setElements(ArrayCollection $elements) {
-        $this->elements = $elements;
-    }
-
-    function setId_donnee_client($id_donnee_client) {
-        $this->id_donnee_client = $id_donnee_client;
-    }
-
-
 }
-

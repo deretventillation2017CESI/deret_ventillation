@@ -1,31 +1,27 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Element</h1>
+    <h1>Typecontrat</h1>
 
     <table>
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ element.id }}</td>
+                <td>{{ typeContrat.id }}</td>
             </tr>
             <tr>
                 <th>Libelle</th>
-                <td>{{ element.libelle }}</td>
-            </tr>
-            <tr>
-                <th>Obligatoire</th>
-                <td>{% if element.obligatoire %}Yes{% else %}No{% endif %}</td>
+                <td>{{ typeContrat.libelle }}</td>
             </tr>
         </tbody>
     </table>
 
     <ul>
         <li>
-            <a href="{{ path('element_index') }}">Back to the list</a>
+            <a href="{{ path('typeContrat_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('element_edit', { 'id': element.id }) }}">Edit</a>
+            <a href="{{ path('typeContrat_edit', { 'id': typeContrat.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

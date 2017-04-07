@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Typecontrats list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libelle</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for typeContrat in typeContrats %}
+            <tr>
+                <td><a href="{{ path('typeContrat_show', { 'id': typeContrat.id }) }}">{{ typeContrat.id }}</a></td>
+                <td>{{ typeContrat.libelle }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('typeContrat_show', { 'id': typeContrat.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('typeContrat_edit', { 'id': typeContrat.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('typeContrat_new') }}">Create a new typeContrat</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -27,6 +27,13 @@ class Ventilation
      * @ORM\Column(name="tempsPasse", type="integer")
      */
     private $tempsPasse;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="validation", type="boolean")
+     */
+    private $validation;
 
     /**
      * @var \DateTime
@@ -52,64 +59,22 @@ class Ventilation
      */
     private $ventilationFormulaire;
     
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
+    function getId() {
         return $this->id;
     }
 
-    /**
-     * Set tempsPasse
-     *
-     * @param integer $tempsPasse
-     *
-     * @return Ventilation
-     */
-    public function setTempsPasse($tempsPasse)
-    {
-        $this->tempsPasse = $tempsPasse;
-
-        return $this;
-    }
-
-    /**
-     * Get tempsPasse
-     *
-     * @return int
-     */
-    public function getTempsPasse()
-    {
+    function getTempsPasse() {
         return $this->tempsPasse;
     }
 
-    /**
-     * Set dateSaisie
-     *
-     * @param \DateTime $dateSaisie
-     *
-     * @return Ventilation
-     */
-    public function setDateSaisie($dateSaisie)
-    {
-        $this->dateSaisie = $dateSaisie;
-
-        return $this;
+    function getValidation() {
+        return $this->validation;
     }
 
-    /**
-     * Get dateSaisie
-     *
-     * @return \DateTime
-     */
-    public function getDateSaisie()
-    {
+    function getDateSaisie() {
         return $this->dateSaisie;
     }
-    
+
     function getPoste() {
         return $this->poste;
     }
@@ -118,16 +83,32 @@ class Ventilation
         return $this->utilisateur;
     }
 
+    function getVentilationFormulaire() {
+        return $this->ventilationFormulaire;
+    }
+
+    function setId($id) {
+        $this->id = $id;
+    }
+
+    function setTempsPasse($tempsPasse) {
+        $this->tempsPasse = $tempsPasse;
+    }
+
+    function setValidation($validation) {
+        $this->validation = $validation;
+    }
+
+    function setDateSaisie(\DateTime $dateSaisie) {
+        $this->dateSaisie = $dateSaisie;
+    }
+
     function setPoste($poste) {
         $this->poste = $poste;
     }
 
     function setUtilisateur($utilisateur) {
         $this->utilisateur = $utilisateur;
-    }
-    
-    function getVentilationFormulaire() {
-        return $this->ventilationFormulaire;
     }
 
     function setVentilationFormulaire($ventilationFormulaire) {

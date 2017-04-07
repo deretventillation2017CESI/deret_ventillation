@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ventilations list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Tempspasse</th>
+                <th>Validation</th>
+                <th>Datesaisie</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ventilation in ventilations %}
+            <tr>
+                <td><a href="{{ path('ventilation_show', { 'id': ventilation.id }) }}">{{ ventilation.id }}</a></td>
+                <td>{{ ventilation.tempsPasse }}</td>
+                <td>{% if ventilation.validation %}Yes{% else %}No{% endif %}</td>
+                <td>{% if ventilation.dateSaisie %}{{ ventilation.dateSaisie|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('ventilation_show', { 'id': ventilation.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('ventilation_edit', { 'id': ventilation.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        
+    <form action="{{ path('ventilation_new') }}" method="post">
+        <label for="activite">Activité </label>
+        <select id="activite" name="activite">
+            {% for activite in formulaires %}
+                <option value="{{ activite.id }}">{{ activite.libelle }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Saisir" />
+    </form>
+{% endblock %}

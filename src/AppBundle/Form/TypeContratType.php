@@ -6,14 +6,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ElementType extends AbstractType
+class TypeContratType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('libelle')->add('obligatoire')->add('typeElement')->add('listElements');
+        $builder->add('libelle');
     }
     
     /**
@@ -22,7 +22,7 @@ class ElementType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Element'
+            'data_class' => 'AppBundle\Entity\TypeContrat'
         ));
     }
 
@@ -31,7 +31,7 @@ class ElementType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_element';
+        return 'appbundle_typecontrat';
     }
 
 

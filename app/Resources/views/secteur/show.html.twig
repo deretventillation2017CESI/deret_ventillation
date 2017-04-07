@@ -1,27 +1,27 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Typeelement</h1>
+    <h1>Secteur</h1>
 
     <table>
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ typeElement.id }}</td>
+                <td>{{ secteur.id }}</td>
             </tr>
             <tr>
                 <th>Libelle</th>
-                <td>{{ typeElement.libelle }}</td>
+                <td>{{ secteur.libelle }}</td>
             </tr>
         </tbody>
     </table>
 
     <ul>
         <li>
-            <a href="{{ path('typeElement_index') }}">Back to the list</a>
+            <a href="{{ path('secteur_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('typeElement_edit', { 'id': typeElement.id }) }}">Edit</a>
+            <a href="{{ path('secteur_edit', { 'id': secteur.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

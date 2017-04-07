@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Typeelements list</h1>
+    <h1>Secteurs list</h1>
 
     <table>
         <thead>
@@ -12,17 +12,17 @@
             </tr>
         </thead>
         <tbody>
-        {% for typeElement in typeElements %}
+        {% for secteur in secteurs %}
             <tr>
-                <td><a href="{{ path('typeElement_show', { 'id': typeElement.id }) }}">{{ typeElement.id }}</a></td>
-                <td>{{ typeElement.libelle }}</td>
+                <td><a href="{{ path('secteur_show', { 'id': secteur.id }) }}">{{ secteur.id }}</a></td>
+                <td>{{ secteur.libelle }}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('typeElement_show', { 'id': typeElement.id }) }}">show</a>
+                            <a href="{{ path('secteur_show', { 'id': secteur.id }) }}">show</a>
                         </li>
                         <li>
-                            <a href="{{ path('typeElement_edit', { 'id': typeElement.id }) }}">edit</a>
+                            <a href="{{ path('secteur_edit', { 'id': secteur.id }) }}">edit</a>
                         </li>
                     </ul>
                 </td>
@@ -33,7 +33,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('typeElement_new') }}">Create a new typeElement</a>
+            <a href="{{ path('secteur_new') }}">Create a new secteur</a>
         </li>
     </ul>
 {% endblock %}
