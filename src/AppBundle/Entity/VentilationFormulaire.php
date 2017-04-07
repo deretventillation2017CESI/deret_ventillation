@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * VentilationFormulaire
@@ -39,10 +40,11 @@ class VentilationFormulaire
     private $elementsValorises;
     
     function __construct() {
-        $this->elementsValorises = new ArrayCollection();
+        $this->elementsValorises = new ArrayCollection;
     }
 
-        function getId() {
+    
+    function getId() {
         return $this->id;
     }
 
@@ -73,8 +75,5 @@ class VentilationFormulaire
     function setElementsValorises($elementsValorises) {
         $this->elementsValorises = $elementsValorises;
     }
-
-
-
 
 }

@@ -2,8 +2,9 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
+
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * ElementsValorises
@@ -52,7 +53,7 @@ class ElementsValorises
      */
     public function __construct()
     {
-        $this->elements = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->elements = new ArrayCollection();
     }
 
     /**
@@ -121,5 +122,29 @@ class ElementsValorises
     public function getElements()
     {
         return $this->elements;
+    }
+
+    /**
+     * Set ventilationFormulaire
+     *
+     * @param \AppBundle\Entity\VentilationFormulaire $ventilationFormulaire
+     *
+     * @return ElementsValorises
+     */
+    public function setVentilationFormulaire(\AppBundle\Entity\VentilationFormulaire $ventilationFormulaire = null)
+    {
+        $this->ventilationFormulaire = $ventilationFormulaire;
+
+        return $this;
+    }
+
+    /**
+     * Get ventilationFormulaire
+     *
+     * @return \AppBundle\Entity\VentilationFormulaire
+     */
+    public function getVentilationFormulaire()
+    {
+        return $this->ventilationFormulaire;
     }
 }

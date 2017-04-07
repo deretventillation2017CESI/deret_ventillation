@@ -163,12 +163,12 @@ class Element {
         return $this->donneesClientElements;
     }
 
-    function getInput(\Symfony\Component\Form\Test\FormBuilderInterface $form) {
-        $properties = array(
+    function getInput($form) {
+        $propertyes = array(
             'label' => $this->getLibelle(),
             'required' => $this->getObligatoire(),
             'data' => $this->getValeur_default(),
-            'mapped'=>false
+            'mapped' => false
         );
         if ($this->getTypeElement()->getId() == TypeElement::$TYPE_TEXT) {
             $type = TextType::class;
@@ -179,16 +179,15 @@ class Element {
         } else if ($this->getTypeElement()->getId() == TypeElement::$TYPE_CHECKBOX) {
             $type = CheckboxType::class;
         } else if ($this->getTypeElement()->getId() == TypeElement::$TYPE_SELECT) {
-            $type = CheckboxType::class;
+            $type = ChoiceType::class;
             $choices = array();
             foreach ($this->getDonneesClientElements() as $donneeClientElement) {
                 $donneClient = $donneeClientElement->getDonneeClient();
                 $choices[] = array($donneeClientElement->getLibelle() => $donneClient->getId());
             }
-            $properties[] = $choices;
         }
 
-        $form->add('element', $type, $properties);
+        $form->add($this->getId(), $type, $propertyes);
         return $form;
     }
 
