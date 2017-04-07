@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class VentilationType extends AbstractType
 {
@@ -14,6 +15,9 @@ class VentilationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('tempsPasse')->add('validation');
+        $builder->add('completed', HiddenType::class, array (
+            'mapped'    => false
+        ));
     }
     
     /**
