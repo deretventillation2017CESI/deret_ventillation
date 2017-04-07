@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Postes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libelle</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for poste in postes %}
+            <tr>
+                <td><a href="{{ path('poste_show', { 'id': poste.id }) }}">{{ poste.id }}</a></td>
+                <td>{{ poste.libelle }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('poste_show', { 'id': poste.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('poste_edit', { 'id': poste.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('poste_new') }}">Create a new poste</a>
+        </li>
+    </ul>
+{% endblock %}

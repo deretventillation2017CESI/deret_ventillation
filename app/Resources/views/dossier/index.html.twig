@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Dossiers list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for dossier in dossiers %}
+            <tr>
+                <td><a href="{{ path('dossier_show', { 'id': dossier.id }) }}">{{ dossier.id }}</a></td>
+                <td>{{ dossier.nom }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('dossier_show', { 'id': dossier.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('dossier_edit', { 'id': dossier.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('dossier_new') }}">Create a new dossier</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Batiments list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libelle</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for batiment in batiments %}
+            <tr>
+                <td><a href="{{ path('batiment_show', { 'id': batiment.id }) }}">{{ batiment.id }}</a></td>
+                <td>{{ batiment.libelle }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('batiment_show', { 'id': batiment.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('batiment_edit', { 'id': batiment.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('batiment_new') }}">Create a new batiment</a>
+        </li>
+    </ul>
+{% endblock %}
