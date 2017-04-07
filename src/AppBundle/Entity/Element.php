@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
@@ -65,7 +64,7 @@ class Element {
 
     /**
      * Many Features have One Product.
-     * @OneToMany(targetEntity="DonneeClientElement", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="DonneeClientElement", mappedBy="element")
      */
     private $donneesClientElements;
 
@@ -165,10 +164,11 @@ class Element {
     }
 
     function getInput(\Symfony\Component\Form\Test\FormBuilderInterface $form) {
-        $propertyes = array(
+        $properties = array(
             'label' => $this->getLibelle(),
             'required' => $this->getObligatoire(),
-            'data' => $this->getValeur_default()
+            'data' => $this->getValeur_default(),
+            'mapped'=>false
         );
         if ($this->getTypeElement()->getId() == TypeElement::$TYPE_TEXT) {
             $type = TextType::class;
@@ -185,9 +185,10 @@ class Element {
                 $donneClient = $donneeClientElement->getDonneeClient();
                 $choices[] = array($donneeClientElement->getLibelle() => $donneClient->getId());
             }
+            $properties[] = $choices;
         }
 
-        $form->add('element', $type, $propertyes);
+        $form->add('element', $type, $properties);
         return $form;
     }
 
