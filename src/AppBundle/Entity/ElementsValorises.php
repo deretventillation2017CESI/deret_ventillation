@@ -122,4 +122,28 @@ class ElementsValorises
     {
         return $this->elements;
     }
+
+    /**
+     * Set ventilationFormulaire
+     *
+     * @param \AppBundle\Entity\VentilationFormulaire $ventilationFormulaire
+     *
+     * @return ElementsValorises
+     */
+    public function setVentilationFormulaire(\AppBundle\Entity\VentilationFormulaire $ventilationFormulaire = null)
+    {
+        $this->ventilationFormulaire = $ventilationFormulaire;
+
+        return $this;
+    }
+
+    /**
+     * Get ventilationFormulaire
+     *
+     * @return \AppBundle\Entity\VentilationFormulaire
+     */
+    public function getVentilationFormulaire()
+    {
+        return $this->ventilationFormulaire;
+    }
 }

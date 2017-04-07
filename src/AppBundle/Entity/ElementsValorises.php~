@@ -40,6 +40,86 @@ class ElementsValorises
      * @var int
      */
     private $id_donnee_client;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="VentilationFormulaire", inversedBy="elementsValorises")
+     * @ORM\JoinColumn(name="id_ventilation_formulaire", referencedColumnName="id")
+     */
+    private $ventilationFormulaire;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->elements = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set valeur
+     *
+     * @param string $valeur
+     *
+     * @return ElementsValorises
+     */
+    public function setValeur($valeur)
+    {
+        $this->valeur = $valeur;
+
+        return $this;
+    }
+
+    /**
+     * Get valeur
+     *
+     * @return string
+     */
+    public function getValeur()
+    {
+        return $this->valeur;
+    }
+
+    /**
+     * Add element
+     *
+     * @param \AppBundle\Entity\Element $element
+     *
+     * @return ElementsValorises
+     */
+    public function addElement(\AppBundle\Entity\Element $element)
+    {
+        $this->elements[] = $element;
+
+        return $this;
+    }
+
+    /**
+     * Remove element
+     *
+     * @param \AppBundle\Entity\Element $element
+     */
+    public function removeElement(\AppBundle\Entity\Element $element)
+    {
+        $this->elements->removeElement($element);
+    }
+
+    /**
+     * Get elements
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getElements()
+    {
+        return $this->elements;
+    }
 }
-

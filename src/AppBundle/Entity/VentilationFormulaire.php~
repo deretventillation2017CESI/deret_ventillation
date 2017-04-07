@@ -65,16 +65,7 @@ class VentilationFormulaire
     function setFormulaire($formulaire) {
         $this->formulaire = $formulaire;
     }
-    
-    function getElementsValorises() {
-        return $this->elementsValorises;
-    }
-
-    function setElementsValorises($elementsValorises) {
-        $this->elementsValorises = $elementsValorises;
-    }
-
-
 
 
 }
+

@@ -50,6 +50,8 @@ class VentilationController extends Controller
         $formulaire = $repo_formulaire->find($id_activite);  
         $elements = $formulaire->getListeElements();
         
+        $ventilationFormulaire->setElementsValorises($elements);
+        
         $ventilation = new Ventilation();
         $form = $this->createForm('AppBundle\Form\VentilationType', $ventilation);
         $form->handleRequest($request);
