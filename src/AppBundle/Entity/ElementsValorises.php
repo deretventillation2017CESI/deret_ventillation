@@ -42,8 +42,8 @@ class ElementsValorises
     private $id_donnee_client;
     
     /**
-     * @ManyToOne(targetEntity="VentilationFormulaire", inversedBy="elementsValorises")
-     * @JoinColumn(name="id_ventilation_formulaire", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="VentilationFormulaire", inversedBy="elementsValorises")
+     * @ORM\JoinColumn(name="id_ventilation_formulaire", referencedColumnName="id")
      */
     private $ventilationFormulaire;
 
@@ -121,5 +121,29 @@ class ElementsValorises
     public function getElements()
     {
         return $this->elements;
+    }
+
+    /**
+     * Set ventilationFormulaire
+     *
+     * @param \AppBundle\Entity\VentilationFormulaire $ventilationFormulaire
+     *
+     * @return ElementsValorises
+     */
+    public function setVentilationFormulaire(\AppBundle\Entity\VentilationFormulaire $ventilationFormulaire = null)
+    {
+        $this->ventilationFormulaire = $ventilationFormulaire;
+
+        return $this;
+    }
+
+    /**
+     * Get ventilationFormulaire
+     *
+     * @return \AppBundle\Entity\VentilationFormulaire
+     */
+    public function getVentilationFormulaire()
+    {
+        return $this->ventilationFormulaire;
     }
 }
