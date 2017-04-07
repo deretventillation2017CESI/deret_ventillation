@@ -191,4 +191,59 @@ class Element {
         return $form;
     }
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->donneesClientElements = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add donneesClientElement
+     *
+     * @param \AppBundle\Entity\DonneeClientElement $donneesClientElement
+     *
+     * @return Element
+     */
+    public function addDonneesClientElement(\AppBundle\Entity\DonneeClientElement $donneesClientElement)
+    {
+        $this->donneesClientElements[] = $donneesClientElement;
+
+        return $this;
+    }
+
+    /**
+     * Remove donneesClientElement
+     *
+     * @param \AppBundle\Entity\DonneeClientElement $donneesClientElement
+     */
+    public function removeDonneesClientElement(\AppBundle\Entity\DonneeClientElement $donneesClientElement)
+    {
+        $this->donneesClientElements->removeElement($donneesClientElement);
+    }
+
+    /**
+     * Set valeurDefault
+     *
+     * @param string $valeurDefault
+     *
+     * @return Element
+     */
+    public function setValeurDefault($valeurDefault)
+    {
+        $this->valeur_default = $valeurDefault;
+
+        return $this;
+    }
+
+    /**
+     * Get valeurDefault
+     *
+     * @return string
+     */
+    public function getValeurDefault()
+    {
+        return $this->valeur_default;
+    }
 }
