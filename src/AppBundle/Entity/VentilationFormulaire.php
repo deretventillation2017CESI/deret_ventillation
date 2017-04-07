@@ -32,8 +32,17 @@ class VentilationFormulaire
      * @ORM\JoinColumn(name="formulaire", referencedColumnName="id")
      */
     private $formulaire;
+    
+    /*
+     * @ORM\OneToMany(targetEntity="ElementsValorises", mappedBy="ventilationFormulaire")
+     */
+    private $elementsValorises;
+    
+    function __construct() {
+        $this->elementsValorises = new ArrayCollection();
+    }
 
-    function getId() {
+        function getId() {
         return $this->id;
     }
 

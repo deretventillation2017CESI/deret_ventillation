@@ -40,6 +40,12 @@ class ElementsValorises
      * @var int
      */
     private $id_donnee_client;
+    
+    /**
+     * @ManyToOne(targetEntity="VentilationFormulaire", inversedBy="elementsValorises")
+     * @JoinColumn(name="id_ventilation_formulaire", referencedColumnName="id")
+     */
+    private $ventilationFormulaire;
 
     /**
      * Constructor

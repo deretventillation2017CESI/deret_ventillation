@@ -42,11 +42,13 @@ class VentilationController extends Controller
      */
     public function newAction(Request $request)
     {
-        /*
-         * @var Formulaire $activite
-         */
-        $activite = $request->get('activite');
-        $elements = $activite->getListeElements();
+        $em = $this->getDoctrine()->getManager();
+        $repo_formulaire = $em->getRepository('AppBundle:Formulaire');
+        $ventilationFormulaire = new \AppBundle\Entity\VentilationFormulaire();
+        
+        $id_activite = $request->get('activite');
+        $formulaire = $repo_formulaire->find($id_activite);  
+        $elements = $formulaire->getListeElements();
         
         $ventilation = new Ventilation();
         $form = $this->createForm('AppBundle\Form\VentilationType', $ventilation);
@@ -63,6 +65,7 @@ class VentilationController extends Controller
 
         return $this->render('ventilation/new.html.twig', array(
             'ventilation' => $ventilation,
+            'elements'    => $elements,
             'form' => $form->createView(),
         ));
     }
