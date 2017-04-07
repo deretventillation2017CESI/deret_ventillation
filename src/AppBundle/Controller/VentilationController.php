@@ -62,6 +62,7 @@ class VentilationController extends Controller
         
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $form->get($name)
             $em = $this->getDoctrine()->getManager();
             $em->persist($ventilation);
             $ventilation->setDateSaisie(new \DateTime);
