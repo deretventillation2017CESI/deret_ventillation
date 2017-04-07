@@ -2,8 +2,9 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
+
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * ElementsValorises
@@ -52,7 +53,7 @@ class ElementsValorises
      */
     public function __construct()
     {
-        $this->elements = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->elements = new ArrayCollection();
     }
 
     /**
