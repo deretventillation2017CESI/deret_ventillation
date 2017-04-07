@@ -41,10 +41,10 @@ class Element {
      */
     private $obligatoire;
 
-    /*
+    /**
      * @var string
      *
-     * @ORM\Column(name="$valeur_default", type="string", length=100) 
+     * @ORM\Column(name="valeur_default", type="string", length=100)
      */
     private $valeur_default;
 
