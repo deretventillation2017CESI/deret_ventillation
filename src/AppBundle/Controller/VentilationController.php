@@ -55,6 +55,11 @@ class VentilationController extends Controller
         $ventilation = new Ventilation();
         $form = $this->createForm('AppBundle\Form\VentilationType', $ventilation);
         $form->handleRequest($request);
+        
+        foreach ($elements as $unElement) {
+            $form = $unElement->getInput($form);
+        }
+        
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();

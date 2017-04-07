@@ -64,7 +64,7 @@ class Element {
 
     /**
      * Many Features have One Product.
-     * @ORM\OneToMany(targetEntity="DonneeClientElement", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="DonneeClientElement", mappedBy="element")
      */
     private $donneesClientElements;
 
@@ -163,11 +163,12 @@ class Element {
         return $this->donneesClientElements;
     }
 
-    function getInput(\Symfony\Component\Form\Test\FormBuilderInterface $form) {
+    function getInput($form) {
         $propertyes = array(
             'label' => $this->getLibelle(),
             'required' => $this->getObligatoire(),
-            'data' => $this->getValeur_default()
+            'data' => $this->getValeur_default(),
+            'mapped' => false
         );
         if ($this->getTypeElement()->getId() == TypeElement::$TYPE_TEXT) {
             $type = TextType::class;
