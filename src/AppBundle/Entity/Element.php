@@ -183,8 +183,9 @@ class Element {
             $choices = array();
             foreach ($this->getDonneesClientElements() as $donneeClientElement) {
                 $donneClient = $donneeClientElement->getDonneeClient();
-                $choices[] = array($donneeClientElement->getLibelle() => $donneClient->getId());
+                $choices[$donneClient->getLibelle()] = $donneClient->getId();
             }
+            $propertyes['choices'] = $choices;
         }
 
         $form->add($this->getId(), $type, $propertyes);
