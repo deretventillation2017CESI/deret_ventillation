@@ -23,13 +23,13 @@ class DonneeClientElement {
     private $id_element_cible;
 
     /**
-     * @ManyToOne(targetEntity="Element", inversedBy="donneesClientElements;")
-     * @JoinColumn(name="id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Element", inversedBy="donneesClientElements;")
+     * @ORM\JoinColumn(name="id", referencedColumnName="id")
      */
     private $element;
         /**
-     * @ManyToOne(targetEntity="DonneClient")
-     * @JoinColumn(name="id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="DonneeClient")
+     * @ORM\JoinColumn(name="id", referencedColumnName="id")
      */
     private $donneClient;
     function getDonneClient() {

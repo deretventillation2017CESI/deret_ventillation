@@ -42,8 +42,8 @@ class ElementsValorises
     private $id_donnee_client;
     
     /**
-     * @ManyToOne(targetEntity="VentilationFormulaire", inversedBy="elementsValorises")
-     * @JoinColumn(name="id_ventilation_formulaire", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="VentilationFormulaire", inversedBy="elementsValorises")
+     * @ORM\JoinColumn(name="id_ventilation_formulaire", referencedColumnName="id")
      */
     private $ventilationFormulaire;
 

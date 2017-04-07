@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
@@ -65,7 +64,7 @@ class Element {
 
     /**
      * Many Features have One Product.
-     * @OneToMany(targetEntity="DonneeClientElement", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="DonneeClientElement", mappedBy="product")
      */
     private $donneesClientElements;
 
