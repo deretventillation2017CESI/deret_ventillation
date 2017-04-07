@@ -81,6 +81,9 @@ fos_user:
     from_email:
         address: "fabien.berger@ymail.com"
         sender_name: "Fabien BERGER"
+    registration:
+        form:
+            type: AppBundle\Form\RegistrationType
 assetic:
     debug:          '%kernel.debug%'
     use_controller: false
