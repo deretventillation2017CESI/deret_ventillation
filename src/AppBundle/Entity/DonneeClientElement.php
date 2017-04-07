@@ -20,23 +20,30 @@ class DonneeClientElement {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Element")
+     * @ORM\JoinColumn(name="id", referencedColumnName="id")
+     */
     private $id_element_cible;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Element", inversedBy="donneesClientElements;")
+     * @ORM\ManyToOne(targetEntity="Element", inversedBy="donneesClientElements")
      * @ORM\JoinColumn(name="id", referencedColumnName="id")
      */
     private $element;
-        /**
+
+    /**
      * @ORM\ManyToOne(targetEntity="DonneeClient")
      * @ORM\JoinColumn(name="id", referencedColumnName="id")
      */
     private $donneClient;
+
     function getDonneClient() {
         return $this->donneClient;
     }
 
-        /**
+    /**
      * Get id
      *
      * @return int
@@ -52,5 +59,19 @@ class DonneeClientElement {
     function setId_element_cible($id_element_cible) {
         $this->id_element_cible = $id_element_cible;
     }
+    
+    function getElement() {
+        return $this->element;
+    }
+
+    function setElement($element) {
+        $this->element = $element;
+    }
+
+    function setDonneClient($donneClient) {
+        $this->donneClient = $donneClient;
+    }
+
+
 
 }

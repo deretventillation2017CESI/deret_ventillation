@@ -35,10 +35,15 @@ class DonneeClient
      */
     private $parametre;
     /**
-     * @ORM\ManyToOne(targetEntity="TypeDonneeClient")
-     * @ORM\JoinColumn(name="id_typeDonneClient", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="GroupeDonneeClient")
+     * @ORM\JoinColumn(name="id_groupe_donne_client", referencedColumnName="id")
      */
-    private $typeDonneeClient;
+    private $groupeDonneeClient;
+    
+    function __construct($groupeDonneeClient) {
+        $this->groupeDonneeClient = $groupeDonneeClient;
+    }
+
     /**
      * Get id
      *
@@ -96,5 +101,15 @@ class DonneeClient
     {
         return $this->parametre;
     }
-}
+    
+    function getGroupeDonneeClient() {
+        return $this->groupeDonneeClient;
+    }
 
+    function setGroupeDonneeClient($groupeDonneeClient) {
+        $this->groupeDonneeClient = $groupeDonneeClient;
+    }
+
+
+
+}

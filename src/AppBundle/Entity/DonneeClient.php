@@ -35,10 +35,12 @@ class DonneeClient
      */
     private $parametre;
     /**
-     * @ORM\ManyToOne(targetEntity="TypeDonneeClient")
-     * @ORM\JoinColumn(name="id_typeDonneClient", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="GroupeDonneeClient")
+     * @ORM\JoinColumn(name="id_groupe_donne_client", referencedColumnName="id")
      */
-    private $typeDonneeClient;
+    private $groupeDonneeClient;
+
+
     /**
      * Get id
      *
@@ -96,28 +98,15 @@ class DonneeClient
     {
         return $this->parametre;
     }
-
-    /**
-     * Set typeDonneeClient
-     *
-     * @param \AppBundle\Entity\TypeDonneeClient $typeDonneeClient
-     *
-     * @return DonneeClient
-     */
-    public function setTypeDonneeClient(\AppBundle\Entity\TypeDonneeClient $typeDonneeClient = null)
-    {
-        $this->typeDonneeClient = $typeDonneeClient;
-
-        return $this;
+    
+    function getGroupeDonneeClient() {
+        return $this->groupeDonneeClient;
     }
 
-    /**
-     * Get typeDonneeClient
-     *
-     * @return \AppBundle\Entity\TypeDonneeClient
-     */
-    public function getTypeDonneeClient()
-    {
-        return $this->typeDonneeClient;
+    function setGroupeDonneeClient($groupeDonneeClient) {
+        $this->groupeDonneeClient = $groupeDonneeClient;
     }
+
+
+
 }
