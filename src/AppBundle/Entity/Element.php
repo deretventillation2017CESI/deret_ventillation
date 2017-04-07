@@ -4,6 +4,12 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 /**
  * Element
@@ -11,8 +17,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="element")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ElementRepository")
  */
-class Element
-{
+class Element {
+
     /**
      * @var int
      *
@@ -35,18 +41,18 @@ class Element
      * @ORM\Column(name="obligatoire", type="boolean")
      */
     private $obligatoire;
-    
+
     /*
      * @var string
      *
      * @ORM\Column(name="$valeur_default", type="string", length=100) 
      */
     private $valeur_default;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="TypeElement")
      * @ORM\JoinColumn(name="id_typeElement", referencedColumnName="id")
-    */
+     */
     private $typeElement;
 
     /**
@@ -58,12 +64,17 @@ class Element
     private $elementsValorises;
 
     /**
+     * Many Features have One Product.
+     * @OneToMany(targetEntity="DonneeClientElement", mappedBy="product")
+     */
+    private $donneesClientElements;
+
+    /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -74,8 +85,7 @@ class Element
      *
      * @return Element
      */
-    public function setLibelle($libelle)
-    {
+    public function setLibelle($libelle) {
         $this->libelle = $libelle;
 
         return $this;
@@ -86,8 +96,7 @@ class Element
      *
      * @return string
      */
-    public function getLibelle()
-    {
+    public function getLibelle() {
         return $this->libelle;
     }
 
@@ -98,8 +107,7 @@ class Element
      *
      * @return Element
      */
-    public function setObligatoire($obligatoire)
-    {
+    public function setObligatoire($obligatoire) {
         $this->obligatoire = $obligatoire;
 
         return $this;
@@ -110,8 +118,7 @@ class Element
      *
      * @return bool
      */
-    public function getObligatoire()
-    {
+    public function getObligatoire() {
         return $this->obligatoire;
     }
 
@@ -122,8 +129,7 @@ class Element
      *
      * @return Element
      */
-    public function setTypeElement(\AppBundle\Entity\TypeElement $typeElement = null)
-    {
+    public function setTypeElement(\AppBundle\Entity\TypeElement $typeElement = null) {
         $this->typeElement = $typeElement;
 
         return $this;
@@ -134,8 +140,7 @@ class Element
      *
      * @return \AppBundle\Entity\typeElement
      */
-    public function getTypeElement()
-    {
+    public function getTypeElement() {
         return $this->typeElement;
     }
 
@@ -146,7 +151,7 @@ class Element
     function setElementsValorises(ArrayCollection $elementsValorises) {
         $this->elementsValorises = $elementsValorises;
     }
-    
+
     function getValeur_default() {
         return $this->valeur_default;
     }
@@ -155,6 +160,35 @@ class Element
         $this->valeur_default = $valeur_default;
     }
 
+    function getDonneesClientElements() {
+        return $this->donneesClientElements;
+    }
 
+    function getInput(\Symfony\Component\Form\Test\FormBuilderInterface $form) {
+        $propertyes = array(
+            'label' => $this->getLibelle(),
+            'required' => $this->getObligatoire(),
+            'data' => $this->getValeur_default()
+        );
+        if ($this->getTypeElement()->getId() == TypeElement::$TYPE_TEXT) {
+            $type = TextType::class;
+        } else if ($this->getTypeElement()->getId() == TypeElement::$TYPE_TEXTAREA) {
+            $type = TextareaType::class;
+        } else if ($this->getTypeElement()->getId() == TypeElement::$TYPE_NOMBRE) {
+            $type = NumberType::class;
+        } else if ($this->getTypeElement()->getId() == TypeElement::$TYPE_CHECKBOX) {
+            $type = CheckboxType::class;
+        } else if ($this->getTypeElement()->getId() == TypeElement::$TYPE_SELECT) {
+            $type = CheckboxType::class;
+            $choices = array();
+            foreach ($this->getDonneesClientElements() as $donneeClientElement) {
+                $donneClient = $donneeClientElement->getDonneeClient();
+                $choices[] = array($donneeClientElement->getLibelle() => $donneClient->getId());
+            }
+        }
+
+        $form->add('element', $type, $propertyes);
+        return $form;
+    }
 
 }

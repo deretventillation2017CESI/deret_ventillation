@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="donnee_client_element")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\DonneeClientElementRepository")
  */
-class DonneeClientElement
-{
+class DonneeClientElement {
+
     /**
      * @var int
      *
@@ -20,20 +20,31 @@ class DonneeClientElement
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    
     private $id_element_cible;
 
-
     /**
+     * @ManyToOne(targetEntity="Element", inversedBy="donneesClientElements;")
+     * @JoinColumn(name="id", referencedColumnName="id")
+     */
+    private $element;
+        /**
+     * @ManyToOne(targetEntity="DonneClient")
+     * @JoinColumn(name="id", referencedColumnName="id")
+     */
+    private $donneClient;
+    function getDonneClient() {
+        return $this->donneClient;
+    }
+
+        /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
-    
+
     function getId_element_cible() {
         return $this->id_element_cible;
     }
@@ -42,6 +53,4 @@ class DonneeClientElement
         $this->id_element_cible = $id_element_cible;
     }
 
-
 }
-
