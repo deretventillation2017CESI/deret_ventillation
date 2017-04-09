@@ -24,25 +24,25 @@ class Utilisateur extends BaseUser {
     }
 
     /** @ORM\Column(type="string") */
-    private $nom;
+    protected $nom;
 
     /** @ORM\Column(type="string") */
-    private $prenom;
+    protected $prenom;
 
     /** @ORM\Column(type="boolean") */
-    private $statut;
+    protected $statut;
 
     /** @ORM\Column(type="integer") */
-    private $identifiantIGE;
+    protected $identifiantIGE;
 
     /** @ORM\Column(type="boolean") */
-    private $responsabe;
+    protected $responsabe;
 
     /** @ORM\Column(type="string") */
-    private $nbHeureTheoriqueSession;
+    protected $nbHeureTheoriqueSession;
 
     /** @ORM\Column(type="datetime") */
-    private $dateCreation;
+    protected $dateCreation;
     
 /*
      * @ORM\ManyToOne(targetEntity="Utilisateur")

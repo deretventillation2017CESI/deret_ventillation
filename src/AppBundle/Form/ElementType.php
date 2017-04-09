@@ -5,19 +5,15 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
-class VentilationType extends AbstractType
+class ElementType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('tempsPasse')->add('validation');
-        $builder->add('completed', HiddenType::class, array (
-            'mapped'    => false
-        ));
+        $builder->add('libelle')->add('obligatoire')->add('typeElement')->add('elementsValorises');
     }
     
     /**
@@ -26,7 +22,7 @@ class VentilationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Ventilation'
+            'data_class' => 'AppBundle\Entity\Element'
         ));
     }
 
@@ -35,7 +31,7 @@ class VentilationType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_ventilation';
+        return 'appbundle_element';
     }
 
 

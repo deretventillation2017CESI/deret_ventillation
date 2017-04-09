@@ -37,10 +37,10 @@ class DonneeClientElement {
      * @ORM\ManyToOne(targetEntity="DonneeClient")
      * @ORM\JoinColumn(name="id_donne_client", referencedColumnName="id")
      */
-    private $donneClient;
+    private $donneeClient;
 
-    function getDonneClient() {
-        return $this->donneClient;
+    public function getDonneeClient() {
+        return $this->donneeClient;
     }
 
     /**
@@ -68,8 +68,8 @@ class DonneeClientElement {
         $this->element = $element;
     }
 
-    function setDonneClient($donneClient) {
-        $this->donneClient = $donneClient;
+    function setDonneeClient($donneeClient) {
+        $this->donneeClient = $donneeClient;
     }
 
 

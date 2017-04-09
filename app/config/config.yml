@@ -39,9 +39,6 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    form_themes:
-        ressources: 
-            -'bootstrap_3_horizontal_layout.html.twig'
  
 
 # Doctrine Configuration
@@ -81,6 +78,9 @@ fos_user:
     from_email:
         address: "fabien.berger@ymail.com"
         sender_name: "Fabien BERGER"
+    registration:
+        form:
+            type: AppBundle\Form\RegistrationType
 assetic:
     debug:          '%kernel.debug%'
     use_controller: false

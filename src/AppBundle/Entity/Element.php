@@ -183,8 +183,9 @@ class Element {
             $choices = array();
             foreach ($this->getDonneesClientElements() as $donneeClientElement) {
                 $donneClient = $donneeClientElement->getDonneeClient();
-                $choices[$donneeClientElement->getLibelle()] = $donneClient->getId();
+                $choices[$donneClient->getLibelle()] = $donneClient->getId();
             }
+            $propertyes['choices'] = $choices;
         }
 
         $form->add($this->getId(), $type, $propertyes);
@@ -194,7 +195,8 @@ class Element {
     /**
      * Constructor
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->donneesClientElements = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -205,7 +207,8 @@ class Element {
      *
      * @return Element
      */
-    public function addDonneesClientElement(\AppBundle\Entity\DonneeClientElement $donneesClientElement) {
+    public function addDonneesClientElement(\AppBundle\Entity\DonneeClientElement $donneesClientElement)
+    {
         $this->donneesClientElements[] = $donneesClientElement;
 
         return $this;
@@ -216,7 +219,8 @@ class Element {
      *
      * @param \AppBundle\Entity\DonneeClientElement $donneesClientElement
      */
-    public function removeDonneesClientElement(\AppBundle\Entity\DonneeClientElement $donneesClientElement) {
+    public function removeDonneesClientElement(\AppBundle\Entity\DonneeClientElement $donneesClientElement)
+    {
         $this->donneesClientElements->removeElement($donneesClientElement);
     }
 
@@ -227,7 +231,8 @@ class Element {
      *
      * @return Element
      */
-    public function setValeurDefault($valeurDefault) {
+    public function setValeurDefault($valeurDefault)
+    {
         $this->valeur_default = $valeurDefault;
 
         return $this;
@@ -238,8 +243,8 @@ class Element {
      *
      * @return string
      */
-    public function getValeurDefault() {
+    public function getValeurDefault()
+    {
         return $this->valeur_default;
     }
-
 }

@@ -62,11 +62,20 @@ class VentilationController extends Controller
         
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $form->get($name)
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($ventilation);
-            $ventilation->setDateSaisie(new \DateTime);
-            $em->flush();
+            $completed = $form->get('completed');
+            
+            if ($completed) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($ventilation);
+                $ventilation->setDateSaisie(new \DateTime);
+                $em->flush();
+            } else {
+                $data = $form->getData();
+                
+                foreach ($data as $donnee) {
+                
+                }
+            }
 
             return $this->redirectToRoute('ventilation_show', array('id' => $ventilation->getId()));
         }
