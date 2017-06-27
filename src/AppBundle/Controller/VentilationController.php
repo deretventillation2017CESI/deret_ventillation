@@ -53,21 +53,15 @@ class VentilationController extends Controller
         $id_formulaire = $request->get('formulaire');
         
         if ($id_formulaire == null) {
-            var_dump($form->get('formulaire'));
-            $id_formulaire = $form->get('formulaire')->getId();
+            $id_formulaire = $form->get('formulaire')->getData();
+        } else {
+            $form->get('formulaire')->setData($id_formulaire);
         }
         
         $formulaire = $repo_formulaire->find($id_formulaire);  
         $elements = $formulaire->getListeElements();
         
         $ventilationFormulaire->setElementsValorises($elements);
-        
-        $form->get('formulaire')->setData($id_formulaire);
-        
-        foreach ($elements as $unElement) {
-            $form = $unElement->getInput($form);
-        }
-        
 
         if ($form->isSubmitted() && $form->isValid()) {
             $completed = $form->get('completed');
@@ -86,6 +80,10 @@ class VentilationController extends Controller
             }
 
             return $this->redirectToRoute('ventilation_show', array('id' => $ventilation->getId()));
+        } else {
+            foreach ($elements as $unElement) {
+                $form = $unElement->getInput($form);
+            }
         }
 
         return $this->render('ventilation/new.html.twig', array(
