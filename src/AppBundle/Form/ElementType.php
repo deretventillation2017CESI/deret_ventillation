@@ -13,7 +13,8 @@ class ElementType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('libelle')->add('obligatoire')->add('typeElement')->add('elementsValorises');
+        $builder->add('libelle')->add('obligatoire')->add('typeElement');
+        //->add('elementsValorises')
     }
     
     /**

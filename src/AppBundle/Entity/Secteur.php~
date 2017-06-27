@@ -63,4 +63,3 @@ class Secteur
         return $this->libelle;
     }
 }
-

@@ -1,32 +1,45 @@
-{% extends 'base.html.twig' %}
+{% extends 'default/layout.html.twig' %}
 
-{% block body %}
-    <h1>Secteur</h1>
+{% block title %}Details d'un secteur{% endblock %}
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ secteur.id }}</td>
-            </tr>
-            <tr>
-                <th>Libelle</th>
-                <td>{{ secteur.libelle }}</td>
-            </tr>
-        </tbody>
-    </table>
+{% block main -%}
+    <div class="row text-left" style="margin-top: 2%;">
+        <a href="{{ path('secteur_index') }}"><button type="button" class="btn btn-primary">
+            <span class=" glyphicon glyphicon-arrow-left"></span> Retour
+        </button></a>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 titre text-center">
+            <h1>Details d'un secteur</h1>
+        </div>
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('secteur_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('secteur_edit', { 'id': secteur.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 text-center">
+            <table class='table' style="margin-top: 2%;">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ secteur.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Libelle</th>
+                        <td>{{ secteur.libelle }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row text-center">
+        <a href="{{ path('secteur_edit', { 'id': secteur.id }) }}"><button type="button" class="btn btn-info">
+            <span class="glyphicon glyphicon-pencil"></span> Modifier
+        </button></a>
+        {{ form_start(delete_form) }}
+            <br/><button type="submit" class="btn btn-danger">
+                <span class=" glyphicon glyphicon-remove"></span> Supprimer
+            </button>
+        {{ form_end(delete_form) }}
+    </div>
 {% endblock %}

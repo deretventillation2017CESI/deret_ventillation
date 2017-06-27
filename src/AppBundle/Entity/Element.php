@@ -44,7 +44,7 @@ class Element {
     /**
      * @var string
      *
-     * @ORM\Column(name="valeur_default", type="string", length=100)
+     * @ORM\Column(name="valeur_default", type="string", length=100, nullable=true)
      */
     private $valeur_default;
 
@@ -162,8 +162,8 @@ class Element {
         return $this->donneesClientElements;
     }
 
-    function getInput($form) {
-        $propertyes = array(
+    /*function getInput($form) {
+        $properties = array(
             'label' => $this->getLibelle(),
             'required' => $this->getObligatoire(),
             'data' => $this->getValeur_default(),
@@ -184,12 +184,12 @@ class Element {
                 $donneClient = $donneeClientElement->getDonneeClient();
                 $choices[$donneClient->getLibelle()] = $donneClient->getId();
             }
-            $propertyes['choices'] = $choices;
+            $properties['choices'] = $choices;
         }
 
-        $form->add($this->getId(), $type, $propertyes);
+        $form->add($this->getId(), $type, $properties);
         return $form;
-    }
+    }*/
 
     /**
      * Constructor
@@ -245,5 +245,10 @@ class Element {
     public function getValeurDefault()
     {
         return $this->valeur_default;
+    }
+
+    function __toString()
+    {
+        return $this->libelle;
     }
 }

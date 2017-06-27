@@ -21,57 +21,114 @@ class DonneeClientElement {
      */
     private $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Element")
-     * @ORM\JoinColumn(name="id_element_cible", referencedColumnName="id")
-     */
-    private $id_element_cible;
-
-    /**
+     /**
      * @ORM\ManyToOne(targetEntity="Element", inversedBy="donneesClientElements")
-     * @ORM\JoinColumn(name="id_element", referencedColumnName="id")
+     * @ORM\JoinColumn(name="element", referencedColumnName="id")
      */
     private $element;
 
     /**
      * @ORM\ManyToOne(targetEntity="DonneeClient")
-     * @ORM\JoinColumn(name="id_donne_client", referencedColumnName="id")
+     * @ORM\JoinColumn(name="donnee_client", referencedColumnName="id")
      */
     private $donneeClient;
 
-    public function getDonneeClient() {
-        return $this->donneeClient;
-    }
+    /**
+     * Many Categories have One Category.
+     * @ORM\ManyToOne(targetEntity="DonneeClientElement", inversedBy="id")
+     * @ORM\JoinColumn(name="interaction", referencedColumnName="id", nullable=true)
+     */
+    private $interaction;
+
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
-    function getId_element_cible() {
-        return $this->id_element_cible;
+    /**
+     * Set element
+     *
+     * @param \AppBundle\Entity\Element $element
+     *
+     * @return DonneeClientElement
+     */
+    public function setElement(\AppBundle\Entity\Element $element = null)
+    {
+        $this->element = $element;
+
+        return $this;
     }
 
-    function setId_element_cible($id_element_cible) {
-        $this->id_element_cible = $id_element_cible;
-    }
-    
-    function getElement() {
+    /**
+     * Get element
+     *
+     * @return \AppBundle\Entity\Element
+     */
+    public function getElement()
+    {
         return $this->element;
     }
 
-    function setElement($element) {
-        $this->element = $element;
-    }
-
-    function setDonneeClient($donneeClient) {
+    /**
+     * Set donneeClient
+     *
+     * @param \AppBundle\Entity\DonneeClient $donneeClient
+     *
+     * @return DonneeClientElement
+     */
+    public function setDonneeClient(\AppBundle\Entity\DonneeClient $donneeClient = null)
+    {
         $this->donneeClient = $donneeClient;
+
+        return $this;
+    }
+
+    /**
+     * Get donneeClient
+     *
+     * @return \AppBundle\Entity\DonneeClient
+     */
+    public function getDonneeClient()
+    {
+        return $this->donneeClient;
+    }
+
+    
+
+    function __toString()
+    {
+        return (string)$this->id;
     }
 
 
 
+    /**
+     * Set interaction
+     *
+     * @param \AppBundle\Entity\DonneeClientElement $interaction
+     *
+     * @return DonneeClientElement
+     */
+    public function setInteraction(\AppBundle\Entity\DonneeClientElement $interaction = null)
+    {
+        $this->interaction = $interaction;
+
+        return $this;
+    }
+
+    /**
+     * Get interaction
+     *
+     * @return \AppBundle\Entity\DonneeClientElement
+     */
+    public function getInteraction()
+    {
+        return $this->interaction;
+    }
 }
