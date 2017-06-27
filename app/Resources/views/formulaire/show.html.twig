@@ -3,7 +3,7 @@
 {% block body %}
     <h1>Formulaire</h1>
 
-    <table>
+    <table border="1">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -15,7 +15,23 @@
             </tr>
         </tbody>
     </table>
-
+    <h1>Liste des elements du formulaire</h1>
+    <table border="1">
+        <tbody>
+            <tr>
+                <th>Nom du champ</th>
+                <th>Position/Ordre</th>
+            </tr>
+            {% for element in formulaire.listeElements %}
+                <tr>
+                    <td>{{ element.libelle }}</td>
+                    <td>ORDRE</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a href="{{ path('formulaire_addElement', {'id': formulaire.id}) }}"><button>Add element to {{ formulaire.libelle }}</button></a>
     <ul>
         <li>
             <a href="{{ path('formulaire_index') }}">Back to the list</a>

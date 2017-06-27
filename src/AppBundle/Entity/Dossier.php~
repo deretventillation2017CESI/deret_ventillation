@@ -68,4 +68,3 @@ class Dossier
         return $this->nom;
     }
 }
-

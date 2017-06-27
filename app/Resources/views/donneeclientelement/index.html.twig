@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Donneeclientelements list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Element</th>
+                <th>Donnée</th>
+                <th>Intéraction (donneeClientElement)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for donneeClientElement in donneeClientElements %}
+            <tr>
+                <td><a href="{{ path('donneeclientelement_show', { 'id': donneeClientElement.id }) }}">{{ donneeClientElement.id }}</a></td>
+                <td>{{ donneeClientElement.getElement.libelle }}</td>
+                <td>{{ donneeClientElement.getDonneeClient.libelle }}</td>
+                {% if donneeClientElement.getInteraction  %}
+                    <td>{{ donneeClientElement.getInteraction.id }}</td>
+                {% else %}
+                    <td></td>
+                {% endif %}
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('donneeclientelement_show', { 'id': donneeClientElement.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('donneeclientelement_edit', { 'id': donneeClientElement.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('donneeclientelement_new') }}">Create a new donneeClientElement</a>
+        </li>
+    </ul>
+{% endblock %}

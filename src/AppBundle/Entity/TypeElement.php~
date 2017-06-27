@@ -10,8 +10,14 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="type_element")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\TypeElementRepository")
  */
-class TypeElement
-{
+class TypeElement {
+
+    public static $TYPE_TEXT = 1;
+    public static $TYPE_TEXTAREA = 2;
+    public static $TYPE_NOMBRE = 3;
+    public static $TYPE_CHECKBOX = 4;
+    public static $TYPE_SELECT = 5;
+
     /**
      * @var int
      *
@@ -28,14 +34,12 @@ class TypeElement
      */
     private $libelle;
 
-
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -46,8 +50,7 @@ class TypeElement
      *
      * @return TypeElement
      */
-    public function setLibelle($libelle)
-    {
+    public function setLibelle($libelle) {
         $this->libelle = $libelle;
 
         return $this;
@@ -58,9 +61,12 @@ class TypeElement
      *
      * @return string
      */
-    public function getLibelle()
-    {
+    public function getLibelle() {
         return $this->libelle;
     }
-}
 
+    function __toString() {
+        return $this->getLibelle();
+    }
+
+}

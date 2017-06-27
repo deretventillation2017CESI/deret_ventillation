@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Liste des elements du formulaire</h1>
+    <table border="1">
+        <tbody>
+        <tr>
+            <th>Nom du champ</th>
+            <th>Position/Ordre</th>
+        </tr>
+        {% for element in formulaire.listeElements %}
+            <tr>
+                <td>{{ element.libelle }}</td>
+                <td>ORDRE</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <form method="POST">
+        Element :
+        <select name="element">
+        {% for element in elements %}
+            <option value="{{ element.id }}">{{ element.libelle }}</option>
+        {% endfor %}
+        </select>
+        <button type="submit">Ajouter</button>
+    </form>
+{% endblock %}

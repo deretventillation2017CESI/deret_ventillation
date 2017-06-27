@@ -4,7 +4,14 @@
     <h1>Formulaire creation</h1>
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
+        {{ form_label(form.libelle) }}
+        {{ form_widget(form.libelle) }}
+    <br/>
+    <br/>
+
+
+    <br/>
+    <br/>
         <input type="submit" value="Create" />
     {{ form_end(form) }}
 
