@@ -55,7 +55,7 @@ class Ventilation
     private $utilisateur;
     
     /*
-     * @ORM\OneToOne(targetEntity="VentilationFormulaire", mappedBy="ventilation")
+     * @ORM\OneToOne(targetEntity="VentilationFormulaire", mappedBy="ventilation" , cascade={"persist"})
      */
     private $ventilationFormulaire;
     

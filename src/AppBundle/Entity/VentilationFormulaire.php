@@ -35,7 +35,7 @@ class VentilationFormulaire
     private $formulaire;
     
     /*
-     * @ORM\OneToMany(targetEntity="ElementsValorises", mappedBy="ventilationFormulaire")
+     * @ORM\OneToMany(targetEntity="ElementsValorises", mappedBy="ventilationFormulaire" , cascade={"persist"})
      */
     private $elementsValorises;
     

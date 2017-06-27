@@ -57,8 +57,7 @@ class Element {
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToOne(targetEntity="ElementsValorises", inversedBy="elements")
-     * @ORM\JoinColumn(name="id_elements_valorises", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="ElementsValorises", mappedBy="element")
      */
     private $elementsValorises;
 
@@ -168,7 +167,7 @@ class Element {
             'label' => $this->getLibelle(),
             'required' => $this->getObligatoire(),
             'data' => $this->getValeur_default(),
-            'mapped' => false
+            'mapped' => true
         );
         if ($this->getTypeElement()->getId() == TypeElement::$TYPE_TEXT) {
             $type = TextType::class;
