@@ -18,6 +18,9 @@ class VentilationType extends AbstractType
         $builder->add('completed', HiddenType::class, array (
             'mapped'    => false
         ));
+        $builder->add('formulaire', HiddenType::class, array (
+            'mapped'    => false
+        ));
     }
     
     /**
