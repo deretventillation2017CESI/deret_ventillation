@@ -46,15 +46,23 @@ class VentilationController extends Controller
         $repo_formulaire = $em->getRepository('AppBundle:Formulaire');
         $ventilationFormulaire = new \AppBundle\Entity\VentilationFormulaire();
         
-        $id_activite = $request->get('activite');
-        $formulaire = $repo_formulaire->find($id_activite);  
+        $ventilation = new Ventilation();
+        $form = $this->createForm('AppBundle\Form\VentilationType', $ventilation);
+        $form->handleRequest($request);
+        
+        $id_formulaire = $request->get('formulaire');
+        
+        if ($id_formulaire == null) {
+            var_dump($form->get('formulaire'));
+            $id_formulaire = $form->get('formulaire')->getId();
+        }
+        
+        $formulaire = $repo_formulaire->find($id_formulaire);  
         $elements = $formulaire->getListeElements();
         
         $ventilationFormulaire->setElementsValorises($elements);
         
-        $ventilation = new Ventilation();
-        $form = $this->createForm('AppBundle\Form\VentilationType', $ventilation);
-        $form->handleRequest($request);
+        $form->get('formulaire')->setData($id_formulaire);
         
         foreach ($elements as $unElement) {
             $form = $unElement->getInput($form);
