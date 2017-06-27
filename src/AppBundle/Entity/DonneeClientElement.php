@@ -99,15 +99,23 @@ class DonneeClientElement {
         return $this->donneeClient;
     }
 
+    
+
+    function __toString()
+    {
+        return (string)$this->id;
+    }
+
+
 
     /**
      * Set interaction
      *
-     * @param \AppBundle\Entity\DonneeClient $interaction
+     * @param \AppBundle\Entity\DonneeClientElement $interaction
      *
      * @return DonneeClientElement
      */
-    public function setInteraction(\AppBundle\Entity\DonneeClient $interaction = null)
+    public function setInteraction(\AppBundle\Entity\DonneeClientElement $interaction = null)
     {
         $this->interaction = $interaction;
 
@@ -117,17 +125,10 @@ class DonneeClientElement {
     /**
      * Get interaction
      *
-     * @return \AppBundle\Entity\DonneeClient
+     * @return \AppBundle\Entity\DonneeClientElement
      */
     public function getInteraction()
     {
         return $this->interaction;
     }
-
-    function __toString()
-    {
-        return (string)$this->id;
-    }
-
-
 }
