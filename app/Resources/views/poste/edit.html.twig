@@ -1,21 +1,40 @@
-{% extends 'base.html.twig' %}
+{% extends 'default/layout.html.twig' %}
 
-{% block body %}
-    <h1>Poste edit</h1>
+{% block title %}Modification d'un poste{% endblock %}
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+{% block main -%}
+    
+    <div class="row text-left" style="margin-top: 2%;">
+        <a href="{{ path('poste_index') }}"><button type="button" class="btn btn-primary">
+            <span class=" glyphicon glyphicon-arrow-left"></span> Retour
+        </button></a>
+    </div>
+            
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 titre text-center">
+            <h1>Modification d'un poste</h1>
+        </div>
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('poste_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <div class="row" style='margin-top: 1%;'>
+        <div class="col-md-6 col-md-offset-3 text-center">
+            {{ form_start(edit_form) }}
+                {{ form_label(edit_form.libelle) }} 
+                {{ form_errors(edit_form.libelle) }}
+                {{ form_widget(edit_form.libelle) }}
+                
+                <br/><br/><button type="submit" class="btn btn-info">
+                    <span class="glyphicon glyphicon-pencil"></span> Modifier
+                </button>
+            {{ form_end(edit_form) }}
+        </div>
+    </div>
+
+    <div class="row text-center">
+        {{ form_start(delete_form) }}
+            <br/><button type="submit" class="btn btn-danger">
+                <span class=" glyphicon glyphicon-remove"></span> Supprimer
+            </button>
+        {{ form_end(delete_form) }}
+    </div>
 {% endblock %}
