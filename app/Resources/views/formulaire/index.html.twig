@@ -31,6 +31,9 @@
                             <a href="{{ path('formulaire_edit', { 'id': formulaire.id }) }}"><button type="button" class="btn btn-info">
                                 <span class="glyphicon glyphicon-pencil"></span> Modifier
                             </button></a>
+                            <a href="{{ path('formulaire_addElement', {'id': formulaire.id}) }}"><button type="button" class="btn btn-warning">
+                                <span class="glyphicon glyphicon-download-alt"></span> Ajouter un élément
+                            </button></a>
                         </td>
                     </tr>
                 {% endfor %}
