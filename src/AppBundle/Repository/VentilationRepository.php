@@ -10,4 +10,17 @@ namespace AppBundle\Repository;
  */
 class VentilationRepository extends \Doctrine\ORM\EntityRepository
 {
+    /*
+     * FONCTION : Récupère toutes les ventilations entre 2 dates
+     */
+    public function findVentilationCreatedBetweenTwoDates(\DateTime $date_debut, \DateTime $date_fin)
+    {
+        return $this->createQueryBuilder('m')
+                    ->where("m.dateSaisie > ?1")
+                    ->andWhere("m.dateSaisie < ?2")
+                    ->setParameter(1, $beginDate)
+                    ->setParameter(2, $endDate)
+                    ->getQuery()
+                    ->getResult();
+    }
 }
