@@ -111,8 +111,10 @@ class Ventilation
         $this->utilisateur = $utilisateur;
     }
 
-    function setVentilationFormulaire($ventilationFormulaire) {
+    function setVentilationFormulaire($ventilationFormulaire) {   
+        $ventilationFormulaire->setVentilation($this);
         $this->ventilationFormulaire = $ventilationFormulaire;
+     
     }
 
 

@@ -21,7 +21,13 @@ class ElementValoriseType extends AbstractType
             $child = $event->getData();
     
             if ($child instanceof \AppBundle\Entity\ElementsValorises) {
-              $builder=   $child->getInput($form);
+                if($child->getElement() != null){
+                                  $builder=   $child->getInput($form);
+
+                }else{
+                    var_dump("ala");
+                }
+           
 
             }
         }

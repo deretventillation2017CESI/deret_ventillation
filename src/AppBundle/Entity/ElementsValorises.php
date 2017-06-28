@@ -32,7 +32,7 @@ class ElementsValorises
     
     /**
      *
-     * @ORM\ManyToOne(targetEntity="Element" , inversedBy="elementsValorises")
+     * @ORM\ManyToOne(targetEntity="Element" , inversedBy="elementsValorises" ,fetch="EAGER")
      * @ORM\JoinColumn(name="id_element", referencedColumnName="id")
      */
     private $element;
@@ -122,7 +122,10 @@ class ElementsValorises
         $this->element = $element;
     }
  function getInput($form) {
+if($this->getElement() != null){
 
-     return $this->element->getInput($form);
+         return $this->getElement()->getInput($form);
+
+}
  }
 }

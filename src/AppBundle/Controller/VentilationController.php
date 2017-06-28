@@ -88,8 +88,11 @@ class VentilationController extends Controller {
         if ($form->isSubmitted() && $form->isValid()) {
             $ventilation = $form->getData();
             $em->persist($ventilation);
+          //   $em->persist($ventilationFormulaire);
+         //   var_dump($ventilation);
             $ventilation->setDateSaisie(new \DateTime);
             $em->flush();
+            
 
             return $this->redirectToRoute('ventilation_show', array('id' => $ventilation->getId()));
         }

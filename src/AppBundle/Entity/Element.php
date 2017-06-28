@@ -49,8 +49,8 @@ class Element {
     private $valeur_default;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TypeElement")
-     * @ORM\JoinColumn(name="id_typeElement", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="TypeElement",fetch="EAGER")
+     * @ORM\JoinColumn(name="id_typeElement", referencedColumnName="id" )
      */
     private $typeElement;
 
@@ -162,7 +162,7 @@ class Element {
         return $this->donneesClientElements;
     }
 
-    /*function getInput($form) {
+    function getInput($form) {
         $properties = array(
             'label' => $this->getLibelle(),
             'required' => $this->getObligatoire(),
@@ -187,9 +187,12 @@ class Element {
             $properties['choices'] = $choices;
         }
 
-        $form->add($this->getId(), $type, $properties);
+
+
+        $form->add("valeur", $type, $properties);
+                        var_dump($this->getTypeElement()->getLibelle());
         return $form;
-    }*/
+    }
 
     /**
      * Constructor

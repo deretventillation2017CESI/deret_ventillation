@@ -22,7 +22,8 @@ class VentilationType extends AbstractType
             'mapped'    => false
         ));
         $builder->add('ventilationFormulaire', VentilationFormulaireType::class,array (
-            'label'    => false
+            'label'    => false,
+            'by_reference' =>false
         ));
     }
     
