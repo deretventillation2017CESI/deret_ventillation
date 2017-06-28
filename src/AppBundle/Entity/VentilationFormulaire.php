@@ -22,19 +22,19 @@ class VentilationFormulaire
      */
     private $id;
 
-    /*
+    /**
      * @ORM\OneToOne(targetEntity="Ventilation", inversedBy="ventilationFormulaire")
      * @ORM\JoinColumn(name="ventilation", referencedColumnName="id")
      */
     private $ventilation;
 
-    /*
+    /**
      * @ORM\ManyToOne(targetEntity="Formulaire")
      * @ORM\JoinColumn(name="formulaire", referencedColumnName="id")
      */
     private $formulaire;
     
-    /*
+    /**
      * @ORM\OneToMany(targetEntity="ElementsValorises", inversedBy="ventilationFormulaire" , cascade={"persist"})
      */
     private $elementsValorises;

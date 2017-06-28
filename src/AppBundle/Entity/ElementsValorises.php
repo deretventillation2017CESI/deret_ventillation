@@ -37,7 +37,7 @@ class ElementsValorises
      */
     private $element;
     
-    /*
+    /**
      * @var int
      */
     private $id_donnee_client;
