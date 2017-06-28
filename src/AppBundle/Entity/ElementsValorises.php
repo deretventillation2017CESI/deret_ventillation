@@ -31,11 +31,11 @@ class ElementsValorises
     private $valeur;
     
     /**
-     * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Element", mappedBy="listElements")
+     * @ORM\ManyToOne(targetEntity="Element" , inversedBy="elementsValorises")
+     * @ORM\JoinColumn(name="id_element", referencedColumnName="id")
      */
-    private $elements;
+    private $element;
     
     /*
      * @var int
@@ -90,39 +90,6 @@ class ElementsValorises
         return $this->valeur;
     }
 
-    /**
-     * Add element
-     *
-     * @param \AppBundle\Entity\Element $element
-     *
-     * @return ElementsValorises
-     */
-    public function addElement(\AppBundle\Entity\Element $element)
-    {
-        $this->elements[] = $element;
-
-        return $this;
-    }
-
-    /**
-     * Remove element
-     *
-     * @param \AppBundle\Entity\Element $element
-     */
-    public function removeElement(\AppBundle\Entity\Element $element)
-    {
-        $this->elements->removeElement($element);
-    }
-
-    /**
-     * Get elements
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getElements()
-    {
-        return $this->elements;
-    }
 
     /**
      * Set ventilationFormulaire
@@ -147,4 +114,15 @@ class ElementsValorises
     {
         return $this->ventilationFormulaire;
     }
+    function getElement() {
+        return $this->element;
+    }
+
+    function setElement($element) {
+        $this->element = $element;
+    }
+ function getInput($form) {
+
+     return $this->element->getInput($form);
+ }
 }

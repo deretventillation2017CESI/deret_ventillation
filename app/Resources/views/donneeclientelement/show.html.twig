@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Donneeclientelement</h1>
+
+    <table border="1">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <th>Element</th>
+                <th>Donnée</th>
+            </tr>
+
+            <tr>
+                <td>{{ donneeClientElement.id }}</td>
+                <td>{{ donneeClientElement.getElement.libelle }}</td>
+                <td>{{ donneeClientElement.getDonneeClient.libelle }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('donneeclientelement_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('donneeclientelement_edit', { 'id': donneeClientElement.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

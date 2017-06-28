@@ -1,32 +1,74 @@
-{% extends 'base.html.twig' %}
+{% extends 'default/layout.html.twig' %}
 
-{% block body %}
-    <h1>Formulaire</h1>
+{% block title %}Details d'un formulaire{% endblock %}
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ formulaire.id }}</td>
-            </tr>
-            <tr>
-                <th>Libelle</th>
-                <td>{{ formulaire.libelle }}</td>
-            </tr>
-        </tbody>
-    </table>
+{% block main -%}
+    <div class="row text-left" style="margin-top: 2%;">
+        <a href="{{ path('formulaire_index') }}"><button type="button" class="btn btn-primary">
+            <span class=" glyphicon glyphicon-arrow-left"></span> Retour
+        </button></a>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 titre text-center">
+            <h1>Details d'un formulaire</h1>
+        </div>
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('formulaire_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('formulaire_edit', { 'id': formulaire.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 text-center">
+            <table class='table' style="margin-top: 2%;">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ formulaire.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Libelle</th>
+                        <td>{{ formulaire.libelle }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>       
+                    
+    <div class="row text-center">
+        <a href="{{ path('formulaire_edit', { 'id': formulaire.id }) }}"><button type="button" class="btn btn-info">
+            <span class="glyphicon glyphicon-pencil"></span> Modifier
+        </button></a>
+        {{ form_start(delete_form) }}
+            <br/><button type="submit" class="btn btn-danger">
+                <span class=" glyphicon glyphicon-remove"></span> Supprimer
+            </button>
+        {{ form_end(delete_form) }}
+    </div>
+                    
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 titre text-center">
+            <h1>Liste des éléments du formulaire</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 text-center">
+            <table class='table' style="margin-top: 2%;">
+                <tbody>
+                    <tr>
+                        <th>Nom champs</th>
+                        <th>Position/Ordre</th>
+                    </tr>
+                    {% for element in formulaire.listeElements %}
+                        <tr>
+                            <td>{{ element.libelle }}</td>
+                            <td>/</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+        
+    <div class="row text-center">
+        <a href="{{ path('formulaire_addElement', {'id': formulaire.id}) }}"><button class='btn btn-success'>Ajouter un élément à {{ formulaire.libelle }}</button></a>
+    </div>
 {% endblock %}

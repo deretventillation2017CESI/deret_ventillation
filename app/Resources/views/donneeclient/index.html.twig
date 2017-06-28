@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Donneeclients list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libelle</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for donneeClient in donneeClients %}
+            <tr>
+                <td><a href="{{ path('donneeclient_show', { 'id': donneeClient.id }) }}">{{ donneeClient.id }}</a></td>
+                <td>{{ donneeClient.libelle }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('donneeclient_show', { 'id': donneeClient.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('donneeclient_edit', { 'id': donneeClient.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('donneeclient_new') }}">Create a new donneeClient</a>
+        </li>
+    </ul>
+{% endblock %}

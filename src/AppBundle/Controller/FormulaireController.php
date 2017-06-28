@@ -53,7 +53,7 @@ class FormulaireController extends Controller
 
         return $this->render('formulaire/new.html.twig', array(
             'formulaire' => $formulaire,
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ));
     }
 
@@ -70,6 +70,31 @@ class FormulaireController extends Controller
         return $this->render('formulaire/show.html.twig', array(
             'formulaire' => $formulaire,
             'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     *
+     * @Route ("/{id}/addElement/", name="formulaire_addElement")
+     * @Method({"GET","POST"})
+     */
+    public function addElementAction(Request $request, $id){
+        $em = $this->getDoctrine()->getManager();
+        $repFormulaire = $em->getRepository('AppBundle:Formulaire');
+        $formulaire = $repFormulaire->find($id);
+        $repElement = $em->getRepository('AppBundle:Element');
+        $elements = $repElement->findAll();
+
+        if($request->getMethod() == 'POST'){
+            $element = $repElement->find($_POST['element']);
+            $formulaire->addListeElement($element);
+            $em->persist($formulaire);
+            $em->flush();
+        }
+
+        return $this->render('formulaire/addElement.html.twig', array(
+            'formulaire' => $formulaire,
+            'elements' => $elements
         ));
     }
 

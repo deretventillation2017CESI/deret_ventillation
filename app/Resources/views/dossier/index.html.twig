@@ -1,39 +1,47 @@
-{% extends 'base.html.twig' %}
+{% extends 'default/layout.html.twig' %}
 
-{% block body %}
-    <h1>Dossiers list</h1>
+{% block title %}Gestion des dossiers{% endblock %}
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for dossier in dossiers %}
-            <tr>
-                <td><a href="{{ path('dossier_show', { 'id': dossier.id }) }}">{{ dossier.id }}</a></td>
-                <td>{{ dossier.nom }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('dossier_show', { 'id': dossier.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('dossier_edit', { 'id': dossier.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+{% block main -%}
+    <div class="row" style='margin-top: 1%;'>
+        <div class="col-md-8 col-md-offset-2 titre text-center">
+            <h1>Liste des dossiers</h1>
+        </div>
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('dossier_new') }}">Create a new dossier</a>
-        </li>
-    </ul>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 text-center">
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">Id</th>
+                        <th style="text-align: center;">Nom</th>
+                        <th style="text-align: center;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for dossier in dossiers %}
+                    <tr>
+                        <td><a href="{{ path('dossier_show', { 'id': dossier.id }) }}">{{ dossier.id }}</a></td>
+                        <td>{{ dossier.nom }}</td>
+                        <td>
+                            <a href="{{ path('dossier_show', { 'id': dossier.id }) }}"><button type="button" class="btn btn-success">
+                                <span class="glyphicon glyphicon-search"></span> Voir
+                            </button></a>
+                            <a href="{{ path('dossier_edit', { 'id': dossier.id }) }}"><button type="button" class="btn btn-info">
+                                <span class="glyphicon glyphicon-pencil"></span> Modifier
+                            </button></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row text-center">
+        <a href="{{ path('dossier_new') }}"><button type="button" class="btn btn-primary">
+            <span class="glyphicon glyphicon-plus-sign"></span> Créer un nouveau dossier
+        </button></a>
+    </div>
 {% endblock %}

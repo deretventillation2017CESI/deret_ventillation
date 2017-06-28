@@ -63,4 +63,3 @@ class TypeContrat
         return $this->libelle;
     }
 }
-

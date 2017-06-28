@@ -28,18 +28,6 @@ class DonneeClient
      */
     private $libelle;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="parametre", type="string", length=255)
-     */
-    private $parametre;
-    /**
-     * @ORM\ManyToOne(targetEntity="GroupeDonneeClient")
-     * @ORM\JoinColumn(name="id_groupe_donne_client", referencedColumnName="id")
-     */
-    private $groupeDonneeClient;
-
 
     /**
      * Get id
@@ -75,38 +63,9 @@ class DonneeClient
         return $this->libelle;
     }
 
-    /**
-     * Set parametre
-     *
-     * @param string $parametre
-     *
-     * @return DonneeClient
-     */
-    public function setParametre($parametre)
+    function __toString()
     {
-        $this->parametre = $parametre;
-
-        return $this;
+        return $this->libelle;
     }
-
-    /**
-     * Get parametre
-     *
-     * @return string
-     */
-    public function getParametre()
-    {
-        return $this->parametre;
-    }
-    
-    function getGroupeDonneeClient() {
-        return $this->groupeDonneeClient;
-    }
-
-    function setGroupeDonneeClient($groupeDonneeClient) {
-        $this->groupeDonneeClient = $groupeDonneeClient;
-    }
-
-
 
 }

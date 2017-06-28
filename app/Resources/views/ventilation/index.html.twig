@@ -36,10 +36,10 @@
     </table>
         
     <form action="{{ path('ventilation_new') }}" method="post">
-        <label for="activite">Activité </label>
-        <select id="activite" name="activite">
-            {% for activite in formulaires %}
-                <option value="{{ activite.id }}">{{ activite.libelle }}</option>
+        <label for="formulaire">Activité </label>
+        <select id="formulaire" name="formulaire">
+            {% for formulaire in formulaires %}
+                <option value="{{ formulaire.id }}">{{ formulaire.libelle }}</option>
             {% endfor %}
         </select>
         <input type="submit" value="Saisir" />
