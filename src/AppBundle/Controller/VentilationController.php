@@ -80,6 +80,7 @@ class VentilationController extends Controller {
         }
       //  var_dump($listeElementsValorises);
         $ventilationFormulaire->setElementsValorises($listeElementsValorises);
+        $ventilationFormulaire->setFormulaire($formulaire);
         $ventilation->setVentilationFormulaire($ventilationFormulaire);
         $form = $this->createForm('AppBundle\Form\VentilationType', $ventilation);
  
@@ -88,8 +89,6 @@ class VentilationController extends Controller {
         if ($form->isSubmitted() && $form->isValid()) {
             $ventilation = $form->getData();
             $em->persist($ventilation);
-          //   $em->persist($ventilationFormulaire);
-         //   var_dump($ventilation);
             $ventilation->setDateSaisie(new \DateTime);
             $em->flush();
             

@@ -43,7 +43,7 @@ class ElementsValorises
     private $id_donnee_client;
     
     /**
-     * @ORM\ManyToOne(targetEntity="VentilationFormulaire", inversedBy="elementsValorises")
+     * @ORM\ManyToOne(targetEntity="VentilationFormulaire", inversedBy="elementsValorises", cascade={"persist"})
      * @ORM\JoinColumn(name="id_ventilation_formulaire", referencedColumnName="id")
      */
     private $ventilationFormulaire;
