@@ -6,9 +6,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {% stylesheets '@css_default'
                        '@bootstrap_css'
+                       '@bootstrap_datepicker_css'
             filter='cssrewrite' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
+        
+        {% block javascripts %}
+            {% javascripts 
+            '@js_default'
+            '@jquery'
+            '@bootstrap_js'
+            '@bootstrap_datepicker_js'
+            %}
+            <script src="{{ asset_url }}">
+            </script>
+            {% endjavascripts %}
+        {% endblock %}
     </head>
     <body><div class="container-fluid">
             <div class="row">
@@ -31,14 +44,5 @@
                 {% endblock %}
             </div>
         </div>
-
     </body>
-    {% block javascripts %}
-        {% javascripts 
-        '@js_default'
-        '@bootstrap_css'
-        %}
-        <script src="{{ asset_url }}"></script>
-        {% endjavascripts %}
-    {% endblock %}
 </html>
