@@ -29,7 +29,11 @@
                 
                 {{ form_label(edit_form.obligatoire) }} 
                 {{ form_errors(edit_form.obligatoire) }}
-                {{ form_widget(edit_form.obligatoire) }}
+                {{ form_widget(edit_form.obligatoire) }}<br/><br/>
+
+                {{ form_label(edit_form.parent) }}
+                {{ form_errors(edit_form.parent) }}
+                {{ form_widget(edit_form.parent) }}
                 
                 <br/><br/><button type="submit" class="btn btn-info">
                     <span class="glyphicon glyphicon-pencil"></span> Modifier

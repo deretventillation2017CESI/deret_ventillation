@@ -2,7 +2,7 @@
 
 {% block title %}Gestion des formulaires{% endblock %}
 
-{% block main -%}
+{% block main %}
     <div class="row" style='margin-top: 1%;'>
         <div class="col-md-8 col-md-offset-2 titre text-center">
             <h1>Liste des formulaires</h1>
@@ -25,6 +25,9 @@
                         <td><a href="{{ path('formulaire_show', { 'id': formulaire.id }) }}">{{ formulaire.id }}</a></td>
                         <td>{{ formulaire.libelle }}</td>
                         <td>
+                            <a href="{{ path('formulaire_afficher', { 'id': formulaire.id }) }}"><button type="button" class="btn btn-success">
+                                    <span class="glyphicon glyphicon-search"></span> Afficher
+                                </button></a>
                             <a href="{{ path('formulaire_show', { 'id': formulaire.id }) }}"><button type="button" class="btn btn-success">
                                 <span class="glyphicon glyphicon-search"></span> Voir
                             </button></a>

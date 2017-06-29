@@ -69,6 +69,13 @@ class Element {
     private $donneesClientElements;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="parent", type="boolean")
+     */
+    private $parent;
+
+    /**
      * Get id
      *
      * @return int

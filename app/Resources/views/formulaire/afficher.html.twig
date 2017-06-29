@@ -1,0 +1,78 @@
+{% extends 'default/layout.html.twig' %}
+
+{% block main %}
+    <h1>{{ formulaire.libelle }}</h1>
+
+    {% for element in formulaire.listeElements %}
+        {% if element.typeElement.libelle == "select" %}
+            {% if element.parent %}
+                <select id="{{ element.id }}" class="select">
+                    <option>- choisir -</option>
+            {% else %}
+                <select id="{{ element.id }}" class="selectD">
+                    <option>- choisir -</option>
+            {% endif %}
+                {% for donnee in element.donneesClientElements %}
+                    <option>{{ donnee.donneeClient.libelle }}</option>
+                {% endfor %}
+            </select>
+        {% endif %}
+    {% endfor %}
+    <br/><br/>
+    <table border="1">
+        <tbody>
+            <tr>
+                <th>Nom du champ</th>
+                <th>Position/Ordre</th>
+            </tr>
+            {% for element in formulaire.listeElements %}
+                <tr>
+                    <td>{{ element.libelle }}</td>
+                    <td>ORDRE</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a href="{{ path('formulaire_addElement', {'id': formulaire.id}) }}"><button>Add element to {{ formulaire.libelle }}</button></a>
+    <ul>
+        <li>
+            <a href="{{ path('formulaire_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('formulaire_edit', { 'id': formulaire.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(document).ready(function() {
+            console.log("jQuery est prêt !");
+
+            $(".select").change(function () {
+                mafonctionchange($(this).attr("id"));
+            });
+
+            function mafonctionchange(idSelect) {
+                alert(idSelect);
+                $.ajax({
+                    url: 'http://localhost/deret_ventillation/web/app_dev.php/formulaire/1/remplir',
+                    type: 'POST',
+                    data: {
+                        id: idSelect
+                    },
+                    dataType: 'json',
+                    success: function (reponse) {
+
+                        console.log(reponse);
+                    }
+                });
+            }
+        });
+    </script>
+{% endblock %}

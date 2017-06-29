@@ -69,6 +69,13 @@ class Element {
     private $donneesClientElements;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="parent", type="boolean")
+     */
+    private $parent;
+
+    /**
      * Get id
      *
      * @return int
@@ -251,5 +258,29 @@ class Element {
     function __toString()
     {
         return $this->libelle;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param boolean $parent
+     *
+     * @return Element
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return boolean
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 }

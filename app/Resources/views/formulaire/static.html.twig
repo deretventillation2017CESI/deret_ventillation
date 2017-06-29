@@ -1,0 +1,42 @@
+{% extends 'default/layout.html.twig' %}
+
+{% block title %}Formulaire{% endblock %}
+
+{% block main %}
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-lg-6">
+            {{ form_label(form.activites) }}
+            {{ form_widget(form.activites) }}
+        </div>
+        <div class="col-lg-6">
+        <label>Type de produit</label>
+        <select id="typeProduit" name="typeProduit">
+            <option value="Debout cuir">Debout cuir</option>
+            <option value="Debout autres">Debout autres</option>
+            <option value="Couchés">Couchés</option>
+            <option value="Fourrure">Fourrure</option>
+            <option value="Accessoires">Accessoires</option>
+            <option value="Meubles">Meubles</option>
+            <option value=Luminaires>Luminaires</option>
+        </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            {{ form_label(form.quantite) }}
+            {{ form_widget(form.quantite) }}
+        </div>
+        <div class="col-lg-6">
+            {{ form_label(form.temps) }}
+            {{ form_widget(form.temps) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            {{ form_label(form.commentaire) }}
+            {{ form_widget(form.commentaire) }}
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

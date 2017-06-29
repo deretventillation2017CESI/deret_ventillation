@@ -10,4 +10,13 @@ namespace AppBundle\Repository;
  */
 class DonneeClientElementRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findAllByIdParent($id)
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT p FROM AppBundle:DonneeClientElement p
+                  WHERE p.interaction = :id'
+            )->setParameter('id',$id)
+            ->getResult();
+    }
 }

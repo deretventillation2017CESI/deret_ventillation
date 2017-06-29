@@ -3,9 +3,16 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Formulaire;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Formulaire controller.
@@ -30,6 +37,28 @@ class FormulaireController extends Controller
             'formulaires' => $formulaires,
         ));
     }
+
+    /**
+     * Lists all formulaire entities.
+     *
+     * @Route("/static", name="formulaire_static")
+     * @Method("GET")
+     */
+    public function staticAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $form = $this->createFormBuilder()->add('activites', EntityType::class, array(
+            // query choices from this entity
+            'class' => 'AppBundle:Formulaire',
+
+            // use the User.username property as the visible option string
+            'choice_label' => 'libelle',))->add('quantite', TextType::class)->add('temps', TextType::class)->add('commentaire', TextareaType::class)
+            ->getForm();
+
+        return $this->render('formulaire/static.html.twig', array('form' => $form->createView()));
+    }
+
 
     /**
      * Creates a new formulaire entity.
@@ -71,6 +100,42 @@ class FormulaireController extends Controller
             'formulaire' => $formulaire,
             'delete_form' => $deleteForm->createView(),
         ));
+    }
+
+    /**
+     * Finds and displays a formulaire entity.
+     *
+     * @Route("/{id}/afficher", name="formulaire_afficher")
+     * @Method("GET")
+     */
+    public function afficherAction(Formulaire $formulaire)
+    {
+        $deleteForm = $this->createDeleteForm($formulaire);
+
+        return $this->render('formulaire/afficher.html.twig', array(
+            'formulaire' => $formulaire,
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     *
+     * @Route("/{id}/remplir", name="formulaire_remplir")
+     * @Method({"GET","POST"})
+     */
+    public function remplirAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        if($request->isXmlHttpRequest()) // pour vérifier la présence d'une requete Ajax
+        {
+            $id = $request->request->get('id');
+            if ($id != null)
+            {
+                $repository = $em->getRepository('AppBundle:DonneeClientElement');
+                $data = $repository->findBy(array('interaction'=>$id));
+                return new JsonResponse($data);
+            }
+        }
+        return new Response("Nonnn ....");
     }
 
     /**
