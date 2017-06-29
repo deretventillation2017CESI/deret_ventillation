@@ -23,20 +23,20 @@ class DonneeClientElement {
 
      /**
      * @ORM\ManyToOne(targetEntity="Element", inversedBy="donneesClientElements")
-     * @ORM\JoinColumn(name="element", referencedColumnName="id")
+     * @ORM\JoinColumn(name="id_element", referencedColumnName="id")
      */
     private $element;
 
     /**
      * @ORM\ManyToOne(targetEntity="DonneeClient")
-     * @ORM\JoinColumn(name="donnee_client", referencedColumnName="id")
+     * @ORM\JoinColumn(name="id_donne_client", referencedColumnName="id")
      */
     private $donneeClient;
 
     /**
      * Many Categories have One Category.
      * @ORM\ManyToOne(targetEntity="DonneeClientElement", inversedBy="id")
-     * @ORM\JoinColumn(name="interaction", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="id_element_cible", referencedColumnName="id", nullable=true)
      */
     private $interaction;
 

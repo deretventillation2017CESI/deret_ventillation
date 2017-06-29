@@ -1,0 +1,45 @@
+{% extends 'default/layout.html.twig' %}
+
+{% block title %}Export des saisies{% endblock %}
+
+{% block main -%}
+    <div class="row" style='margin-top: 1%;'>
+        <div class="col-md-8 col-md-offset-2 titre text-center">
+            <h1>Export des saisies</h1>
+        </div>
+    </div>
+    
+    <div class="row text-center" style='margin-top: 2%;'>
+        <form action="{{ path('export_index') }}" method="post" class="form-inline">
+            <div class="form-group">
+                <label for="date_debut">Date de début</label>
+{#                <input id="date_debut" name="date_debut" type="text" class="datepicker form-control" data-provide="datepicker-inline">#}
+                <input id="date_debut" name="date_debut" type="text" class="form-control">
+            </div>
+            &nbsp;&nbsp;<div class="form-group">
+                <label for="date_fin">Date de fin</label>
+{#                <input id="date_fin" name="date_fin" type="text" class="datepicker form-control" data-provide="datepicker-inline">#}
+                <input id="date_fin" name="date_fin" type="text" class="form-control">
+            </div>
+            &nbsp;&nbsp;<div class="form-group">
+                <button type="submit" class="btn btn-primary">Exporter</button>
+            </div>
+        </form>
+    </div>
+          
+    <div class="row text-center" style='margin-top: 2%;'>
+        {% for key, value in tabHeureTotal %}
+            {{ key }} - {{ value }}
+        {% endfor %}
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.datepicker').datepicker({
+                format: "dd/mm/yyyy",
+                todayBtn: "linked",
+                language: "fr"
+            });
+        });
+    </script>
+{% endblock %}

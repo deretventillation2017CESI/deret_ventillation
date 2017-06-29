@@ -1,28 +1,54 @@
-{% extends 'base.html.twig' %}
+{% extends 'default/layout.html.twig' %}
 
-{% block body %}
-    <h1>Liste des elements du formulaire</h1>
-    <table border="1">
-        <tbody>
-        <tr>
-            <th>Nom du champ</th>
-            <th>Position/Ordre</th>
-        </tr>
-        {% for element in formulaire.listeElements %}
-            <tr>
-                <td>{{ element.libelle }}</td>
-                <td>ORDRE</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <form method="POST">
-        Element :
-        <select name="element">
-        {% for element in elements %}
-            <option value="{{ element.id }}">{{ element.libelle }}</option>
-        {% endfor %}
-        </select>
-        <button type="submit">Ajouter</button>
-    </form>
+{% block title %}Ajout d'un élémént au formulaire {{ formulaire.libelle }}{% endblock %}
+
+{% block main -%}
+    <div class="row text-left" style="margin-top: 2%;">
+        <a href="{{ path('formulaire_show', { 'id': formulaire.id }) }}"><button type="button" class="btn btn-primary">
+            <span class=" glyphicon glyphicon-arrow-left"></span> Retour
+        </button></a>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 titre text-center">
+            <h1>Liste des éléménts du formulaire {{ formulaire.libelle }}</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 text-center">
+            <table class='table' style="margin-top: 2%;">
+                <tbody>
+                    <tr>
+                        <th style="text-align: center;">Nom champs</th>
+                        <th style="text-align: center;">Position/Ordre</th>
+                    </tr>
+                    {% for element in formulaire.listeElements %}
+                        <tr>
+                            <td>{{ element.libelle }}</td>
+                            <td>/</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+                
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 titre text-center">
+            <h1>Ajouter un élément au formulaire</h1>
+        </div>
+    </div>
+                    
+    <div class="row text-center">
+        <form method="POST" style="margin-top: 1%;">
+            Element :
+            <select name="element">
+            {% for element in elements %}
+                <option value="{{ element.id }}">{{ element.libelle }}</option>
+            {% endfor %}
+            </select>
+            <button type="submit" class="btn btn-success">Ajouter</button>
+        </form>
+    </div>
 {% endblock %}

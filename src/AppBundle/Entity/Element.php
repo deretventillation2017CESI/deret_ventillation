@@ -49,16 +49,15 @@ class Element {
     private $valeur_default;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TypeElement")
-     * @ORM\JoinColumn(name="id_typeElement", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="TypeElement",fetch="EAGER")
+     * @ORM\JoinColumn(name="id_typeElement", referencedColumnName="id" )
      */
     private $typeElement;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToOne(targetEntity="ElementsValorises", inversedBy="elements")
-     * @ORM\JoinColumn(name="id_elements_valorises", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="ElementsValorises", mappedBy="element")
      */
     private $elementsValorises;
 
@@ -170,12 +169,12 @@ class Element {
         return $this->donneesClientElements;
     }
 
-    /*function getInput($form) {
+    function getInput($form) {
         $properties = array(
             'label' => $this->getLibelle(),
             'required' => $this->getObligatoire(),
             'data' => $this->getValeur_default(),
-            'mapped' => false
+            'mapped' => true
         );
         if ($this->getTypeElement()->getId() == TypeElement::$TYPE_TEXT) {
             $type = TextType::class;
@@ -195,9 +194,12 @@ class Element {
             $properties['choices'] = $choices;
         }
 
-        $form->add($this->getId(), $type, $properties);
+
+
+        $form->add("valeur", $type, $properties);
+                        var_dump($this->getTypeElement()->getLibelle());
         return $form;
-    }*/
+    }
 
     /**
      * Constructor

@@ -42,20 +42,20 @@ class Ventilation
      */
     private $dateSaisie;
     
-    /*
+    /**
      * @ORM\ManyToOne(targetEntity="Poste")
      * @ORM\JoinColumn(name="poste", referencedColumnName="id")
      */
     private $poste;
     
-    /*
+    /**
      * @ORM\ManyToOne(targetEntity="Utilisateur")
      * @ORM\JoinColumn(name="utilisateur", referencedColumnName="id")
      */
     private $utilisateur;
     
-    /*
-     * @ORM\OneToOne(targetEntity="VentilationFormulaire", mappedBy="ventilation")
+    /**
+     * @ORM\OneToOne(targetEntity="VentilationFormulaire", mappedBy="ventilation" , cascade={"persist"})
      */
     private $ventilationFormulaire;
     
@@ -111,8 +111,10 @@ class Ventilation
         $this->utilisateur = $utilisateur;
     }
 
-    function setVentilationFormulaire($ventilationFormulaire) {
+    function setVentilationFormulaire($ventilationFormulaire) {   
+        $ventilationFormulaire->setVentilation($this);
         $this->ventilationFormulaire = $ventilationFormulaire;
+     
     }
 
 

@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-
+use Symfony\Component\Form\FormEvents;
 class VentilationType extends AbstractType
 {
     /**
@@ -20,6 +20,10 @@ class VentilationType extends AbstractType
         ));
         $builder->add('formulaire', HiddenType::class, array (
             'mapped'    => false
+        ));
+        $builder->add('ventilationFormulaire', VentilationFormulaireType::class,array (
+            'label'    => false,
+            'by_reference' =>false
         ));
     }
     
@@ -40,6 +44,4 @@ class VentilationType extends AbstractType
     {
         return 'appbundle_ventilation';
     }
-
-
 }
