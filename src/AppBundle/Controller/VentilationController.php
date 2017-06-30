@@ -45,6 +45,19 @@ class VentilationController extends Controller {
 
         $repo_formulaire_modele = $em->getRepository('AppBundle:Formulaire');
 
+        $user = $em->getRepository('AppBundle:Utilisateur')->find($this->getUser()->getId());
+
+        $total = 0;
+
+        if(isset($_POST['formulaire'])) {
+            setcookie("form", $_POST['formulaire']);
+
+            $tempsPassee = $em->getRepository('AppBundle:Ventilation')->findAllTempsPasseeVentilation($user, $_COOKIE["form"]);
+
+            foreach ($tempsPassee as $temps) {
+                $total = $total + $temps->getTempsPasse();
+            }
+        }
 
         $ventilation = new Ventilation();
 
@@ -62,12 +75,12 @@ class VentilationController extends Controller {
 
 
         //On recupère le formulaire dans la base
-        $formulaire = $repo_formulaire_modele->find($id_formulaire_modele);
+        //$formulaire = $repo_formulaire_modele->find($id_formulaire_modele);
 
         //On récupère tout les elements du formulaire modele. 
-        $elements = $formulaire->getListeElements();
+        //$elements = $formulaire->getListeElements();
 
-        $ventilationFormulaire = new \AppBundle\Entity\VentilationFormulaire();
+        /*$ventilationFormulaire = new \AppBundle\Entity\VentilationFormulaire();
 
         $listeElementsValorises = [];
 
@@ -78,27 +91,39 @@ class VentilationController extends Controller {
             $elementsValorise->setValeur($element->getValeur_default());
             $listeElementsValorises[] = $elementsValorise;
         }
-      //  var_dump($listeElementsValorises);
+        //var_dump($listeElementsValorises);
         $ventilationFormulaire->setElementsValorises($listeElementsValorises);
         $ventilationFormulaire->setFormulaire($formulaire);
-        $ventilation->setVentilationFormulaire($ventilationFormulaire);
+        $ventilation->setVentilationFormulaire($ventilationFormulaire);*/
         $form = $this->createForm('AppBundle\Form\VentilationType', $ventilation);
  
         $form->get('formulaire')->setData($id_formulaire_modele);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $ventilation = $form->getData();
+            $ventilation->setValidation(false);
+
+            // GET USER ID FOS USER BUNDLE
+            //$user = $this->container->get('security.context')->getToken()->getUser();
+
+            $ventilation->setUtilisateur($user);
+
+            //var_dump($num_formulaire);
+
+            $form = $em->getRepository("AppBundle:Formulaire")->find($_COOKIE["form"]);
+
+            $ventilation->setFormulaire($form);
+
             $em->persist($ventilation);
             $ventilation->setDateSaisie(new \DateTime);
             $em->flush();
-            
 
             return $this->redirectToRoute('ventilation_show', array('id' => $ventilation->getId()));
         }
 
         return $this->render('ventilation/new.html.twig', array(
                     'ventilation' => $ventilation,
-                    'elements' => $elements,
+                    'temps' => $total,
                     'form' => $form->createView(),
         ));
     }
@@ -130,6 +155,7 @@ class VentilationController extends Controller {
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('ventilation_edit', array('id' => $ventilation->getId()));

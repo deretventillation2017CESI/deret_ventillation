@@ -22,20 +22,20 @@ class VentilationFormulaire
      */
     private $id;
 
-    /*
+    /**
      * @ORM\OneToOne(targetEntity="Ventilation", inversedBy="ventilationFormulaire")
      * @ORM\JoinColumn(name="ventilation", referencedColumnName="id")
      */
     private $ventilation;
 
-    /*
+    /**
      * @ORM\ManyToOne(targetEntity="Formulaire")
      * @ORM\JoinColumn(name="formulaire", referencedColumnName="id")
      */
     private $formulaire;
     
-    /*
-     * @ORM\OneToMany(targetEntity="ElementsValorises", mappedBy="ventilationFormulaire")
+    /**
+     * @ORM\OneToMany(targetEntity="ElementsValorises", mappedBy="ventilationFormulaire" , cascade={"persist"})
      */
     private $elementsValorises;
     
@@ -76,4 +76,28 @@ class VentilationFormulaire
         $this->elementsValorises = $elementsValorises;
     }
 
+
+    /**
+     * Add elementsValorise
+     *
+     * @param \AppBundle\Entity\ElementsValorises $elementsValorise
+     *
+     * @return VentilationFormulaire
+     */
+    public function addElementsValorise(\AppBundle\Entity\ElementsValorises $elementsValorise)
+    {
+        $this->elementsValorises[] = $elementsValorise;
+
+        return $this;
+    }
+
+    /**
+     * Remove elementsValorise
+     *
+     * @param \AppBundle\Entity\ElementsValorises $elementsValorise
+     */
+    public function removeElementsValorise(\AppBundle\Entity\ElementsValorises $elementsValorise)
+    {
+        $this->elementsValorises->removeElement($elementsValorise);
+    }
 }

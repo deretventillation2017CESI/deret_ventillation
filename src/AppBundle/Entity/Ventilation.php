@@ -38,7 +38,7 @@ class Ventilation
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateSaisie", type="datetime")
+     * @ORM\Column(name="dateSaisie", type="date")
      */
     private $dateSaisie;
     
@@ -53,11 +53,34 @@ class Ventilation
      * @ORM\JoinColumn(name="utilisateur", referencedColumnName="id")
      */
     private $utilisateur;
-    
+
     /**
-     * @ORM\OneToOne(targetEntity="VentilationFormulaire", mappedBy="ventilation" , cascade={"persist"})
+    *
+    * @ORM\ManyToOne(targetEntity="Produit")
+    * @ORM\JoinColumn(name="id_produit", referencedColumnName="id")
+    */
+    private $produit;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="quantite", type="integer")
      */
-    private $ventilationFormulaire;
+    private $quantite;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="commentaire", type="string", length=255 )
+     */
+    private $commentaire;
+
+    /**
+     * One Product has One Shipment.
+     * @ORM\ManyToOne(targetEntity="Formulaire")
+     * @ORM\JoinColumn(name="formulaire_id", referencedColumnName="id")
+     */
+    private $formulaire;
     
     function getId() {
         return $this->id;
@@ -117,5 +140,108 @@ class Ventilation
      
     }
 
+    /**
+     * Set produit
+     *
+     * @param \AppBundle\Entity\Produit $produit
+     *
+     * @return Ventilation
+     */
+    public function setProduit(\AppBundle\Entity\Produit $produit = null)
+    {
+        $this->produit = $produit;
 
+        return $this;
+    }
+
+    /**
+     * Get produit
+     *
+     * @return \AppBundle\Entity\Produit
+     */
+    public function getProduit()
+    {
+        return $this->produit;
+    }
+
+    /**
+     * Set quantite
+     *
+     * @param integer $quantite
+     *
+     * @return Ventilation
+     */
+    public function setQuantite($quantite)
+    {
+        $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    /**
+     * Get quantite
+     *
+     * @return integer
+     */
+    public function getQuantite()
+    {
+        return $this->quantite;
+    }
+
+    /**
+     * Set commentaire
+     *
+     * @param string $commentaire
+     *
+     * @return Ventilation
+     */
+    public function setCommentaire($commentaire)
+    {
+        $this->commentaire = $commentaire;
+
+        return $this;
+    }
+
+    /**
+     * Get commentaire
+     *
+     * @return string
+     */
+    public function getCommentaire()
+    {
+        return $this->commentaire;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->formulaire = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
+
+    /**
+     * Set formulaire
+     *
+     * @param \AppBundle\Entity\Formulaire $formulaire
+     *
+     * @return Ventilation
+     */
+    public function setFormulaire(\AppBundle\Entity\Formulaire $formulaire = null)
+    {
+        $this->formulaire = $formulaire;
+
+        return $this;
+    }
+
+    /**
+     * Get formulaire
+     *
+     * @return \AppBundle\Entity\Formulaire
+     */
+    public function getFormulaire()
+    {
+        return $this->formulaire;
+    }
 }

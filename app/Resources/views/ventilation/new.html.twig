@@ -4,12 +4,13 @@
     <h1>Ventilation creation</h1>
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+        <input type="submit" value="Sauvegarder" />
 
-    <ul>
-        <li>
-            <a href="{{ path('ventilation_index') }}">Back to the list</a>
-        </li>
-    </ul>
+    {{ form_end(form) }}
+    <a href="{{ path('ventilation_index') }}"><button>Retour</button></a>
+
+    <div>
+        <label>Temps journalier passé :</label>
+        <div>{{ temps }}</div>
+    </div>
 {% endblock %}

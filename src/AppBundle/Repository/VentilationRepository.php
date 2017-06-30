@@ -26,4 +26,27 @@ class VentilationRepository extends \Doctrine\ORM\EntityRepository
                     ->getQuery()
                     ->getResult();
     }
+
+    /*
+     * FONCTION :
+     */
+    public function findAllTempsPasseeVentilation($user,$form)
+    {
+
+        $dateless = new \DateTime("-1 day");
+        $datemore = new \DateTime("+1 day");
+
+
+        return $this->createQueryBuilder('t')
+            ->where("t.utilisateur = ?1")
+            ->andWhere("t.dateSaisie > ?2")
+            ->andWhere("t.dateSaisie < ?3")
+            ->andWhere("t.formulaire = ?4")
+            ->setParameter(1, $user->getId())
+            ->setParameter(2, $dateless)
+            ->setParameter(3, $datemore)
+            ->setParameter(4, $form)
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -55,13 +55,6 @@ class Element {
     private $typeElement;
 
     /**
-     * @var ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="ElementsValorises", mappedBy="element")
-     */
-    private $elementsValorises;
-
-    /**
      * Many Features have One Product.
      * @ORM\OneToMany(targetEntity="DonneeClientElement", mappedBy="element")
      */
@@ -284,5 +277,29 @@ class Element {
     public function getParent()
     {
         return $this->parent;
+    }
+
+    /**
+     * Add elementsValorise
+     *
+     * @param \AppBundle\Entity\ElementsValorises $elementsValorise
+     *
+     * @return Element
+     */
+    public function addElementsValorise(\AppBundle\Entity\ElementsValorises $elementsValorise)
+    {
+        $this->elementsValorises[] = $elementsValorise;
+
+        return $this;
+    }
+
+    /**
+     * Remove elementsValorise
+     *
+     * @param \AppBundle\Entity\ElementsValorises $elementsValorise
+     */
+    public function removeElementsValorise(\AppBundle\Entity\ElementsValorises $elementsValorise)
+    {
+        $this->elementsValorises->removeElement($elementsValorise);
     }
 }
