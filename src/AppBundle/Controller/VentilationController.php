@@ -26,7 +26,6 @@ class VentilationController extends Controller {
         $em = $this->getDoctrine()->getManager();
 
         $ventilations = $em->getRepository('AppBundle:Ventilation')->findAll();
-        $formulaires = $em->getRepository('AppBundle:Formulaire')->findAll();
         $typeActivite = $em->getRepository('AppBundle:TypeActivite')->findAll();
 
         var_dump($request->request->get('typeActivite'));
@@ -37,7 +36,6 @@ class VentilationController extends Controller {
 
         return $this->render('ventilation/index.html.twig', array(
                     'ventilations' => $ventilations,
-                    'formulaires' => $formulaires,
                     'typeActivite' => $typeActivite
         ));
     }
@@ -48,25 +46,20 @@ class VentilationController extends Controller {
      * @Route("/new/{id}", name="ventilation_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request) {
+    public function newAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
 
-        $repo_formulaire_modele = $em->getRepository('AppBundle:Formulaire');
+        $activite = $em->getRepository("AppBundle:TypeActivite")->find($id);
+        $formulaires = $em->getRepository('AppBundle:Formulaire')->findBy(array("type_activite" => $id));
 
         $user = $em->getRepository('AppBundle:Utilisateur')->find($this->getUser()->getId());
 
         $total = 0;
 
-        if(isset($_POST['formulaire'])) {
-            setcookie("form", $_POST['formulaire']);
+        $tempsPassee = $em->getRepository('AppBundle:Ventilation')->findAllTempsPasseeVentilation($user, $id);
 
-            var_dump("user".$user."cookieform".$_COOKIE['form']);
-
-            $tempsPassee = $em->getRepository('AppBundle:Ventilation')->findAllTempsPasseeVentilation($user, $_COOKIE["form"]);
-
-            foreach ($tempsPassee as $temps) {
-                $total = $total + $temps->getTempsPasse();
-            }
+        foreach ($tempsPassee as $temps) {
+            $total = $total + $temps->getTempsPasse();
         }
 
         $ventilation = new Ventilation();
@@ -74,14 +67,14 @@ class VentilationController extends Controller {
         $form = $this->createForm('AppBundle\Form\VentilationType', $ventilation);
         $form->handleRequest($request);
 
-        $id_formulaire_modele = $request->get('formulaire');
+        /*$id_formulaire_modele = $request->get('formulaire');*
 
         // Si on vient de la selection du formulair e
-        if ($id_formulaire_modele == null) {
+        /*if ($id_formulaire_modele == null) {
             $id_formulaire_modele = $form->get('formulaire')->getData();
         } else {//Sinon on charge depuis le form
             $form->get('formulaire')->setData($id_formulaire_modele);
-        }
+        }*/
 
 
         //On recupère le formulaire dans la base
@@ -105,10 +98,10 @@ class VentilationController extends Controller {
         $ventilationFormulaire->setElementsValorises($listeElementsValorises);
         $ventilationFormulaire->setFormulaire($formulaire);
         $ventilation->setVentilationFormulaire($ventilationFormulaire);*/
-        $form = $this->createForm('AppBundle\Form\VentilationType', $ventilation);
+        /*$form = $this->createForm('AppBundle\Form\VentilationType', $ventilation);
  
         $form->get('formulaire')->setData($id_formulaire_modele);
-        $form->handleRequest($request);
+        $form->handleRequest($request);*/
         if ($form->isSubmitted() && $form->isValid()) {
             $ventilation = $form->getData();
             $ventilation->setValidation(false);
@@ -120,7 +113,7 @@ class VentilationController extends Controller {
 
             //var_dump($num_formulaire);
 
-            $form = $em->getRepository("AppBundle:Formulaire")->find($_COOKIE["form"]);
+            $form = $em->getRepository("AppBundle:Formulaire")->find($id);
 
             $ventilation->setFormulaire($form);
 
@@ -133,6 +126,7 @@ class VentilationController extends Controller {
 
         return $this->render('ventilation/new.html.twig', array(
                     'ventilation' => $ventilation,
+                    'formulaires' => $formulaires,
                     'temps' => $total,
                     'form' => $form->createView(),
         ));

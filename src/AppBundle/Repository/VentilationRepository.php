@@ -30,7 +30,7 @@ class VentilationRepository extends \Doctrine\ORM\EntityRepository
     /*
      * FONCTION :
      */
-    public function findAllTempsPasseeVentilation($user,$form)
+    public function findAllTempsPasseeVentilation($user,$id)
     {
 
         $dateless = new \DateTime("-1 day");
@@ -38,14 +38,16 @@ class VentilationRepository extends \Doctrine\ORM\EntityRepository
 
 
         return $this->createQueryBuilder('t')
+            ->join("t.formulaire", "f")
+            ->where("t.formulaire = f.id" )
             ->where("t.utilisateur = ?1")
             ->andWhere("t.dateSaisie > ?2")
             ->andWhere("t.dateSaisie < ?3")
-            ->andWhere("t.formulaire = ?4")
+            ->andWhere("f.type_activite = ?4")
             ->setParameter(1, $user->getId())
             ->setParameter(2, $dateless)
             ->setParameter(3, $datemore)
-            ->setParameter(4, $form)
+            ->setParameter(4, $id)
             ->getQuery()
             ->getResult();
     }

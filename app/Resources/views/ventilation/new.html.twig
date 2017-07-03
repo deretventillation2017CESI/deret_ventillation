@@ -2,7 +2,14 @@
 
 {% block body %}
     <h1>Ventilation creation</h1>
+
     {{ form_start(form) }}
+        <label>Métier</label>
+        <select id="formulaire" name="formulaire">
+            {% for formulaire in formulaires %}
+                <option value="{{ formulaire.id }}">{{ formulaire.libelle }}</option>
+            {% endfor %}
+        </select>
         {{ form_widget(form) }}
         <input type="submit" value="Sauvegarder" />
 
