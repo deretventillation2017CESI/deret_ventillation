@@ -76,12 +76,11 @@ class Ventilation
     private $commentaire;
 
     /**
-     * One Product has One Shipment.
      * @ORM\ManyToOne(targetEntity="Formulaire")
      * @ORM\JoinColumn(name="formulaire_id", referencedColumnName="id")
      */
     private $formulaire;
-    
+
     function getId() {
         return $this->id;
     }

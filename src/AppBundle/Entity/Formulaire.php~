@@ -29,6 +29,12 @@ class Formulaire
     private $libelle;
 
     /**
+     * @ORM\OneToOne(targetEntity="TypeActivite")
+     * @ORM\JoinColumn(name="type_activite_id", referencedColumnName="id")
+     */
+    private $type_activite;
+
+    /**
      * Many Users have Many Groups.
      * @ORM\ManyToMany(targetEntity="Element")
      * @ORM\JoinTable(name="formulaire_elements",

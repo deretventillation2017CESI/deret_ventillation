@@ -29,6 +29,12 @@ class Formulaire
     private $libelle;
 
     /**
+     * @ORM\ManyToOne(targetEntity="TypeActivite")
+     * @ORM\JoinColumn(name="type_activite_id", referencedColumnName="id")
+     */
+    private $type_activite;
+
+    /**
      * Many Users have Many Groups.
      * @ORM\ManyToMany(targetEntity="Element")
      * @ORM\JoinTable(name="formulaire_elements",
@@ -93,5 +99,29 @@ class Formulaire
     public function removeListeElement(\AppBundle\Entity\Element $listeElement)
     {
         $this->listeElements->removeElement($listeElement);
+    }
+
+    /**
+     * Set typeActivite
+     *
+     * @param \AppBundle\Entity\TypeActivite $typeActivite
+     *
+     * @return Formulaire
+     */
+    public function setTypeActivite(\AppBundle\Entity\TypeActivite $typeActivite = null)
+    {
+        $this->type_activite = $typeActivite;
+
+        return $this;
+    }
+
+    /**
+     * Get typeActivite
+     *
+     * @return \AppBundle\Entity\TypeActivite
+     */
+    public function getTypeActivite()
+    {
+        return $this->type_activite;
     }
 }

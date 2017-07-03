@@ -20,24 +20,32 @@ class VentilationController extends Controller {
      * Lists all ventilation entities.
      *
      * @Route("/", name="ventilation_index")
-     * @Method("GET")
+     * @Method({"GET", "POST"}))
      */
-    public function indexAction() {
+    public function indexAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
 
         $ventilations = $em->getRepository('AppBundle:Ventilation')->findAll();
         $formulaires = $em->getRepository('AppBundle:Formulaire')->findAll();
+        $typeActivite = $em->getRepository('AppBundle:TypeActivite')->findAll();
+
+        var_dump($request->request->get('typeActivite'));
+
+        if($request->request->get('typeActivite')){
+            return $this->redirectToRoute('ventilation_new', array('id' => $request->request->get('typeActivite')));
+        }
 
         return $this->render('ventilation/index.html.twig', array(
                     'ventilations' => $ventilations,
                     'formulaires' => $formulaires,
+                    'typeActivite' => $typeActivite
         ));
     }
 
     /**
      * Creates a new ventilation entity.
      *
-     * @Route("/new", name="ventilation_new")
+     * @Route("/new/{id}", name="ventilation_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request) {
@@ -51,6 +59,8 @@ class VentilationController extends Controller {
 
         if(isset($_POST['formulaire'])) {
             setcookie("form", $_POST['formulaire']);
+
+            var_dump("user".$user."cookieform".$_COOKIE['form']);
 
             $tempsPassee = $em->getRepository('AppBundle:Ventilation')->findAllTempsPasseeVentilation($user, $_COOKIE["form"]);
 

@@ -54,6 +54,12 @@ class FormulaireController extends Controller
 
             // use the User.username property as the visible option string
             'choice_label' => 'libelle',))->add('quantite', TextType::class)->add('temps', TextType::class)->add('commentaire', TextareaType::class)
+            ->add('typeActivite', EntityType::class, array(
+                // query choices from this entity
+                'class' => 'AppBundle:TypeActivite',
+
+                // use the User.username property as the visible option string
+                'choice_label' => 'libelle',))
             ->getForm();
 
         return $this->render('formulaire/static.html.twig', array('form' => $form->createView()));

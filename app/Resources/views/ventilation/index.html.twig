@@ -37,13 +37,18 @@
         </tbody>
     </table>
         
-    <form action="{{ path('ventilation_new') }}" method="post">
-        <label for="formulaire">Activité </label>
-        <select id="formulaire" name="formulaire">
+    <form action="{{ path('ventilation_index') }}" method="post">
+        <label for="typeActivite">Activité </label>
+        <select id="typeActivite" name="typeActivite">
+            {% for activite in typeActivite %}
+                <option value="{{ activite.id }}">{{ activite.libelle }}</option>
+            {% endfor %}
+        </select>
+        {#<select id="formulaire" name="formulaire">
             {% for formulaire in formulaires %}
                 <option value="{{ formulaire.id }}">{{ formulaire.libelle }}</option>
             {% endfor %}
-        </select>
-        <input type="submit" value="Saisir" />
+        </select>#}
+        <input type="submit" value="Choisir" />
     </form>
 {% endblock %}

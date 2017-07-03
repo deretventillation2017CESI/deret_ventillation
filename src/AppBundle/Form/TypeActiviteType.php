@@ -5,21 +5,15 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class FormulaireType extends AbstractType
+class TypeActiviteType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('libelle')->add('type_activite', EntityType::class, array(
-            // query choices from this entity
-            'class' => 'AppBundle:TypeActivite',
-
-            // use the User.username property as the visible option string
-            'choice_label' => 'libelle',));
+        $builder->add('libelle');
     }
     
     /**
@@ -28,7 +22,7 @@ class FormulaireType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Formulaire'
+            'data_class' => 'AppBundle\Entity\TypeActivite'
         ));
     }
 
@@ -37,7 +31,7 @@ class FormulaireType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_formulaire';
+        return 'appbundle_typeactivite';
     }
 
 
