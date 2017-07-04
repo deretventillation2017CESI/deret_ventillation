@@ -23,7 +23,7 @@ class VentilationController extends Controller {
      */
     public function indexAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
-
+      
         $ventilation = $em->getRepository('AppBundle:Ventilation')->findBy(
             array("utilisateur" => $this->getUser()->getId(), "dateSaisie" => new \DateTime()));
         $activites = $em->getRepository('AppBundle:Activite')->findBy(
@@ -94,9 +94,75 @@ class VentilationController extends Controller {
     public function responsableAction(){
         $em = $this->getDoctrine()->getManager();
 
-        
+        $ventilations = $em->getRepository("AppBundle:Ventilation")->findBy(array('validation' => false));
 
-        return $this->redirectToRoute('ventilation_index');
+        return $this->render('ventilation/responsable.html.twig', array(
+            'ventilations' => $ventilations
+        ));
+    }
+
+    /**
+    * Creates a new ventilation entity.
+    *
+    * @Route("/validation/{id}", name="ventilation_validation")
+    * @Method({"GET", "POST"})
+    */
+    public function validationAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $ventilation = $em->getRepository("AppBundle:Ventilation")->find($id);
+        $ventilation->setValidation(true);
+        $em->persist($ventilation);
+        $em->flush();
+
+        return $this->redirectToRoute("ventilation_responsable");
+    }
+
+    /**
+     * Creates a new ventilation entity.
+     *
+     * @Route("/voir/{id}", name="ventilation_voir")
+     * @Method({"GET", "POST"})
+     */
+    public function voirAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $ventilation = $em->getRepository('AppBundle:Ventilation')->find($id);
+        $activites = $em->getRepository('AppBundle:Activite')->findBy(
+            array("ventilation" => $id));
+        $autreactivites = $em->getRepository('AppBundle:AutreActivite')->findBy(
+            array("ventilation" => $id));
+        $anomalies = $em->getRepository('AppBundle:Anomalies')->findBy(
+            array("ventilation" => $id));
+
+        $tempsActivite = 0;
+        $tempsAutreActivite = 0;
+        $tempsAnomalie = 0;
+
+        foreach ($activites as $activite){
+            $tempsActivite = $tempsActivite + $activite->getTemps();
+        }
+        foreach ($autreactivites as $autreActivite){
+            $tempsAutreActivite = $tempsAutreActivite + $autreActivite->getTemps();
+        }
+        foreach ($anomalies as $anomalie){
+            $tempsAnomalie = $tempsAnomalie + $anomalie->getTemps();
+        }
+
+        $tempsJournalier = $tempsActivite+$tempsAutreActivite+$tempsAnomalie;
+
+        return $this->render('ventilation/voir.html.twig', array(
+            "ventilation" => $ventilation,
+            'activites'=> $activites,
+            'autreActivites'=> $autreactivites,
+            'anomalies' => $anomalies,
+            'tempsActivite' => $tempsActivite,
+            'tempsAutreActivite' => $tempsAutreActivite,
+            'tempsAnomalie' => $tempsAnomalie,
+            'tempsJournalier' => $tempsJournalier
+        ));
     }
 
     /**

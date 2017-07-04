@@ -55,7 +55,7 @@ class Ventilation
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\AutreActivite", mappedBy="ventilation")
      */
-    private $autreactivite;
+    private $autreactivites;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Anomalies", mappedBy="ventilation")
@@ -211,47 +211,7 @@ class Ventilation
         return $this->activites;
     }
 
-    /**
-     * Add autreactivite
-     *
-     * @param \AppBundle\Entity\AutreActivite $autreactivite
-     *
-     * @return Ventilation
-     */
-    public function addAutreactivite(\AppBundle\Entity\AutreActivite $autreactivite)
-    {
-        $this->autreactivite[] = $autreactivite;
-
-        return $this;
-    }
-
-    /**
-     * Remove autreactivite
-     *
-     * @param \AppBundle\Entity\AutreActivite $autreactivite
-     */
-    public function removeAutreactivite(\AppBundle\Entity\AutreActivite $autreactivite)
-    {
-        $this->autreactivite->removeElement($autreactivite);
-    }
-
-    /**
-     * Get autreactivite
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAutreactivite()
-    {
-        return $this->autreactivite;
-    }
-
-    /**
-     * Add anomaly
-     *
-     * @param \AppBundle\Entity\Anomalies $anomaly
-     *
-     * @return Ventilation
-     */
+    
     public function addAnomaly(\AppBundle\Entity\Anomalies $anomaly)
     {
         $this->anomalies[] = $anomaly;
