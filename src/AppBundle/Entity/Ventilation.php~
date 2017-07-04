@@ -56,7 +56,7 @@ class Ventilation
 
     /**
     *
-    * @ORM\OneToOne(targetEntity="Produit")
+    * @ORM\ManyToOne(targetEntity="Produit")
     * @ORM\JoinColumn(name="id_produit", referencedColumnName="id")
     */
     private $produit;
@@ -76,12 +76,11 @@ class Ventilation
     private $commentaire;
 
     /**
-     * One Product has One Shipment.
-     * @ORM\OneToOne(targetEntity="Formulaire")
+     * @ORM\ManyToOne(targetEntity="Formulaire")
      * @ORM\JoinColumn(name="formulaire_id", referencedColumnName="id")
      */
     private $formulaire;
-    
+
     function getId() {
         return $this->id;
     }
@@ -220,4 +219,28 @@ class Ventilation
     }
 
 
+
+    /**
+     * Set formulaire
+     *
+     * @param \AppBundle\Entity\Formulaire $formulaire
+     *
+     * @return Ventilation
+     */
+    public function setFormulaire(\AppBundle\Entity\Formulaire $formulaire = null)
+    {
+        $this->formulaire = $formulaire;
+
+        return $this;
+    }
+
+    /**
+     * Get formulaire
+     *
+     * @return \AppBundle\Entity\Formulaire
+     */
+    public function getFormulaire()
+    {
+        return $this->formulaire;
+    }
 }

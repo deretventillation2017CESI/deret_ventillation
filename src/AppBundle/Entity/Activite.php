@@ -187,4 +187,3 @@ class Activite
         return $this->commentaire;
     }
 }
-

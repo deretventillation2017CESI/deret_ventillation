@@ -2,8 +2,12 @@
 
 {% block title %}Liste des ventilations{% endblock %}
 
-{% block main -%}
-    <h1>Liste des ventilations</h1>
+{% block main %}
+
+    <a href="{{ path('activite') }}"><button class="btn btn-primary">Activités</button></a>
+    <a href="{{ path('autreactivite') }}"><button class="btn btn-primary">Autre activités</button></a>
+    <a href="{{ path('anomalie') }}"><button class="btn btn-primary">Anomalies</button></a>
+    {#<h1>Liste des ventilations</h1>
 
     <table>
         <thead>
@@ -45,5 +49,5 @@
             {% endfor %}
         </select>
         <input type="submit" value="Choisir" />
-    </form>
+    </form>#}
 {% endblock %}

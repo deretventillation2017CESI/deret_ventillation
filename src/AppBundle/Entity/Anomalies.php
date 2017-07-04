@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Activite
+ * Anomalies
  *
- * @ORM\Table(name="activite")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ActiviteRepository")
+ * @ORM\Table(name="anomalies")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\AnomaliesRepository")
  */
-class Activite
+class Anomalies
 {
     /**
      * @var int
@@ -24,9 +24,9 @@ class Activite
     /**
      * @var string
      *
-     * @ORM\Column(name="metier", type="string", length=255)
+     * @ORM\Column(name="anomalie", type="string", length=255)
      */
-    private $metier;
+    private $anomalie;
 
     /**
      * @var string
@@ -34,6 +34,27 @@ class Activite
      * @ORM\Column(name="type_produit", type="string", length=255)
      */
     private $typeProduit;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fabricant", type="string", length=255)
+     */
+    private $fabricant;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="reference", type="string", length=255)
+     */
+    private $reference;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="code_defaut", type="string", length=255)
+     */
+    private $codeDefaut;
 
     /**
      * @var int
@@ -68,27 +89,27 @@ class Activite
     }
 
     /**
-     * Set metier
+     * Set anomalie
      *
-     * @param string $metier
+     * @param string $anomalie
      *
-     * @return Activite
+     * @return Anomalies
      */
-    public function setMetier($metier)
+    public function setAnomalie($anomalie)
     {
-        $this->metier = $metier;
+        $this->anomalie = $anomalie;
 
         return $this;
     }
 
     /**
-     * Get metier
+     * Get anomalie
      *
      * @return string
      */
-    public function getMetier()
+    public function getAnomalie()
     {
-        return $this->metier;
+        return $this->anomalie;
     }
 
     /**
@@ -96,7 +117,7 @@ class Activite
      *
      * @param string $typeProduit
      *
-     * @return Activite
+     * @return Anomalies
      */
     public function setTypeProduit($typeProduit)
     {
@@ -116,11 +137,83 @@ class Activite
     }
 
     /**
+     * Set fabricant
+     *
+     * @param string $fabricant
+     *
+     * @return Anomalies
+     */
+    public function setFabricant($fabricant)
+    {
+        $this->fabricant = $fabricant;
+
+        return $this;
+    }
+
+    /**
+     * Get fabricant
+     *
+     * @return string
+     */
+    public function getFabricant()
+    {
+        return $this->fabricant;
+    }
+
+    /**
+     * Set reference
+     *
+     * @param string $reference
+     *
+     * @return Anomalies
+     */
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+    /**
+     * Get reference
+     *
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    /**
+     * Set codeDefaut
+     *
+     * @param string $codeDefaut
+     *
+     * @return Anomalies
+     */
+    public function setCodeDefaut($codeDefaut)
+    {
+        $this->codeDefaut = $codeDefaut;
+
+        return $this;
+    }
+
+    /**
+     * Get codeDefaut
+     *
+     * @return string
+     */
+    public function getCodeDefaut()
+    {
+        return $this->codeDefaut;
+    }
+
+    /**
      * Set quantite
      *
      * @param integer $quantite
      *
-     * @return Activite
+     * @return Anomalies
      */
     public function setQuantite($quantite)
     {
@@ -144,7 +237,7 @@ class Activite
      *
      * @param string $temps
      *
-     * @return Activite
+     * @return Anomalies
      */
     public function setTemps($temps)
     {
@@ -168,7 +261,7 @@ class Activite
      *
      * @param string $commentaire
      *
-     * @return Activite
+     * @return Anomalies
      */
     public function setCommentaire($commentaire)
     {
@@ -187,4 +280,3 @@ class Activite
         return $this->commentaire;
     }
 }
-
