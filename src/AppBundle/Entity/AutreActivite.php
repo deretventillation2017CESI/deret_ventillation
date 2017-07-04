@@ -42,6 +42,18 @@ class AutreActivite
      */
     private $commentaire;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Utilisateur")
+     * @ORM\JoinColumn(name="utilisateur", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="date")
+     */
+    private $date;
 
     /**
      * Get id
@@ -123,5 +135,53 @@ class AutreActivite
     public function getCommentaire()
     {
         return $this->commentaire;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return AutreActivite
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\Utilisateur $user
+     *
+     * @return AutreActivite
+     */
+    public function setUser(\AppBundle\Entity\Utilisateur $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\Utilisateur
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

@@ -25,17 +25,40 @@ class VentilationController extends Controller {
     public function indexAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
 
-        $ventilations = $em->getRepository('AppBundle:Ventilation')->findAll();
-        $typeActivite = $em->getRepository('AppBundle:TypeActivite')->findAll();
+        $activites = $em->getRepository('AppBundle:Activite')->findBy(array("user"=>$this->getUser()->getId(),"date"=> new \DateTime()));
+        $autreactivites = $em->getRepository('AppBundle:AutreActivite')->findBy(array("user"=>$this->getUser()->getId(),"date"=> new \DateTime()));
+        $anomalies = $em->getRepository('AppBundle:Anomalies')->findBy(array("user"=>$this->getUser()->getId(),"date"=> new \DateTime()));
+
+        $tempsActivite = 0;
+        $tempsAutreActivite = 0;
+        $tempsAnomalie = 0;
+
+        foreach ($activites as $activite){
+            $tempsActivite = $tempsActivite + $activite->getTemps();
+        }
+        foreach ($autreactivites as $autreActivite){
+            $tempsAutreActivite = $tempsAutreActivite + $autreActivite->getTemps();
+        }
+        foreach ($anomalies as $anomalie){
+            $tempsAnomalie = $tempsAnomalie + $anomalie->getTemps();
+        }
+
+
+
+        /* $ventilations = $em->getRepository('AppBundle:Ventilation')->findAll();
+        $typeActivite = $em->getRepository('AppBundle:TypeActivite')->findAll();*/
 
         if($request->request->get('typeActivite')){
             return $this->redirectToRoute('ventilation_new', array('id' => $request->request->get('typeActivite')));
         }
 
-        return $this->render('ventilation/index.html.twig', array(
-                    'ventilations' => $ventilations,
-                    'typeActivite' => $typeActivite
-        ));
+        return $this->render('ventilation/index.html.twig', array('activites'=>$activites,
+            'autreActivites'=> $autreactivites,
+            'anomalies' => $anomalies,
+            'tempsActivite' => $tempsActivite,
+            'tempsAutreActivite' => $tempsAutreActivite,
+            'tempsAnomalie' => $tempsAnomalie
+             ));
     }
 
     /**

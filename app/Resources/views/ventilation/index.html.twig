@@ -7,6 +7,56 @@
     <a href="{{ path('activite') }}"><button class="btn btn-primary">Activités</button></a>
     <a href="{{ path('autreactivite') }}"><button class="btn btn-primary">Autre activités</button></a>
     <a href="{{ path('anomalie') }}"><button class="btn btn-primary">Anomalies</button></a>
+
+    <div class="col-lg-4">
+        <h1>Activité journalière saisie</h1>
+        <table border="1">
+        {% for activite in activites %}
+            <tr>
+                <td>{{ activite.metier }}</td>
+                <td>{{ activite.typeProduit }}</td>
+                <td>{{ activite.quantite }}</td>
+                <td>{{ activite.temps }}</td>
+                <td>{{ activite.commentaire }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+
+        <label>Temps passée : {{ tempsActivite }}</label>
+    </div>
+    <div class="col-lg-4">
+        <h1>Autre Activité journalière saisie</h1>
+        <table border="1">
+            {% for autreactivite in autreActivites %}
+                <tr>
+                    <td>{{ autreactivite.activite }}</td>
+                    <td>{{ autreactivite.temps }}</td>
+                    <td>{{ autreactivite.commentaire }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <label>Temps passée : {{ tempsAutreActivite }}</label>
+    </div>
+    <div class="col-lg-4">
+        <h1>Anomalie journalière saisie</h1>
+        <table border="1">
+            {% for anomalie in anomalies %}
+                <tr>
+                    <td>{{ anomalie.anomalie }}</td>
+                    <td>{{ anomalie.typeProduit }}</td>
+                    <td>{{ anomalie.fabricant }}</td>
+                    <td>{{ anomalie.reference }}</td>
+                    <td>{{ anomalie.codeDefaut }}</td>
+                    <td>{{ anomalie.quantite }}</td>
+                    <td>{{ anomalie.temps }}</td>
+                    <td>{{ anomalie.commentaire }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <label>Temps passée : {{ tempsAnomalie }}</label>
+    </div>
     {#<h1>Liste des ventilations</h1>
 
     <table>
