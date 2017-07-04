@@ -28,8 +28,6 @@ class VentilationController extends Controller {
         $ventilations = $em->getRepository('AppBundle:Ventilation')->findAll();
         $typeActivite = $em->getRepository('AppBundle:TypeActivite')->findAll();
 
-        var_dump($request->request->get('typeActivite'));
-
         if($request->request->get('typeActivite')){
             return $this->redirectToRoute('ventilation_new', array('id' => $request->request->get('typeActivite')));
         }

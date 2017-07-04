@@ -4,11 +4,11 @@
         <div class ="col-md-12 titre">
             <h1>Activite</h1>
        </div>
-        <form action="" method="POST">
+        <form action="#" method="POST">
             <div class="row">
                 <div class="metier col-lg-6">
                     <label>Métier</label>
-                    <select>
+                    <select name="metier">
                         <option value="" disabled>---> Contrôle qualité <---</option>
                         <option value="Contrôle qualité à la pièce chaussures">&nbsp;&nbsp;&nbsp;Contrôle qualité à la pièce chaussures</option>
                         <option value="Contrôle qualité à la pièce femme">&nbsp;&nbsp;&nbsp;Contrôle qualité à la pièce femme</option>
@@ -42,7 +42,7 @@
                 </div>
                 <div class="typeProduit col-lg-6">
                     <label>Type de produits</label>
-                    <select>
+                    <select name="typeProduit">
                         <option value="Debout cuir">Debout cuir</option>
                         <option value="Debout autres">Debout autres</option>
                         <option value="Couchés">Couchés</option>
@@ -56,17 +56,18 @@
             <div class="row">
                 <div class="metier col-lg-6">
                     <label>Quantité</label>
-                    <input type="number"/>
+                    <input name="quantite" type="number"/>
                 </div>
                 <div class="typeProduit col-lg-6">
                     <label>Temps passé</label>
-                    <input type="number" step="0.01"/>
+                    <input name="temps" type="number" step="0.01"/>
                 </div>
             </div>
             <div class="col-lg-12">
                 <label>Commentaire</label>
-                <textarea></textarea>
+                <textarea name="commentaire"></textarea>
             </div>
+            <input type="submit" value="Enregistrer"></input>
         </form>
     </div>
 
