@@ -39,12 +39,17 @@ class DossierController extends Controller
      */
     public function newAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+
         $dossier = new Dossier();
         $form = $this->createForm('AppBundle\Form\DossierType', $dossier);
         $form->handleRequest($request);
+        $listeResponsable = $em->getRepository('AppBundle:Utilisateur')->findByResponsabe(1);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $responsable = $em->getRepository('AppBundle:Utilisateur')->findById($request->request->get('responsable'));
+            $dossier->setResponsable($responsable);
             $em->persist($dossier);
             $em->flush();
 
@@ -53,6 +58,7 @@ class DossierController extends Controller
 
         return $this->render('dossier/new.html.twig', array(
             'dossier' => $dossier,
+            'listeReponsable'=> $listeResponsable,
             'form' => $form->createView(),
         ));
     }

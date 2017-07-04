@@ -67,4 +67,22 @@ class Dossier
     {
         return $this->nom;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getResponsable()
+    {
+        return $this->responsable;
+    }
+
+    /**
+     * @param mixed $responsable
+     */
+    public function setResponsable($responsable)
+    {
+        $this->responsable = $responsable;
+    }
+
+
 }

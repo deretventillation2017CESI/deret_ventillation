@@ -5,13 +5,11 @@
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand logo" href="#">
-           
-{#                        <img src="/images/logo.png" alt="Example" />#}
-                     
+                        {#<img src="/images/logo.png" alt="Example" />#}
                     </a>                 
                 </div> 
                 <ul class="nav navbar-nav">
-                    <li><a href="/">Accueil</a></li>   
+                    <li><a href="{{ path('homepage') }}">Accueil</a></li>
                         {% if is_granted("ROLE_DROIT_ACCES_RESPONSABLE") %}
                         <li><a href="{{path("magasin")}}">Gestion des utilisateurs</a></li>
                         <li><a href="{{path("contratConsommateur")}}">Gestion des activités</a></li>
@@ -24,6 +22,26 @@
                 </ul>
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                     <ul class="nav navbar-nav">
+                        {# Je suis un commentaire
+                        <li>
+                            <a href="{{ path('batiment_index') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Gestion des bâtiments</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('dossier_index') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Gestion des dossiers</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('poste_index') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Gestion des postes</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('secteur_index') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Gestion des secteurs</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('typeContrat_index') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Gestion des types de contrats</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('ventilation_index') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Gestion des ventilations</a>
+                        </li>
+                        #}
                         <li>
                             <a href="{{ path('fos_user_profile_show') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Bonjour {{ app.user.username }}</a>
                         </li>
@@ -34,8 +52,9 @@
                 {% else %}
                     <ul  class="nav navbar-nav navbar-right">
                         <li><a href="{{ path('fos_user_security_login') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Connexion</a></li>
-                    </ul>
                 {% endif %}
+                        <li>{{ "now"|date("d/m/Y")}}</li>
+                    </ul>
             </div>
         </div>
     </nav>

@@ -15,18 +15,28 @@
             <h1>Création d'un dossier</h1>
         </div>
     </div>
-
+    {{ form_start(form) }}
     <div class="row" style='margin-top: 1%;'>
-        <div class="col-md-6 col-md-offset-3 text-center">
-            {{ form_start(form) }}
-                {{ form_label(form.nom) }} 
-                {{ form_errors(form.nom) }}
-                {{ form_widget(form.nom) }}
-                
-                <br/><br/><button type="submit" class="btn btn-success">
-                    <span class="glyphicon glyphicon-ok"></span> Créer
-                </button>
-            {{ form_end(form) }}
+        <div class="col-md-4">
+            <label class="col-sm-4 col-form-label">Nom :</label>
+            {{ form_widget(form.nom, {'attr': {'class': 'form-control col-md-4'}}) }}
+        </div>
+        <div class="col-md-4">
+            <label class="col-sm-6 col-form-label">Responsable :</label>
+            <select class="form-control col-md-4" name="responsable" id="listeResponsable">
+                {% for utilisateur in listeReponsable %}
+                    <option value="{{ utilisateur.id }}">{{ utilisateur.nom  }} {{ utilisateur.prenom }}</option>
+                {% endfor %}
+            </select>
         </div>
     </div>
+    <div class="row" style='margin-top: 1%;'>
+        <div class="col-md-6 col-md-offset-6">
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-ok"></span> Créer
+                </button>
+
+        </div>
+    </div>
+    {{ form_end(form) }}
 {% endblock %}

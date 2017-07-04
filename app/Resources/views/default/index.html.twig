@@ -2,9 +2,25 @@
 {% block main -%}
     <div class="row">
         <div class ="col-md-12 titre">
-            <h1>Accueil</h1>        
+            <h1>Menu principal</h1>
        </div>
     </div>
+    <div class="row">
+        <h2>Bienvue sur la plateforme de saisie des ventilations.</h2>
+        <p>Depuis cette plateforme vous pouvez faire la saisie dela ventillation des heures
+            que vous avez réalisé dans les entrepôts de deret logistique.</p>
+    </div>
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 
+        <div class="row">
+            <a class="btn btn-primary col-md-2" href="{{ path('ventilation_index') }}" role="button" title="Saisir une ventilation">Saisir</a>
+            <a class="btn btn-primary col-md-2 col-md-offset-1" href="{{ path('dossier_index') }}" role="button">Administration</a>
+            <a class="btn btn-primary col-md-2 col-md-offset-1" href="#" role="button">Extraction</a>
+        </div>
+    {% else %}
+        <div>
+            <blockquote>Veuillez vous connecter pour accéder aux fonctionalité de l'application.</blockquote>
+        </div>
+    {% endif %}
    
 {% endblock %}
