@@ -20,13 +20,6 @@ class Ventilation
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="tempsPasse", type="integer")
-     */
-    private $tempsPasse;
     
     /**
      * @var boolean
@@ -55,192 +48,234 @@ class Ventilation
     private $utilisateur;
 
     /**
-    *
-    * @ORM\ManyToOne(targetEntity="Produit")
-    * @ORM\JoinColumn(name="id_produit", referencedColumnName="id")
-    */
-    private $produit;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="quantite", type="integer")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Activite", mappedBy="ventilation")
      */
-    private $quantite;
+    private $activites;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="commentaire", type="string", length=255 )
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\AutreActivite", mappedBy="ventilation")
      */
-    private $commentaire;
+    private $autreactivite;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Formulaire")
-     * @ORM\JoinColumn(name="formulaire_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Anomalies", mappedBy="ventilation")
      */
-    private $formulaire;
-
-    function getId() {
-        return $this->id;
-    }
-
-    function getTempsPasse() {
-        return $this->tempsPasse;
-    }
-
-    function getValidation() {
-        return $this->validation;
-    }
-
-    function getDateSaisie() {
-        return $this->dateSaisie;
-    }
-
-    function getPoste() {
-        return $this->poste;
-    }
-
-    function getUtilisateur() {
-        return $this->utilisateur;
-    }
-
-    function getVentilationFormulaire() {
-        return $this->ventilationFormulaire;
-    }
-
-    function setId($id) {
-        $this->id = $id;
-    }
-
-    function setTempsPasse($tempsPasse) {
-        $this->tempsPasse = $tempsPasse;
-    }
-
-    function setValidation($validation) {
-        $this->validation = $validation;
-    }
-
-    function setDateSaisie(\DateTime $dateSaisie) {
-        $this->dateSaisie = $dateSaisie;
-    }
-
-    function setPoste($poste) {
-        $this->poste = $poste;
-    }
-
-    function setUtilisateur($utilisateur) {
-        $this->utilisateur = $utilisateur;
-    }
-
-    function setVentilationFormulaire($ventilationFormulaire) {   
-        $ventilationFormulaire->setVentilation($this);
-        $this->ventilationFormulaire = $ventilationFormulaire;
-     
-    }
+    private $anomalies;
 
     /**
-     * Set produit
-     *
-     * @param \AppBundle\Entity\Produit $produit
-     *
-     * @return Ventilation
-     */
-    public function setProduit(\AppBundle\Entity\Produit $produit = null)
-    {
-        $this->produit = $produit;
-
-        return $this;
-    }
-
-    /**
-     * Get produit
-     *
-     * @return \AppBundle\Entity\Produit
-     */
-    public function getProduit()
-    {
-        return $this->produit;
-    }
-
-    /**
-     * Set quantite
-     *
-     * @param integer $quantite
-     *
-     * @return Ventilation
-     */
-    public function setQuantite($quantite)
-    {
-        $this->quantite = $quantite;
-
-        return $this;
-    }
-
-    /**
-     * Get quantite
+     * Get id
      *
      * @return integer
      */
-    public function getQuantite()
+    public function getId()
     {
-        return $this->quantite;
+        return $this->id;
     }
 
     /**
-     * Set commentaire
+     * Set validation
      *
-     * @param string $commentaire
+     * @param boolean $validation
      *
      * @return Ventilation
      */
-    public function setCommentaire($commentaire)
+    public function setValidation($validation)
     {
-        $this->commentaire = $commentaire;
+        $this->validation = $validation;
 
         return $this;
     }
 
     /**
-     * Get commentaire
+     * Get validation
      *
-     * @return string
+     * @return boolean
      */
-    public function getCommentaire()
+    public function getValidation()
     {
-        return $this->commentaire;
+        return $this->validation;
+    }
+
+    /**
+     * Set dateSaisie
+     *
+     * @param \DateTime $dateSaisie
+     *
+     * @return Ventilation
+     */
+    public function setDateSaisie($dateSaisie)
+    {
+        $this->dateSaisie = $dateSaisie;
+
+        return $this;
+    }
+
+    /**
+     * Get dateSaisie
+     *
+     * @return \DateTime
+     */
+    public function getDateSaisie()
+    {
+        return $this->dateSaisie;
+    }
+
+    /**
+     * Set poste
+     *
+     * @param \AppBundle\Entity\Poste $poste
+     *
+     * @return Ventilation
+     */
+    public function setPoste(\AppBundle\Entity\Poste $poste = null)
+    {
+        $this->poste = $poste;
+
+        return $this;
+    }
+
+    /**
+     * Get poste
+     *
+     * @return \AppBundle\Entity\Poste
+     */
+    public function getPoste()
+    {
+        return $this->poste;
+    }
+
+    /**
+     * Set utilisateur
+     *
+     * @param \AppBundle\Entity\Utilisateur $utilisateur
+     *
+     * @return Ventilation
+     */
+    public function setUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur = null)
+    {
+        $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get utilisateur
+     *
+     * @return \AppBundle\Entity\Utilisateur
+     */
+    public function getUtilisateur()
+    {
+        return $this->utilisateur;
     }
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->formulaire = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->activites = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->autreactivite = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->anomalies = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-
-
     /**
-     * Set formulaire
+     * Add activite
      *
-     * @param \AppBundle\Entity\Formulaire $formulaire
+     * @param \AppBundle\Entity\Activite $activite
      *
      * @return Ventilation
      */
-    public function setFormulaire(\AppBundle\Entity\Formulaire $formulaire = null)
+    public function addActivite(\AppBundle\Entity\Activite $activite)
     {
-        $this->formulaire = $formulaire;
+        $this->activites[] = $activite;
 
         return $this;
     }
 
     /**
-     * Get formulaire
+     * Remove activite
      *
-     * @return \AppBundle\Entity\Formulaire
+     * @param \AppBundle\Entity\Activite $activite
      */
-    public function getFormulaire()
+    public function removeActivite(\AppBundle\Entity\Activite $activite)
     {
-        return $this->formulaire;
+        $this->activites->removeElement($activite);
+    }
+
+    /**
+     * Get activites
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getActivites()
+    {
+        return $this->activites;
+    }
+
+    /**
+     * Add autreactivite
+     *
+     * @param \AppBundle\Entity\AutreActivite $autreactivite
+     *
+     * @return Ventilation
+     */
+    public function addAutreactivite(\AppBundle\Entity\AutreActivite $autreactivite)
+    {
+        $this->autreactivite[] = $autreactivite;
+
+        return $this;
+    }
+
+    /**
+     * Remove autreactivite
+     *
+     * @param \AppBundle\Entity\AutreActivite $autreactivite
+     */
+    public function removeAutreactivite(\AppBundle\Entity\AutreActivite $autreactivite)
+    {
+        $this->autreactivite->removeElement($autreactivite);
+    }
+
+    /**
+     * Get autreactivite
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAutreactivite()
+    {
+        return $this->autreactivite;
+    }
+
+    /**
+     * Add anomaly
+     *
+     * @param \AppBundle\Entity\Anomalies $anomaly
+     *
+     * @return Ventilation
+     */
+    public function addAnomaly(\AppBundle\Entity\Anomalies $anomaly)
+    {
+        $this->anomalies[] = $anomaly;
+
+        return $this;
+    }
+
+    /**
+     * Remove anomaly
+     *
+     * @param \AppBundle\Entity\Anomalies $anomaly
+     */
+    public function removeAnomaly(\AppBundle\Entity\Anomalies $anomaly)
+    {
+        $this->anomalies->removeElement($anomaly);
+    }
+
+    /**
+     * Get anomalies
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAnomalies()
+    {
+        return $this->anomalies;
     }
 }
