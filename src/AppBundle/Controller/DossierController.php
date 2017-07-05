@@ -44,11 +44,11 @@ class DossierController extends Controller
         $dossier = new Dossier();
         $form = $this->createForm('AppBundle\Form\DossierType', $dossier);
         $form->handleRequest($request);
-        $listeResponsable = $em->getRepository('AppBundle:Utilisateur')->findByResponsabe(1);
+        $listeResponsable = $em->getRepository('AppBundle:Utilisateur')->findByResponsable(1);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $responsable = $em->getRepository('AppBundle:Utilisateur')->findById($request->request->get('responsable'));
+            $responsable = $em->getRepository('AppBundle:Utilisateur')->find($request->request->get('responsable'));
             $dossier->setResponsable($responsable);
             $em->persist($dossier);
             $em->flush();
@@ -87,17 +87,23 @@ class DossierController extends Controller
      */
     public function editAction(Request $request, Dossier $dossier)
     {
+        $em = $this->getDoctrine()->getManager();
+
         $deleteForm = $this->createDeleteForm($dossier);
         $editForm = $this->createForm('AppBundle\Form\DossierType', $dossier);
         $editForm->handleRequest($request);
+        $listeResponsable = $em->getRepository('AppBundle:Utilisateur')->findByResponsable(1);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $responsable = $em->getRepository('AppBundle:Utilisateur')->find($request->request->get('responsable'));
+            $dossier->setResponsable($responsable);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('dossier_edit', array('id' => $dossier->getId()));
         }
 
         return $this->render('dossier/edit.html.twig', array(
+            'listeReponsable'=> $listeResponsable,
             'dossier' => $dossier,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

@@ -14,7 +14,7 @@ class RegistrationType extends AbstractType
         $builder->add('prenom');
         $builder->add('statut');
         $builder->add('identifiantIGE');
-        $builder->add('responsabe');
+        $builder->add('responsable');
         $builder->add('nbHeureTheoriqueSession');
         $builder->add('dateCreation');
     }

@@ -15,24 +15,32 @@
             <h1>Modification d'un dossier</h1>
         </div>
     </div>
-
+    {{ form_start(edit_form) }}
     <div class="row" style='margin-top: 1%;'>
-        <div class="col-md-6 col-md-offset-3 text-center">
-            {{ form_start(edit_form) }}
-                {{ form_label(edit_form.nom) }} 
-                {{ form_errors(edit_form.nom) }}
-                {{ form_widget(edit_form.nom) }}
-                
-                <br/><br/><button type="submit" class="btn btn-info">
-                    <span class="glyphicon glyphicon-pencil"></span> Modifier
-                </button>
-            {{ form_end(edit_form) }}
+        <div class="col-md-4">
+            <label class="col-sm-4 col-form-label">Nom :</label>
+            {{ form_widget(edit_form.nom, {'attr': {'class': 'form-control col-md-4'}}) }}
         </div>
+        <div class="col-md-4">
+            <label class="col-sm-6 col-form-label">Responsable :</label>
+            <select class="form-control col-md-4" name="responsable" id="listeResponsable">
+                {% for utilisateur in listeReponsable %}
+                    <option value="{{ utilisateur.id }}">{{ utilisateur.nom  }} {{ utilisateur.prenom }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
     </div>
 
     <div class="row text-center">
+        <br/><button type="submit" class="btn btn-info col-md-2 col-md-offset-6">
+            <span class="glyphicon glyphicon-pencil"></span> Modifier
+        </button>
+    </div>
+    {{ form_end(edit_form) }}
+    <div class="row text-center">
         {{ form_start(delete_form) }}
-            <br/><button type="submit" class="btn btn-danger">
+            <br/><button type="submit" class="btn btn-danger col-md-2 col-md-offset-6 ">
                 <span class=" glyphicon glyphicon-remove"></span> Supprimer
             </button>
         {{ form_end(delete_form) }}

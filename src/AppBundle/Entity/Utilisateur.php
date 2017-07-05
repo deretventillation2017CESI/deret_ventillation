@@ -4,7 +4,7 @@ namespace AppBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Entity
  * @ORM\Table(name="utilisateur")
@@ -23,6 +23,7 @@ class Utilisateur extends BaseUser {
         // your own logic
     }
 
+
     /** @ORM\Column(type="string") */
     protected $nom;
 
@@ -36,7 +37,7 @@ class Utilisateur extends BaseUser {
     protected $identifiantIGE;
 
     /** @ORM\Column(type="boolean") */
-    protected $responsabe;
+    protected $responsable;
 
     /** @ORM\Column(type="string") */
     protected $nbHeureTheoriqueSession;
@@ -87,7 +88,7 @@ class Utilisateur extends BaseUser {
 
      /*
      * @ORM\ManyToOne(targetEntity="Dossier")
-     * @ORM\JoinColumn(name="dosier", referencedColumnName="id")
+     * @ORM\JoinColumn(name="dossier", referencedColumnName="id")
      */
     private $dossier;
 
@@ -189,27 +190,27 @@ class Utilisateur extends BaseUser {
     }
 
     /**
-     * Set responsabe
+     * Set responsable
      *
-     * @param boolean $responsabe
+     * @param boolean $responsable
      *
      * @return Utilisateur
      */
-    public function setResponsabe($responsabe)
+    public function setResponsable($responsable)
     {
-        $this->responsabe = $responsabe;
+        $this->responsable = $responsable;
 
         return $this;
     }
 
     /**
-     * Get responsabe
+     * Get responsable
      *
      * @return boolean
      */
-    public function getResponsabe()
+    public function getResponsable()
     {
-        return $this->responsabe;
+        return $this->responsable;
     }
 
     /**

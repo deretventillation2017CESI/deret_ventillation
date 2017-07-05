@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Dossier
@@ -12,6 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Dossier
 {
+
+
     /**
      * @var int
      *
@@ -28,11 +31,22 @@ class Dossier
      */
     private $nom;
 
-    /*
+
+    /**
+     *
      * @ORM\ManyToOne(targetEntity="Utilisateur")
-     * @ORM\JoinColumn(name="responsable", referencedColumnName="id")
+     * @ORM\JoinColumn(name="utilisateur", referencedColumnName="id")
      */
+
     private $responsable;
+
+    /**
+     * Dossier constructor.
+     * @param $responsable
+     */
+    public function __construct()
+    {
+    }
 
     /**
      * Get id
