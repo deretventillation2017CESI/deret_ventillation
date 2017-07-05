@@ -36,12 +36,6 @@ class Ventilation
     private $dateSaisie;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Poste")
-     * @ORM\JoinColumn(name="poste", referencedColumnName="id")
-     */
-    private $poste;
-    
-    /**
      * @ORM\ManyToOne(targetEntity="Utilisateur")
      * @ORM\JoinColumn(name="utilisateur", referencedColumnName="id")
      */

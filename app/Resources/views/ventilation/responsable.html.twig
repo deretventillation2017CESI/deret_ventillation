@@ -3,35 +3,135 @@
 {% block title %}Liste des ventilations à controler{% endblock %}
 
 {% block main %}
-    <table border="1">
-        <tr>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Date de saisie</th>
-            <th>Temps</th>
-            <th>Inspecter</th>
-            <th>Validation</th>
-        </tr>
+     <div class="row">
+        <h1>Liste des ventilations en retard</h1>
+        <table border="1" class="table table-striped">
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Date de saisie</th>
+                <th>Temps</th>
+                <th>Inspecter</th>
+                <th>Validation</th>
+            </tr>
 
-        {% for ventilation in ventilations %}
-        {% set temps = 0 %}
-        <tr>
-            <td>{{ ventilation.utilisateur.nom }}</td>
-            <td>{{ ventilation.utilisateur.prenom }}</td>
-            <td>{{ ventilation.dateSaisie|date("d/m/Y") }}</td>
-            {% for activite in ventilation.activites %}
-                {% set temps = temps + activite.temps %}
+            {% for ventilation in ventilationsRetards %}
+                {% set temps = 0 %}
+                <tr>
+                    <td>{{ ventilation.utilisateur.nom }}</td>
+                    <td>{{ ventilation.utilisateur.prenom }}</td>
+                    <td>{{ ventilation.dateSaisie|date("d/m/Y") }}</td>
+                    {% for activite in ventilation.activites %}
+                        {% set temps = temps + activite.temps %}
+                    {% endfor %}
+                    {% for autreactivite in ventilation.autreactivites %}
+                        {% set temps = temps + autreactivite.temps %}
+                    {% endfor %}
+                    {% for anomalie in ventilation.anomalies %}
+                        {% set temps = temps + anomalie.temps %}
+                    {% endfor %}
+                    <td>{{ temps }}</td>
+                    <td><a href="{{ path('ventilation_voir', {'id' : ventilation.id}) }}"><button>Voir</button></a></td>
+                    <td><a href="{{ path('ventilation_validation', {'id' : ventilation.id}) }}"><button>Valider</button></a></td>
+                </tr>
             {% endfor %}
-            {% for autreactivite in ventilation.autreactivites %}
-                {% set temps = temps + autreactivite.temps %}
+        </table>
+    </div>
+    <div class="row">
+        <h1>Liste des ventilations à contrôler</h1>
+        <table border="1" class="table table-striped">
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Date de saisie</th>
+                <th>Temps</th>
+                <th>Inspecter</th>
+                <th>Validation</th>
+            </tr>
+
+            {% for ventilation in ventilations %}
+                {% set temps = 0 %}
+                <tr>
+                    <td>{{ ventilation.utilisateur.nom }}</td>
+                    <td>{{ ventilation.utilisateur.prenom }}</td>
+                    <td>{{ ventilation.dateSaisie|date("d/m/Y") }}</td>
+                    {% for activite in ventilation.activites %}
+                        {% set temps = temps + activite.temps %}
+                    {% endfor %}
+                    {% for autreactivite in ventilation.autreactivites %}
+                        {% set temps = temps + autreactivite.temps %}
+                    {% endfor %}
+                    {% for anomalie in ventilation.anomalies %}
+                        {% set temps = temps + anomalie.temps %}
+                    {% endfor %}
+                    <td>{{ temps }}</td>
+                    <td><a href="{{ path('ventilation_voir', {'id' : ventilation.id}) }}"><button>Voir</button></a></td>
+                    <td><a href="{{ path('ventilation_validation', {'id' : ventilation.id}) }}"><button>Valider</button></a></td>
+                </tr>
             {% endfor %}
-            {% for anomalie in ventilation.anomalies %}
-                {% set temps = temps + anomalie.temps %}
+        </table>
+    </div>
+         <div class="row">
+        <h1>Liste des ventilations contrôlées</h1>
+        <table border="1" class="table table-striped">
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Date de saisie</th>
+                <th>Temps</th>
+                <th>Validation</th>
+            </tr>
+
+            {% for ventilation in ventilationsControlees %}
+                {% set temps = 0 %}
+                <tr>
+                    <td>{{ ventilation.utilisateur.nom }}</td>
+                    <td>{{ ventilation.utilisateur.prenom }}</td>
+                    <td>{{ ventilation.dateSaisie|date("d/m/Y") }}</td>
+                    {% for activite in ventilation.activites %}
+                        {% set temps = temps + activite.temps %}
+                    {% endfor %}
+                    {% for autreactivite in ventilation.autreactivites %}
+                        {% set temps = temps + autreactivite.temps %}
+                    {% endfor %}
+                    {% for anomalie in ventilation.anomalies %}
+                        {% set temps = temps + anomalie.temps %}
+                    {% endfor %}
+                    <td>{{ temps }}</td>
+                    <td><a href="{{ path('ventilation_devalidation', {'id' : ventilation.id}) }}"><button>Dévalider</button></a></td>
+                </tr>
             {% endfor %}
-            <td>{{ temps }}</td>
-            <td><a href="{{ path('ventilation_voir', {'id' : ventilation.id}) }}"><button>Voir</button></a></td>
-            <td><a href="{{ path('ventilation_validation', {'id' : ventilation.id}) }}"><button>Valider</button></a></td>
-        </tr>
-        {% endfor %}
-    </table>
+        </table>
+    </div>
+            <div class="row">
+        <h1>Liste des ventilations archivées</h1>
+        <table border="1" class="table table-striped">
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Date de saisie</th>
+                <th>Temps</th>
+            </tr>
+
+            {% for ventilation in ventilationsArchives %}
+                {% set temps = 0 %}
+                <tr>
+                    <td>{{ ventilation.utilisateur.nom }}</td>
+                    <td>{{ ventilation.utilisateur.prenom }}</td>
+                    <td>{{ ventilation.dateSaisie|date("d/m/Y") }}</td>
+                    {% for activite in ventilation.activites %}
+                        {% set temps = temps + activite.temps %}
+                    {% endfor %}
+                    {% for autreactivite in ventilation.autreactivites %}
+                        {% set temps = temps + autreactivite.temps %}
+                    {% endfor %}
+                    {% for anomalie in ventilation.anomalies %}
+                        {% set temps = temps + anomalie.temps %}
+                    {% endfor %}
+                    <td>{{ temps }}</td>
+                  
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 {% endblock %}

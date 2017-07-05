@@ -23,7 +23,7 @@ class VentilationController extends Controller {
      */
     public function indexAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
-      
+
         $ventilation = $em->getRepository('AppBundle:Ventilation')->findBy(
             array("utilisateur" => $this->getUser()->getId(), "dateSaisie" => new \DateTime()));
         $activites = $em->getRepository('AppBundle:Activite')->findBy(
@@ -93,11 +93,19 @@ class VentilationController extends Controller {
      */
     public function responsableAction(){
         $em = $this->getDoctrine()->getManager();
-
-        $ventilations = $em->getRepository("AppBundle:Ventilation")->findBy(array('validation' => false));
-
+        $dateDebut= new \DateTime();
+        $dateDebut->modify('-1 month');
+        $dateFin= new \DateTime();
+         $dateFin->modify('-2 day');
+        $ventilationsRetards = $em->getRepository("AppBundle:Ventilation")->findByNotValidationAndDateMax($dateFin);
+        $ventilations = $em->getRepository("AppBundle:Ventilation")->findByNotValidationAndDateMin($dateFin);     
+       $ventilationsControlees = $em->getRepository("AppBundle:Ventilation")->findByValidationAndDateMin($dateFin);
+        $ventilationsArchives = $em->getRepository("AppBundle:Ventilation")->findByAllDateMinMax($dateDebut,$dateFin);
         return $this->render('ventilation/responsable.html.twig', array(
-            'ventilations' => $ventilations
+            'ventilations' => $ventilations,
+            'ventilationsRetards' => $ventilationsRetards,
+            'ventilationsArchives' => $ventilationsArchives,
+            'ventilationsControlees' =>$ventilationsControlees
         ));
     }
 
@@ -118,6 +126,23 @@ class VentilationController extends Controller {
 
         return $this->redirectToRoute("ventilation_responsable");
     }
+        /**
+    * Creates a new ventilation entity.
+    *
+    * @Route("/devalidation/{id}", name="ventilation_devalidation")
+    * @Method({"GET", "POST"})
+    */
+    public function devalidationAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $ventilation = $em->getRepository("AppBundle:Ventilation")->find($id);
+        $ventilation->setValidation(false);
+        $em->persist($ventilation);
+        $em->flush();
+
+        return $this->redirectToRoute("ventilation_responsable");
+    }
 
     /**
      * Creates a new ventilation entity.
@@ -129,13 +154,14 @@ class VentilationController extends Controller {
     {
         $em = $this->getDoctrine()->getManager();
 
-        $ventilation = $em->getRepository('AppBundle:Ventilation')->find($id);
+        $ventilation = $em->getRepository('AppBundle:Ventilation')->findBy(
+            array("utilisateur" => $this->getUser()->getId(), "dateSaisie" => new \DateTime()));
         $activites = $em->getRepository('AppBundle:Activite')->findBy(
-            array("ventilation" => $id));
+            array("user"=>$this->getUser()->getId(),"date"=> new \DateTime()));
         $autreactivites = $em->getRepository('AppBundle:AutreActivite')->findBy(
-            array("ventilation" => $id));
+            array("user"=>$this->getUser()->getId(),"date"=> new \DateTime()));
         $anomalies = $em->getRepository('AppBundle:Anomalies')->findBy(
-            array("ventilation" => $id));
+            array("user"=>$this->getUser()->getId(),"date"=> new \DateTime()));
 
         $tempsActivite = 0;
         $tempsAutreActivite = 0;
@@ -152,6 +178,10 @@ class VentilationController extends Controller {
         }
 
         $tempsJournalier = $tempsActivite+$tempsAutreActivite+$tempsAnomalie;
+
+        if($request->request->get('typeActivite')){
+            return $this->redirectToRoute('ventilation_new', array('id' => $request->request->get('typeActivite')));
+        }
 
         return $this->render('ventilation/voir.html.twig', array(
             "ventilation" => $ventilation,
@@ -255,80 +285,6 @@ class VentilationController extends Controller {
                     'temps' => $total,
                     'form' => $form->createView(),
         ));
-    }
-
-    /**
-     * Finds and displays a ventilation entity.
-     *
-     * @Route("/{id}", name="ventilation_show")
-     * @Method("GET")
-     */
-    public function showAction(Ventilation $ventilation) {
-        $deleteForm = $this->createDeleteForm($ventilation);
-
-        return $this->render('ventilation/show.html.twig', array(
-                    'ventilation' => $ventilation,
-                    'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
-     * Displays a form to edit an existing ventilation entity.
-     *
-     * @Route("/{id}/edit", name="ventilation_edit")
-     * @Method({"GET", "POST"})
-     */
-    public function editAction(Request $request, Ventilation $ventilation) {
-        $deleteForm = $this->createDeleteForm($ventilation);
-        $editForm = $this->createForm('AppBundle\Form\VentilationType', $ventilation);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('ventilation_edit', array('id' => $ventilation->getId()));
-        }
-
-        return $this->render('ventilation/edit.html.twig', array(
-                    'ventilation' => $ventilation,
-                    'edit_form' => $editForm->createView(),
-                    'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
-     * Deletes a ventilation entity.
-     *
-     * @Route("/{id}", name="ventilation_delete")
-     * @Method("DELETE")
-     */
-    public function deleteAction(Request $request, Ventilation $ventilation) {
-        $form = $this->createDeleteForm($ventilation);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($ventilation);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('ventilation_index');
-    }
-
-    /**
-     * Creates a form to delete a ventilation entity.
-     *
-     * @param Ventilation $ventilation The ventilation entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Ventilation $ventilation) {
-        return $this->createFormBuilder()
-                        ->setAction($this->generateUrl('ventilation_delete', array('id' => $ventilation->getId())))
-                        ->setMethod('DELETE')
-                        ->getForm()
-        ;
     }
 
 }
