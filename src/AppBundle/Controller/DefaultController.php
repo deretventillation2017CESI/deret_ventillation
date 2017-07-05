@@ -83,6 +83,31 @@ class DefaultController extends Controller
         ));
     }
 
+    /**
+     * @Route("{idVentilation}/activite/{id}/delete/resp", name="activite_delete_responsable")
+     */
+    public function deleteActiviteByResponsableAction($idVentilation, $id){
+        $em = $this->getDoctrine()->getManager();
+        $activite = $em->getRepository("AppBundle:Activite")->find($id);
+
+        $em->remove($activite);
+        $em->flush();
+
+        return $this->redirectToRoute("ventilation_voir",array('id' => $idVentilation));
+    }
+
+    /**
+     * @Route("{idVentilation}/activite/{id}/delete", name="activite_delete")
+     */
+    public function deleteActiviteAction($idVentilation, $id){
+        $em = $this->getDoctrine()->getManager();
+        $activite = $em->getRepository("AppBundle:Activite")->find($id);
+
+        $em->remove($activite);
+        $em->flush();
+
+        return $this->redirectToRoute("ventilation_index");
+    }
 
     /**
      * @Route("autreactivite/", name="autreactivite")
@@ -140,6 +165,32 @@ class DefaultController extends Controller
         return $this->render('autre_activite/edit.html.twig', array(
             'autreActivite' => $autreActivite
         ));
+    }
+
+    /**
+     * @Route("{idVentilation}/autreactivite/{id}/delete/resp", name="autreactivite_delete_responsable")
+     */
+    public function deleteAutreActiviteByResponsableAction($idVentilation, $id){
+        $em = $this->getDoctrine()->getManager();
+        $autreactivite = $em->getRepository("AppBundle:AutreActivite")->find($id);
+
+        $em->remove($autreactivite);
+        $em->flush();
+
+        return $this->redirectToRoute("ventilation_voir",array('id' => $idVentilation));
+    }
+
+    /**
+     * @Route("{idVentilation}/autreactivite/{id}/delete", name="autreactivite_delete")
+     */
+    public function deleteAutreActiviteAction($idVentilation, $id){
+        $em = $this->getDoctrine()->getManager();
+        $autreactivite = $em->getRepository("AppBundle:AutreActivite")->find($id);
+
+        $em->remove($autreactivite);
+        $em->flush();
+
+        return $this->redirectToRoute("ventilation_index");
     }
 
     /**
@@ -209,5 +260,31 @@ class DefaultController extends Controller
         return $this->render('anomalie/edit.html.twig', array(
             'anomalie' => $anomalie
         ));
+    }
+
+    /**
+    * @Route("{idVentilation}/anomalie/{id}/delete/resp", name="anomalie_delete_responsable")
+    */
+    public function deleteAnomalieByResponsableAction($idVentilation, $id){
+        $em = $this->getDoctrine()->getManager();
+        $anomalie = $em->getRepository("AppBundle:Anomalies")->find($id);
+
+        $em->remove($anomalie);
+        $em->flush();
+
+        return $this->redirectToRoute("ventilation_voir",array('id' => $idVentilation));
+    }
+
+    /**
+     * @Route("{idVentilation}/anomalie/{id}/delete", name="anomalie_delete")
+     */
+    public function deleteAnomalieAction($idVentilation, $id){
+        $em = $this->getDoctrine()->getManager();
+        $anomalie = $em->getRepository("AppBundle:Anomalies")->find($id);
+
+        $em->remove($anomalie);
+        $em->flush();
+
+        return $this->redirectToRoute("ventilation_index");
     }
 }
