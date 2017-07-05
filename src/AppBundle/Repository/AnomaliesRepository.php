@@ -10,4 +10,18 @@ namespace AppBundle\Repository;
  */
 class AnomaliesRepository extends \Doctrine\ORM\EntityRepository
 {
+    /*
+     * FONCTION : Récupère toutes les anomalies entre 2 dates
+     */
+    public function findAnomalieCreatedBetweenTwoDates(\DateTime $date_debut, \DateTime $date_fin)
+    {
+        return $this->createQueryBuilder('m')
+                    ->where("m.date > ?1")
+                    ->andWhere("m.date < ?2")
+                    ->orderBy('m.anomalie', 'ASC')
+                    ->setParameter(1, $date_debut)
+                    ->setParameter(2, $date_fin)
+                    ->getQuery()
+                    ->getResult();
+    }
 }

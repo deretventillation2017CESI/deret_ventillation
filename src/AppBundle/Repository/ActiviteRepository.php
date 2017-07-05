@@ -10,4 +10,18 @@ namespace AppBundle\Repository;
  */
 class ActiviteRepository extends \Doctrine\ORM\EntityRepository
 {
+    /*
+     * FONCTION : Récupère toutes les activités entre 2 dates
+     */
+    public function findActiviteCreatedBetweenTwoDates(\DateTime $date_debut, \DateTime $date_fin)
+    {
+        return $this->createQueryBuilder('m')
+                    ->where("m.date > ?1")
+                    ->andWhere("m.date < ?2")
+                    ->orderBy('m.metier', 'ASC')
+                    ->setParameter(1, $date_debut)
+                    ->setParameter(2, $date_fin)
+                    ->getQuery()
+                    ->getResult();
+    }
 }

@@ -16,19 +16,46 @@ class ExportController extends Controller
     {
         $date_debut = new DateTime($request->request->get('date_debut'));
         $date_fin = new DateTime($request->request->get('date_fin'));
-        $tab_heure_total = [];
         
         if (!empty($date_debut) && !empty($date_fin)) 
         {
             $em = $this->getDoctrine()->getManager();
-            $allVentilation = $em->getRepository('AppBundle:Ventilation')->findVentilationCreatedBetweenTwoDates($date_debut, $date_fin);
-            foreach ($allVentilation as $ventilation) {
-                $tab_heure_total[$ventilation->getVentilationFormulaire()->getFormulaire()->getLibelle()] += $ventilation->getTempsPasse();
+            
+            $tab_heure_activite = [];
+            $allActivite = $em->getRepository('AppBundle:Activite')->findActiviteCreatedBetweenTwoDates($date_debut, $date_fin);
+            foreach ($allActivite as $activite) {
+                if (empty($tab_heure_activite[$activite->getMetier()])) {
+                    $tab_heure_activite[$activite->getMetier()] = $activite->getTemps();
+                } else {
+                    $tab_heure_activite[$activite->getMetier()] += $activite->getTemps();
+                }
+            }
+            
+            $tab_heure_anomalie = [];
+            $allAnomalie = $em->getRepository('AppBundle:Anomalies')->findAnomalieCreatedBetweenTwoDates($date_debut, $date_fin);
+            foreach ($allAnomalie as $anomalie) {
+                if (empty($tab_heure_anomalie[$anomalie->getAnomalie()])) {
+                    $tab_heure_anomalie[$anomalie->getAnomalie()] = $anomalie->getTemps();
+                } else {
+                    $tab_heure_anomalie[$anomalie->getAnomalie()] += $anomalie->getTemps();
+                }
+            }
+            
+            $tab_heure_autres_activites = [];
+            $allAutresActivites = $em->getRepository('AppBundle:AutreActivite')->findAutreActiviteCreatedBetweenTwoDates($date_debut, $date_fin);
+            foreach ($allAutresActivites as $autres_activites) {
+                if (empty($tab_heure_autres_activites[$autres_activites->getActivite()])) {
+                    $tab_heure_autres_activites[$autres_activites->getActivite()] = $autres_activites->getTemps();
+                } else {
+                    $tab_heure_autres_activites[$autres_activites->getActivite()] += $autres_activites->getTemps();
+                }
             }
         }
         
         return $this->render('export/index.html.twig', array(
-            "tabHeureTotal" => $tab_heure_total
+            "tabHeureActivite" => $tab_heure_activite,
+            "tabHeureAnomalie" => $tab_heure_anomalie,
+            "tabHeureAutresActivites" => $tab_heure_autres_activites
         ));
     }
 
