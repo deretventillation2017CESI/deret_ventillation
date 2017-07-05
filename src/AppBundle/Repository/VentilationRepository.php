@@ -53,6 +53,14 @@ class VentilationRepository extends \Doctrine\ORM\EntityRepository {
                         ->setParameter(2, $dateDebut)
                         ->getQuery()->getResult();
     }
+        public function findByValidationAndDateMin($dateDebut) {
+        return $this->createQueryBuilder('t')
+                        ->where("t.validation = ?1")
+                        ->andWhere("t.dateSaisie > ?2")
+                        ->setParameter(1, true)
+                        ->setParameter(2, $dateDebut)
+                        ->getQuery()->getResult();
+    }
 
     public function findByAllDateMinMax($dateDebut, $dateFin) {
         return $this->createQueryBuilder('t')
