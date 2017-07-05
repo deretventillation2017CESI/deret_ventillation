@@ -91,6 +91,12 @@ class Anomalies
     private $date;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Ventilation", inversedBy="anomalies")
+     * @ORM\JoinColumn(name="ventilation_id", referencedColumnName="id")
+     */
+    private $ventilation;
+
+    /**
      * Get id
      *
      * @return int
@@ -338,5 +344,29 @@ class Anomalies
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set ventilation
+     *
+     * @param \AppBundle\Entity\Ventilation $ventilation
+     *
+     * @return Anomalies
+     */
+    public function setVentilation(\AppBundle\Entity\Ventilation $ventilation = null)
+    {
+        $this->ventilation = $ventilation;
+
+        return $this;
+    }
+
+    /**
+     * Get ventilation
+     *
+     * @return \AppBundle\Entity\Ventilation
+     */
+    public function getVentilation()
+    {
+        return $this->ventilation;
     }
 }

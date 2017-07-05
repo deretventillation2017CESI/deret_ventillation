@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Ventilation;
-use AppBundle\Entity\Formulaire;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -24,10 +23,15 @@ class VentilationController extends Controller {
      */
     public function indexAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
-
-        $activites = $em->getRepository('AppBundle:Activite')->findBy(array("user"=>$this->getUser()->getId(),"date"=> new \DateTime()));
-        $autreactivites = $em->getRepository('AppBundle:AutreActivite')->findBy(array("user"=>$this->getUser()->getId(),"date"=> new \DateTime()));
-        $anomalies = $em->getRepository('AppBundle:Anomalies')->findBy(array("user"=>$this->getUser()->getId(),"date"=> new \DateTime()));
+      
+        $ventilation = $em->getRepository('AppBundle:Ventilation')->findBy(
+            array("utilisateur" => $this->getUser()->getId(), "dateSaisie" => new \DateTime()));
+        $activites = $em->getRepository('AppBundle:Activite')->findBy(
+            array("user"=>$this->getUser()->getId(),"date"=> new \DateTime()));
+        $autreactivites = $em->getRepository('AppBundle:AutreActivite')->findBy(
+            array("user"=>$this->getUser()->getId(),"date"=> new \DateTime()));
+        $anomalies = $em->getRepository('AppBundle:Anomalies')->findBy(
+            array("user"=>$this->getUser()->getId(),"date"=> new \DateTime()));
 
         $tempsActivite = 0;
         $tempsAutreActivite = 0;
@@ -43,7 +47,7 @@ class VentilationController extends Controller {
             $tempsAnomalie = $tempsAnomalie + $anomalie->getTemps();
         }
 
-
+        $tempsJournalier = $tempsActivite+$tempsAutreActivite+$tempsAnomalie;
 
         /* $ventilations = $em->getRepository('AppBundle:Ventilation')->findAll();
         $typeActivite = $em->getRepository('AppBundle:TypeActivite')->findAll();*/
@@ -52,13 +56,113 @@ class VentilationController extends Controller {
             return $this->redirectToRoute('ventilation_new', array('id' => $request->request->get('typeActivite')));
         }
 
-        return $this->render('ventilation/index.html.twig', array('activites'=>$activites,
+        return $this->render('ventilation/index.html.twig', array(
+            "ventilation" => $ventilation,
+            'activites'=> $activites,
             'autreActivites'=> $autreactivites,
             'anomalies' => $anomalies,
             'tempsActivite' => $tempsActivite,
             'tempsAutreActivite' => $tempsAutreActivite,
-            'tempsAnomalie' => $tempsAnomalie
+            'tempsAnomalie' => $tempsAnomalie,
+            'tempsJournalier' => $tempsJournalier
              ));
+    }
+
+    /**
+     * @Route("/demarrer", name="ventilation_demarrer")
+     * @Method({"GET", "POST"})
+     */
+    public function demarrerAction(){
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $em->getRepository('AppBundle:Utilisateur')->find($this->getUser()->getId());
+        $ventilation = new Ventilation();
+        $ventilation->setDateSaisie(new \DateTime());
+        $ventilation->setUtilisateur($user);
+        $ventilation->setValidation(false);
+
+        $em->persist($ventilation);
+        $em->flush();
+
+        return $this->redirectToRoute('ventilation_index');
+    }
+
+    /**
+     * @Route("/responsable", name="ventilation_responsable")
+     * @Method({"GET", "POST"})
+     */
+    public function responsableAction(){
+        $em = $this->getDoctrine()->getManager();
+
+        $ventilations = $em->getRepository("AppBundle:Ventilation")->findBy(array('validation' => false));
+
+        return $this->render('ventilation/responsable.html.twig', array(
+            'ventilations' => $ventilations
+        ));
+    }
+
+    /**
+    * Creates a new ventilation entity.
+    *
+    * @Route("/validation/{id}", name="ventilation_validation")
+    * @Method({"GET", "POST"})
+    */
+    public function validationAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $ventilation = $em->getRepository("AppBundle:Ventilation")->find($id);
+        $ventilation->setValidation(true);
+        $em->persist($ventilation);
+        $em->flush();
+
+        return $this->redirectToRoute("ventilation_responsable");
+    }
+
+    /**
+     * Creates a new ventilation entity.
+     *
+     * @Route("/voir/{id}", name="ventilation_voir")
+     * @Method({"GET", "POST"})
+     */
+    public function voirAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $ventilation = $em->getRepository('AppBundle:Ventilation')->find($id);
+        $activites = $em->getRepository('AppBundle:Activite')->findBy(
+            array("ventilation" => $id));
+        $autreactivites = $em->getRepository('AppBundle:AutreActivite')->findBy(
+            array("ventilation" => $id));
+        $anomalies = $em->getRepository('AppBundle:Anomalies')->findBy(
+            array("ventilation" => $id));
+
+        $tempsActivite = 0;
+        $tempsAutreActivite = 0;
+        $tempsAnomalie = 0;
+
+        foreach ($activites as $activite){
+            $tempsActivite = $tempsActivite + $activite->getTemps();
+        }
+        foreach ($autreactivites as $autreActivite){
+            $tempsAutreActivite = $tempsAutreActivite + $autreActivite->getTemps();
+        }
+        foreach ($anomalies as $anomalie){
+            $tempsAnomalie = $tempsAnomalie + $anomalie->getTemps();
+        }
+
+        $tempsJournalier = $tempsActivite+$tempsAutreActivite+$tempsAnomalie;
+
+        return $this->render('ventilation/voir.html.twig', array(
+            "ventilation" => $ventilation,
+            'activites'=> $activites,
+            'autreActivites'=> $autreactivites,
+            'anomalies' => $anomalies,
+            'tempsActivite' => $tempsActivite,
+            'tempsAutreActivite' => $tempsAutreActivite,
+            'tempsAnomalie' => $tempsAnomalie,
+            'tempsJournalier' => $tempsJournalier
+        ));
     }
 
     /**

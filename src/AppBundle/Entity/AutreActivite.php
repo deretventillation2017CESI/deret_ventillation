@@ -56,6 +56,12 @@ class AutreActivite
     private $date;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Ventilation", inversedBy="autreactivite")
+     * @ORM\JoinColumn(name="ventilation_id", referencedColumnName="id")
+     */
+    private $ventilation;
+
+    /**
      * Get id
      *
      * @return int
@@ -183,5 +189,29 @@ class AutreActivite
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set ventilation
+     *
+     * @param \AppBundle\Entity\Ventilation $ventilation
+     *
+     * @return AutreActivite
+     */
+    public function setVentilation(\AppBundle\Entity\Ventilation $ventilation = null)
+    {
+        $this->ventilation = $ventilation;
+
+        return $this;
+    }
+
+    /**
+     * Get ventilation
+     *
+     * @return \AppBundle\Entity\Ventilation
+     */
+    public function getVentilation()
+    {
+        return $this->ventilation;
     }
 }

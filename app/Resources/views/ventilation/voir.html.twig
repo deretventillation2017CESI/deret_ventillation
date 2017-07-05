@@ -5,10 +5,6 @@
 {% block main %}
 
     {% if ventilation %}
-    <a href="{{ path('activite') }}"><button class="btn btn-primary">Activités</button></a>
-    <a href="{{ path('autreactivite') }}"><button class="btn btn-primary">Autre activités</button></a>
-    <a href="{{ path('anomalie') }}"><button class="btn btn-primary">Anomalies</button></a>
-
     <div class="col-lg-4">
         <h1>Activité journalière saisie</h1>
         <table border="1">
@@ -81,51 +77,5 @@
         <label>Temps passée : {{ tempsAnomalie }}</label>
     </div>
     <h1>Temps journalier : {{ tempsJournalier }}</h1>
-    {#<h1>Liste des ventilations</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Tempspasse</th>
-                <th>Validation</th>
-                <th>Datesaisie</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for ventilation in ventilations %}
-            <tr>
-                <td><a href="{{ path('ventilation_show', { 'id': ventilation.id }) }}">{{ ventilation.id }}</a></td>
-                <td>{{ ventilation.tempsPasse }}</td>
-                <td>{% if ventilation.validation %}Yes{% else %}No{% endif %}</td>
-                <td>{% if ventilation.dateSaisie %}{{ ventilation.dateSaisie|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('ventilation_show', { 'id': ventilation.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('ventilation_edit', { 'id': ventilation.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-        
-    <form action="{{ path('ventilation_index') }}" method="post">
-        <label for="typeActivite">Activité </label>
-        <select id="typeActivite" name="typeActivite">
-            {% for activite in typeActivite %}
-                <option value="{{ activite.id }}">{{ activite.libelle }}</option>
-            {% endfor %}
-        </select>
-        <input type="submit" value="Choisir" />
-    </form>#}
-    {% else %}
-        <a href="{{  path('ventilation_demarrer') }}"><button>Démarrer la ventilation</button></a>
     {% endif %}
-
 {% endblock %}

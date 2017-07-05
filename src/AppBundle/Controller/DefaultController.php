@@ -28,6 +28,10 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $user = $em->getRepository('AppBundle:Utilisateur')->find($this->getUser()->getId());
+        $ventilation = $em->getRepository('AppBundle:Ventilation')->findBy(array(
+            'utilisateur' => $user,
+            'dateSaisie' => new \DateTime()
+        ));
 
         if($request->request->get("metier"))
         {
@@ -39,6 +43,7 @@ class DefaultController extends Controller
             $activite->setTypeProduit(($_POST['typeProduit']));
             $activite->setUser($user);
             $activite->setDate(new \DateTime());
+            $activite->setVentilation($ventilation);
 
             $em->persist($activite);
             $em->flush();
@@ -56,6 +61,10 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $user = $em->getRepository('AppBundle:Utilisateur')->find($this->getUser()->getId());
+        $ventilation = $em->getRepository('AppBundle:Ventilation')->findBy(array(
+            'utilisateur' => $user,
+            'dateSaisie' => new \DateTime()
+        ));
 
         if($request->request->get("metier"))
         {
@@ -65,6 +74,7 @@ class DefaultController extends Controller
             $autreActivite->setTemps($_POST['temps']);
             $autreActivite->setUser($user);
             $autreActivite->setDate(new \DateTime());
+            $autreActivite->setVentilation($ventilation);
 
             $em->persist($autreActivite);
             $em->flush();
@@ -84,6 +94,10 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $user = $em->getRepository('AppBundle:Utilisateur')->find($this->getUser()->getId());
+        $ventilation = $em->getRepository('AppBundle:Ventilation')->findBy(array(
+            'utilisateur' => $user,
+            'dateSaisie' => new \DateTime()
+        ));
 
         if($request->request->get("metier"))
         {
@@ -98,6 +112,7 @@ class DefaultController extends Controller
             $anomalie->setReference($_POST['reference']);
             $anomalie->setUser($user);
             $anomalie->setDate(new \DateTime());
+            $anomalie->setVentilation($ventilation);
 
             $em->persist($anomalie);
             $em->flush();
