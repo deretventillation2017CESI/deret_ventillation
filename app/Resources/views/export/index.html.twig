@@ -28,7 +28,15 @@
     </div>
           
     <div class="row text-center" style='margin-top: 2%;'>
-        {% for key, value in tabHeureTotal %}
+        {% for key, value in tabHeureActivite %}
+            {{ key }} - {{ value }}
+        {% endfor %}
+        
+        {% for key, value in tabHeureAnomalie %}
+            {{ key }} - {{ value }}
+        {% endfor %}
+        
+        {% for key, value in tabHeureAutresActivites %}
             {{ key }} - {{ value }}
         {% endfor %}
     </div>

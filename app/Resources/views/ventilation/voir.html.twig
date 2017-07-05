@@ -5,77 +5,95 @@
 {% block main %}
 
     {% if ventilation %}
-    <div class="col-lg-4">
-        <h1>Activité journalière saisie</h1>
-        <table border="1">
-            <tr>
-                <th>Métier</th>
-                <th>Type Produit</th>
-                <th>Quantite</th>
-                <th>Temps</th>
-                <th>Commentaire</th>
-            </tr>
-        {% for activite in activites %}
-            <tr>
-                <td>{{ activite.metier }}</td>
-                <td>{{ activite.typeProduit }}</td>
-                <td>{{ activite.quantite }}</td>
-                <td>{{ activite.temps }}</td>
-                <td>{{ activite.commentaire }}</td>
-            </tr>
-        {% endfor %}
-        </table>
+        <h1>Saisie du salarié : {{ ventilation.utilisateur.nom }} {{ ventilation.utilisateur.prenom }}</h1>
+        <h2>Date : {{ ventilation.dateSaisie|date("d/m/y") }}</h2>
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Activité journalière saisie</h1>
+                <table border="1" class="table table-striped">
+                    <tr>
+                        <th>Métier</th>
+                        <th>Type Produit</th>
+                        <th>Quantite</th>
+                        <th>Temps</th>
+                        <th>Commentaire</th>
+                        <th>Editer</th>
+                        <th>Supprimer</th>
+                    </tr>
+                {% for activite in activites %}
+                    <tr>
+                        <td>{{ activite.metier }}</td>
+                        <td>{{ activite.typeProduit }}</td>
+                        <td>{{ activite.quantite }}</td>
+                        <td>{{ activite.temps }}</td>
+                        <td>{{ activite.commentaire }}</td>
+                        <td><a href="{{ path('activite_edit', {'id' : activite.id}) }}"><button class="btn btn-warning">Editer</button><a/></td>
+                        <td><a href="{{ path('activite_delete_responsable', {'id' : activite.id, 'idVentilation' : ventilation.id}) }}"><button class="btn btn-danger">Supprimer</button><a/></td>
+                    </tr>
+                {% endfor %}
+                </table>
 
-        <label>Temps passée : {{ tempsActivite }}</label>
-    </div>
-    <div class="col-lg-4">
-        <h1>Autre Activité journalière saisie</h1>
-        <table border="1">
-            <tr>
-                <th>Activite</th>
-                <th>Temps</th>
-                <th>Commentaire</th>
-            </tr>
-            {% for autreactivite in autreActivites %}
-                <tr>
-                    <td>{{ autreactivite.activite }}</td>
-                    <td>{{ autreactivite.temps }}</td>
-                    <td>{{ autreactivite.commentaire }}</td>
-                </tr>
-            {% endfor %}
-        </table>
+                <label>Temps passée : {{ tempsActivite }}</label>
+            </div>
+            <div class="col-lg-12">
+                <h1>Autre Activité journalière saisie</h1>
+                <table border="1" class="table table-striped">
+                    <tr>
+                        <th>Activite</th>
+                        <th>Temps</th>
+                        <th>Commentaire</th>
+                        <th>Editer</th>
+                        <th>Supprimer</th>
+                    </tr>
+                    {% for autreactivite in autreActivites %}
+                        <tr>
+                            <td>{{ autreactivite.activite }}</td>
+                            <td>{{ autreactivite.temps }}</td>
+                            <td>{{ autreactivite.commentaire }}</td>
+                            <td><a href="{{ path('autreactivite_edit', {'id' : autreactivite.id}) }}"><button class="btn btn-warning">Editer</button><a/></td>
+                            <td><a href="{{ path('autreactivite_delete_responsable', {'id' : autreactivite.id, 'idVentilation' : ventilation.id}) }}"><button class="btn btn-danger">Supprimer</button><a/></td>
+                        </tr>
+                    {% endfor %}
+                </table>
 
-        <label>Temps passée : {{ tempsAutreActivite }}</label>
-    </div>
-    <div class="col-lg-4">
-        <h1>Anomalie journalière saisie</h1>
-        <table border="1">
-            <tr>
-                <th>Anomalie</th>
-                <th>Type Produit</th>
-                <th>Fabricant</th>
-                <th>Reférence</th>
-                <th>Code Défaut</th>
-                <th>Quantite</th>
-                <th>Temps</th>
-                <th>Commentaire</th>
-            </tr>
-            {% for anomalie in anomalies %}
-                <tr>
-                    <td>{{ anomalie.anomalie }}</td>
-                    <td>{{ anomalie.typeProduit }}</td>
-                    <td>{{ anomalie.fabricant }}</td>
-                    <td>{{ anomalie.reference }}</td>
-                    <td>{{ anomalie.codeDefaut }}</td>
-                    <td>{{ anomalie.quantite }}</td>
-                    <td>{{ anomalie.temps }}</td>
-                    <td>{{ anomalie.commentaire }}</td>
-                </tr>
-            {% endfor %}
-        </table>
+                <label>Temps passée : {{ tempsAutreActivite }}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Anomalie journalière saisie</h1>
+                <table border="1" class="table table-striped">
+                    <tr>
+                        <th>Anomalie</th>
+                        <th>Type Produit</th>
+                        <th>Fabricant</th>
+                        <th>Reférence</th>
+                        <th>Code Défaut</th>
+                        <th>Quantite</th>
+                        <th>Temps</th>
+                        <th>Commentaire</th>
+                        <th>Editer</th>
+                        <th>Supprimer</th>
+                    </tr>
+                    {% for anomalie in anomalies %}
+                        <tr>
+                            <td>{{ anomalie.anomalie }}</td>
+                            <td>{{ anomalie.typeProduit }}</td>
+                            <td>{{ anomalie.fabricant }}</td>
+                            <td>{{ anomalie.reference }}</td>
+                            <td>{{ anomalie.codeDefaut }}</td>
+                            <td>{{ anomalie.quantite }}</td>
+                            <td>{{ anomalie.temps }}</td>
+                            <td>{{ anomalie.commentaire }}</td>
+                            <td><a href="{{ path('anomalie_edit', {'id' : anomalie.id}) }}"><button class="btn btn-warning">Editer</button><a/></td>
+                            <td><a href="{{ path('anomalie_delete_responsable', {'id' : anomalie.id, 'idVentilation' : ventilation.id}) }}"><button class="btn btn-danger">Supprimer</button><a/></td>
+                        </tr>
+                    {% endfor %}
+                </table>
 
-        <label>Temps passée : {{ tempsAnomalie }}</label>
-    </div>
-    <h1>Temps journalier : {{ tempsJournalier }}</h1>
+                <label>Temps passée : {{ tempsAnomalie }}</label>
+            </div>
+            <h1>Temps journalier : {{ tempsJournalier }}</h1>
+        </div>
     {% endif %}
 {% endblock %}

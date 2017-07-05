@@ -13,17 +13,15 @@ class AutreActiviteRepository extends \Doctrine\ORM\EntityRepository
     /*
      * FONCTION : Récupère toutes les autres activités entre 2 dates
      */
-    public function findVentilationCreatedBetweenTwoDates(\DateTime $date_debut, \DateTime $date_fin)
+    public function findAutreActiviteCreatedBetweenTwoDates(\DateTime $date_debut, \DateTime $date_fin)
     {
-//        return $this->createQueryBuilder('m')
-//                    ->join('m.ventilationFormulaire', 'vf')
-//                    ->join('vf.formulaire', 'f')
-//                    ->where("m.dateSaisie > ?1")
-//                    ->andWhere("m.dateSaisie < ?2")
-//                    ->orderBy('f.libelle', 'ASC')
-//                    ->setParameter(1, $date_debut)
-//                    ->setParameter(2, $date_fin)
-//                    ->getQuery()
-//                    ->getResult();
+        return $this->createQueryBuilder('m')
+                    ->where("m.date > ?1")
+                    ->andWhere("m.date < ?2")
+                    ->orderBy('m.activite', 'ASC')
+                    ->setParameter(1, $date_debut)
+                    ->setParameter(2, $date_fin)
+                    ->getQuery()
+                    ->getResult();
     }
 }

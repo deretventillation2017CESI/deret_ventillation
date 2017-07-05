@@ -1,0 +1,79 @@
+{% extends 'default/layout.html.twig' %}
+{% block main %}
+    <div class="row">
+        <div class ="col-md-12 titre">
+            <h1>Activite</h1>
+       </div>
+        <form action="#" method="POST">
+            <div class="row">
+                <div class="metier col-lg-6">
+                    <label>Métier</label>
+                    <select id="metier" name="metier">
+                        <option value="" disabled>---> Contrôle qualité <---</option>
+                        <option value="Contrôle qualité à la pièce chaussures">&nbsp;&nbsp;&nbsp;Contrôle qualité à la pièce chaussures</option>
+                        <option value="Contrôle qualité à la pièce femme">&nbsp;&nbsp;&nbsp;Contrôle qualité à la pièce femme</option>
+                        <option value="Contrôle qualité à la pièce homme">&nbsp;&nbsp;&nbsp;Contrôle qualité à la pièce homme</option>
+                        <option value="Contrôle qualité à la pièce chapeaux/gants/mouchoirs">&nbsp;&nbsp;&nbsp;Contrôle qualité à la pièce chapeaux/gants/mouchoirs</option>
+                        <option value="Contrôle qualité à la pièce meuble">&nbsp;&nbsp;&nbsp;Contrôle qualité à la pièce meuble</option>
+                        <option value="Contrôle qualité à la pièce équitation">&nbsp;&nbsp;&nbsp;Contrôle qualité à la pièce équitation</option>
+                        <option value="Contrôle qualité à la pièce luminaires en carton">&nbsp;&nbsp;&nbsp;Contrôle qualité à la pièce luminaires en carton</option>
+                        <option value="Contrôle qualité aspect">&nbsp;&nbsp;&nbsp;Contrôle qualité aspect</option>
+                        <option value="Contrôle qualité sur mesure">&nbsp;&nbsp;&nbsp;Contrôle qualité sur mesure</option>
+                        <option value="Contrôle 1er de série pap homme/femme">&nbsp;&nbsp;&nbsp;Contrôle 1er de série pap homme/femme</option>
+                        <option value="Contrôle 1er de série équitation">&nbsp;&nbsp;&nbsp;Contrôle 1er de série équitation</option>
+                        <option value="Contrôle 1er de série chapeaux/gants">&nbsp;&nbsp;&nbsp;Contrôle 1er de série chapeaux/gants </option>
+                        <option value="" disabled>---> Reconditionnement <---</option>
+                        <option value="Reconditionnement pièce femme">&nbsp;&nbsp;&nbsp;Reconditionnement pièce femme</option>
+                        <option value="Reconditionnement pièce homme">&nbsp;&nbsp;&nbsp;Reconditionnement pièce homme</option>
+                        <option value="Reconditionnement chaussures">&nbsp;&nbsp;&nbsp;Reconditionnement chaussures</option>
+                        <option value="Reconditionnement meubles">&nbsp;&nbsp;&nbsp;Reconditionnement meubles</option>
+                        <option value="Reconditionnement chapeaux/gants/mouchoirs">&nbsp;&nbsp;&nbsp;Reconditionnement chapeaux/gants/mouchoirs</option>
+                        <option value="Réception">---> Réception <---</option>
+                        <option value="Stock">---> Stock <---</option>
+                        <option value="Préparation">---> Préparation <---</option>
+                        <option value="Expédition">---> Expédition <---</option>
+                        <option value="Transfert des pièces CQ">---> Transfert des pièces CQ <---</option>
+                        <option value="Cellophanage">---> Cellophanage <---</option>
+                        <option value="Montage boîtes à chapeaux">---> Montage boîtes à chapeaux <---</option>
+                        <option value="Autres">---> Autres <---</option>
+                    </select>
+                </div>
+                <div class="typeProduit col-lg-6">
+                    <label>Type de produits</label>
+                    <select id="typeProduit" name="typeProduit">
+                        <option value="Debout cuir">Debout cuir</option>
+                        <option value="Debout autres">Debout autres</option>
+                        <option value="Couchés">Couchés</option>
+                        <option value="Fourrure">Fourrure</option>
+                        <option value="Accessoires">Accessoires</option>
+                        <option value="Meubles">Meubles</option>
+                        <option value="Luminaires">Luminaires</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="quantite col-lg-6">
+                    <label>Quantité</label>
+                    <input name="quantite" type="number" value="{{ activite.quantite }}"/>
+                </div>
+                <div class="temps col-lg-6">
+                    <label>Temps passé</label>
+                    <input name="temps" type="number" step="0.01" value="{{ activite.temps }}"/>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <label>Commentaire</label>
+                <textarea name="commentaire">{{ activite.commentaire }}</textarea>
+            </div>
+            <input type="submit" value="Editer"></input>
+        </form>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(document).ready(function() {
+            $("#metier").val("{{ activite.metier }}");
+            $("#typeProduit").val("{{ activite.typeProduit }}");
+        });
+    </script>
+{% endblock %}
