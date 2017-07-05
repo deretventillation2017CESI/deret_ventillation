@@ -45,7 +45,7 @@ class Activite
     /**
      * @var string
      *
-     * @ORM\Column(name="temps", type="decimal", precision=2, scale=0)
+     * @ORM\Column(name="temps", type="decimal", precision=5, scale=0)
      */
     private $temps;
 

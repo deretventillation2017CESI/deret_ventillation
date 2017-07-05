@@ -1,0 +1,96 @@
+{% extends 'default/layout.html.twig' %}
+{% block main %}
+    <div class="row">
+        <div class ="col-md-12 titre">
+            <h1>Anomalies</h1>
+       </div>
+        <form action="#" method="POST">
+            <div class="row">
+                <div class="metier col-lg-4">
+                    <label>Anomalies</label>
+                    <select id="metier" name="metier">
+                        <option value="" disabled>---> Ajout <---</option>
+                        <option value="Compo pour Brésil, Argentine...">&nbsp;&nbsp;&nbsp;Compo pour Brésil, Argentine...</option>
+                        <option value="Etiquette Real Fur (chaussures)">&nbsp;&nbsp;&nbsp;Etiquette Real Fur (chaussures)</option>
+                        <option value="Notices chapeaux">&nbsp;&nbsp;&nbsp;Notices chapeaux</option>
+                        <option value="Autres">&nbsp;&nbsp;&nbsp;Autres</option>
+                        <option value="" disabled>---> Assemblage <---</option>
+                        <option value="Notice-cordonnets">&nbsp;&nbsp;&nbsp;Notice-cordonnets</option>
+                        <option value="Etiquette Real Fur">&nbsp;&nbsp;&nbsp;Etiquette Real Fur</option>
+                        <option value="" disabled>---> Brossage <---</option>
+                        <option value="Chapeaux">&nbsp;&nbsp;&nbsp;Chapeaux</option>
+                        <option value="Pièce femme">&nbsp;&nbsp;&nbsp;Pièce femme</option>
+                        <option value="Pièce femme">&nbsp;&nbsp;&nbsp;Pièce homme</option>
+                        <option value="Gants">&nbsp;&nbsp;&nbsp;Gants</option>
+                        <option value="SM">&nbsp;&nbsp;&nbsp;SM</option>
+                        <option value="Changement étiquettes SKU ou ajout pictogramme" >---> Changement étiquettes SKU ou ajout pictogramme <---</option>
+                        <option value="" disabled>---> Détache <---</option>
+                        <option value="Femme">&nbsp;&nbsp;&nbsp;Femme</option>
+                        <option value="Homme">&nbsp;&nbsp;&nbsp;Homme</option>
+                        <option value="SM">&nbsp;&nbsp;&nbsp;SM</option>
+                        <option value="Chapeaux">&nbsp;&nbsp;&nbsp;Chapeaux</option>
+                        <option value="Gants">&nbsp;&nbsp;&nbsp;Gants</option>
+                        <option value="Mouchoirs">&nbsp;&nbsp;&nbsp;Mouchoirs</option>
+                        <option value="Equitation">&nbsp;&nbsp;&nbsp;Equitation</option>
+                        <option value="Chaussures">&nbsp;&nbsp;&nbsp;Chaussures</option>
+                    </select>
+                </div>
+                <div class="metier col-lg-4">
+                    <label>Type de produits</label>
+                    <select id="typeProduit" name="typeProduit">
+                        <option value="Debout cuir">Debout cuir</option>
+                        <option value="Debout autres">Debout autres</option>
+                        <option value="Couchés">Couchés</option>
+                        <option value="Fourrure">Fourrure</option>
+                        <option value="Accessoires">Accessoires</option>
+                        <option value="Meubles">Meubles</option>
+                        <option value="Luminaires">Luminaires</option>
+                    </select>
+                </div>
+                <div class="metier col-lg-4">
+                    <label>Fabricant</label>
+                    <select name="fabricant">
+                        <option value="Diors">Diors</option>
+                        <option value="Diors">Hermès</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <label>Référence</label>
+                    <input name="reference" type="text" value="{{ anomalie.reference }}"/>
+                </div>
+                <div class="col-lg-3">
+                    <label>Code défaut</label>
+                    <select id="code" name="code">
+                        <option value="X01">X01</option>
+                        <option value="X02">X02</option>
+                    </select>
+                </div>
+                <div class="col-lg-3">
+                    <label>Quantite</label>
+                    <input name="quantite" type="integer" value="{{ anomalie.quantite }}"/>
+                </div>
+                <div class="col-lg-3">
+                    <label>Temps</label>
+                    <input name="temps" type="number" step="0.01" value="{{ anomalie.temps }}"/>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <label>Commentaire</label>
+                <textarea name="commentaire">{{ anomalie.commentaire }}</textarea>
+            </div>
+            <input type="submit" value="Enregistrer"></input>
+        </form>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(document).ready(function() {
+            $("#code").val("{{ anomalie.codeDefaut }}");
+            $("#metier").val("{{ anomalie.anomalie }}");
+            $("#typeProduit").val("{{ anomalie.typeProduit }}");
+            $("#fabricant").val("{{ anomalie.fabricant }}");
+        });
+    </script>
+{% endblock %}
