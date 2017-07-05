@@ -62,4 +62,10 @@ class Batiment
     {
         return $this->libelle;
     }
+
+    public function __toString()
+    {
+        // TODO: Implement __toString() method.
+        return $this->libelle;
+    }
 }

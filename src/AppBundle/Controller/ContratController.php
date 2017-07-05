@@ -2,17 +2,18 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\TypeContrat;
+use AppBundle\Entity\Contrat;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Typecontrat controller.
  *
  * @Route("typeContrat")
  */
-class TypeContratController extends Controller
+class ContratController extends Controller
 {
     /**
      * Lists all typeContrat entities.
@@ -24,9 +25,9 @@ class TypeContratController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $typeContrats = $em->getRepository('AppBundle:TypeContrat')->findAll();
+        $typeContrats = $em->getRepository('AppBundle:Contrat')->findAll();
 
-        return $this->render('typecontrat/index.html.twig', array(
+        return $this->render('contrat/index.html.twig', array(
             'typeContrats' => $typeContrats,
         ));
     }
@@ -39,7 +40,7 @@ class TypeContratController extends Controller
      */
     public function newAction(Request $request)
     {
-        $typeContrat = new Typecontrat();
+        $typeContrat = new Contrat();
         $form = $this->createForm('AppBundle\Form\TypeContratType', $typeContrat);
         $form->handleRequest($request);
 
@@ -51,7 +52,7 @@ class TypeContratController extends Controller
             return $this->redirectToRoute('typeContrat_show', array('id' => $typeContrat->getId()));
         }
 
-        return $this->render('typecontrat/new.html.twig', array(
+        return $this->render('contrat/new.html.twig', array(
             'typeContrat' => $typeContrat,
             'form' => $form->createView(),
         ));
@@ -63,11 +64,11 @@ class TypeContratController extends Controller
      * @Route("/{id}", name="typeContrat_show")
      * @Method("GET")
      */
-    public function showAction(TypeContrat $typeContrat)
+    public function showAction(Contrat $typeContrat)
     {
         $deleteForm = $this->createDeleteForm($typeContrat);
 
-        return $this->render('typecontrat/show.html.twig', array(
+        return $this->render('contrat/show.html.twig', array(
             'typeContrat' => $typeContrat,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -79,7 +80,7 @@ class TypeContratController extends Controller
      * @Route("/{id}/edit", name="typeContrat_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, TypeContrat $typeContrat)
+    public function editAction(Request $request, Contrat $typeContrat)
     {
         $deleteForm = $this->createDeleteForm($typeContrat);
         $editForm = $this->createForm('AppBundle\Form\TypeContratType', $typeContrat);
@@ -91,7 +92,7 @@ class TypeContratController extends Controller
             return $this->redirectToRoute('typeContrat_edit', array('id' => $typeContrat->getId()));
         }
 
-        return $this->render('typecontrat/edit.html.twig', array(
+        return $this->render('contrat/edit.html.twig', array(
             'typeContrat' => $typeContrat,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -104,7 +105,7 @@ class TypeContratController extends Controller
      * @Route("/{id}", name="typeContrat_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, TypeContrat $typeContrat)
+    public function deleteAction(Request $request, Contrat $typeContrat)
     {
         $form = $this->createDeleteForm($typeContrat);
         $form->handleRequest($request);
@@ -121,16 +122,15 @@ class TypeContratController extends Controller
     /**
      * Creates a form to delete a typeContrat entity.
      *
-     * @param TypeContrat $typeContrat The typeContrat entity
+     * @param Contrat $typeContrat The typeContrat entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(TypeContrat $typeContrat)
+    private function createDeleteForm(Contrat $typeContrat)
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('typeContrat_delete', array('id' => $typeContrat->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

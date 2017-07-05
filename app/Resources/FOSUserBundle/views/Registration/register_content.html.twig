@@ -1,7 +1,13 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_label(form.email) }}
+<div class="form-group row">
+    <label for="example-text-input" class="col-2 col-form-label"> Email:</label>
+
+</div>
+
+</div>
+{{ form_label(form.email) }}
     {{ form_widget(form.email) }}
 
     {{ form_label(form.username) }}
@@ -21,7 +27,6 @@
 
     {{ form_label(form.responsable) }}
     {{ form_widget(form.responsable) }}
-
 
     {{ form_label(form.nbHeureTheoriqueSession) }}
     {{ form_widget(form.nbHeureTheoriqueSession) }}

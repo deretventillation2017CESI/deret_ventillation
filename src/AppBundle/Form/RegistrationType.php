@@ -17,6 +17,17 @@ class RegistrationType extends AbstractType
         $builder->add('responsable');
         $builder->add('nbHeureTheoriqueSession');
         $builder->add('dateCreation');
+        $builder->add('contrat');
+        $builder->add('secteur');
+        $builder->add('poste');
+        $builder->add('batiment');
+        $builder->add('typeHoraire');
+
+
+
+
+
+
     }
 
     public function getParent()

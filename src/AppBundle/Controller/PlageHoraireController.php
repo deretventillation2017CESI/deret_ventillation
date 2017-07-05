@@ -2,31 +2,32 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\TypeHoraire;
+use AppBundle\Entity\PlageHoraire;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Typehoraire controller.
  *
- * @Route("typeHoraire")
+ * @Route("plageHoraire")
  */
-class TypeHoraireController extends Controller
+class PlageHoraireController extends Controller
 {
     /**
      * Lists all typeHoraire entities.
      *
-     * @Route("/", name="typeHoraire_index")
+     * @Route("/", name="plageHoraire_index")
      * @Method("GET")
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $typeHoraires = $em->getRepository('AppBundle:TypeHoraire')->findAll();
+        $typeHoraires = $em->getRepository('AppBundle:PlageHoraire')->findAll();
 
-        return $this->render('typehoraire/index.html.twig', array(
+        return $this->render('plagehoraire/index.html.twig', array(
             'typeHoraires' => $typeHoraires,
         ));
     }
@@ -39,7 +40,7 @@ class TypeHoraireController extends Controller
      */
     public function newAction(Request $request)
     {
-        $typeHoraire = new Typehoraire();
+        $typeHoraire = new PlageHoraire();
         $form = $this->createForm('AppBundle\Form\TypeHoraireType', $typeHoraire);
         $form->handleRequest($request);
 
@@ -51,7 +52,7 @@ class TypeHoraireController extends Controller
             return $this->redirectToRoute('typeHoraire_show', array('id' => $typeHoraire->getId()));
         }
 
-        return $this->render('typehoraire/new.html.twig', array(
+        return $this->render('plagehoraire/new.html.twig', array(
             'typeHoraire' => $typeHoraire,
             'form' => $form->createView(),
         ));
@@ -63,11 +64,11 @@ class TypeHoraireController extends Controller
      * @Route("/{id}", name="typeHoraire_show")
      * @Method("GET")
      */
-    public function showAction(TypeHoraire $typeHoraire)
+    public function showAction(PlageHoraire $typeHoraire)
     {
         $deleteForm = $this->createDeleteForm($typeHoraire);
 
-        return $this->render('typehoraire/show.html.twig', array(
+        return $this->render('plagehoraire/show.html.twig', array(
             'typeHoraire' => $typeHoraire,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -79,7 +80,7 @@ class TypeHoraireController extends Controller
      * @Route("/{id}/edit", name="typeHoraire_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, TypeHoraire $typeHoraire)
+    public function editAction(Request $request, PlageHoraire $typeHoraire)
     {
         $deleteForm = $this->createDeleteForm($typeHoraire);
         $editForm = $this->createForm('AppBundle\Form\TypeHoraireType', $typeHoraire);
@@ -91,7 +92,7 @@ class TypeHoraireController extends Controller
             return $this->redirectToRoute('typeHoraire_edit', array('id' => $typeHoraire->getId()));
         }
 
-        return $this->render('typehoraire/edit.html.twig', array(
+        return $this->render('plagehoraire/edit.html.twig', array(
             'typeHoraire' => $typeHoraire,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -104,7 +105,7 @@ class TypeHoraireController extends Controller
      * @Route("/{id}", name="typeHoraire_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, TypeHoraire $typeHoraire)
+    public function deleteAction(Request $request, PlageHoraire $typeHoraire)
     {
         $form = $this->createDeleteForm($typeHoraire);
         $form->handleRequest($request);
@@ -121,16 +122,15 @@ class TypeHoraireController extends Controller
     /**
      * Creates a form to delete a typeHoraire entity.
      *
-     * @param TypeHoraire $typeHoraire The typeHoraire entity
+     * @param PlageHoraire $typeHoraire The typeHoraire entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(TypeHoraire $typeHoraire)
+    private function createDeleteForm(PlageHoraire $typeHoraire)
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('typeHoraire_delete', array('id' => $typeHoraire->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

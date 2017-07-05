@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * TypeHoraire
+ * PlageHoraire
  *
- * @ORM\Table(name="type_horaire")
+ * @ORM\Table(name="plage_horaire")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\TypeHoraireRepository")
  */
-class TypeHoraire
+class PlageHoraire
 {
     /**
      * @var int
@@ -44,7 +44,7 @@ class TypeHoraire
      *
      * @param string $libelle
      *
-     * @return TypeHoraire
+     * @return PlageHoraire
      */
     public function setLibelle($libelle)
     {
@@ -60,6 +60,12 @@ class TypeHoraire
      */
     public function getLibelle()
     {
+        return $this->libelle;
+    }
+
+    public function __toString()
+    {
+        // TODO: Implement __toString() method.
         return $this->libelle;
     }
 }

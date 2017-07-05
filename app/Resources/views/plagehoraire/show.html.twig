@@ -1,18 +1,18 @@
-{% extends 'base.html.twig' %}
+{% extends 'default/layout.html.twig' %}
 
 {% block body %}
-    <h1>Typehoraire</h1>
+    <h1>horaire</h1>
 
     <table>
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ typeHoraire.id }}</td>
-            </tr>
-            <tr>
-                <th>Libelle</th>
-                <td>{{ typeHoraire.libelle }}</td>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ typeHoraire.id }}</td>
+        </tr>
+        <tr>
+            <th>Libelle</th>
+            <td>{{ typeHoraire.libelle }}</td>
+        </tr>
         </tbody>
     </table>
 
@@ -25,7 +25,7 @@
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+            <input type="submit" value="Delete">
             {{ form_end(delete_form) }}
         </li>
     </ul>

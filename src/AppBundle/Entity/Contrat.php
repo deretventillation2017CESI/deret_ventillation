@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * TypeContrat
+ * Contrat
  *
  * @ORM\Table(name="type_contrat")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\TypeContratRepository")
  */
-class TypeContrat
+class Contrat
 {
     /**
      * @var int
@@ -44,7 +44,7 @@ class TypeContrat
      *
      * @param string $libelle
      *
-     * @return TypeContrat
+     * @return Contrat
      */
     public function setLibelle($libelle)
     {
@@ -60,6 +60,12 @@ class TypeContrat
      */
     public function getLibelle()
     {
+        return $this->libelle;
+    }
+
+    public function __toString()
+    {
+        // TODO: Implement __toString() method.
         return $this->libelle;
     }
 }

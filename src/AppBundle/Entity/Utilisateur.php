@@ -19,6 +19,7 @@ class Utilisateur extends BaseUser {
     protected $id;
 
     public function __construct() {
+        $this->poste = new ArrayCollection();
         parent::__construct();
         // your own logic
     }
@@ -50,39 +51,40 @@ class Utilisateur extends BaseUser {
      * @ORM\JoinColumn(name="responsableN1", referencedColumnName="id")
      */
     private $responsableN1;
-    /*
-     * @ORM\ManyToOne(targetEntity="TypeContrat")
-     * @ORM\JoinColumn(name="type_contrat", referencedColumnName="id")
-     */
-    private $typeContrat;
 
-    /*
-     * @ORM\ManyToOne(targetEntity="TypeHoraire")
-     * @ORM\JoinColumn(name="type_horaire", referencedColumnName="id")
+    /**
+     * un utilisateur à un contrat
+     * @ORM\OneToOne(targetEntity="Contrat")
+     * @ORM\JoinColumn(name="contrat_id", referencedColumnName="id")
+     */
+    private $contrat;
+
+    /**
+     * un utilisateur à une PlageHoraire
+     * @ORM\OneToOne(targetEntity="PlageHoraire")
+     * @ORM\JoinColumn(name="plage_horaire_id", referencedColumnName="id")
      */
     private $typeHoraire;
 
-    /* @ORM\ManyToMany(targetEntity="Secteur")
-     * @ORM\JoinTable(name="utilisateur_secteur",
-     *      joinColumns={@JoinColumn(name="id_utilisateur", referencedColumnName="id")},
-     *      inverseJoinColumns={@JoinColumn(name="id_secteur", referencedColumnName="id")}
-     *      )
+    /**
+     * un utilisateur à un secteur
+     * @ORM\OneToOne(targetEntity="Secteur")
+     * @ORM\JoinColumn(name="secteur_id", referencedColumnName="id")
      */
     private $secteur;
 
-     /* @ORM\ManyToMany(targetEntity="Batiment")
-     * @ORM\JoinTable(name="utilisateur_batiment",
-     *      joinColumns={@JoinColumn(name="id_utilisateur", referencedColumnName="id")},
-     *      inverseJoinColumns={@JoinColumn(name="id_batiment", referencedColumnName="id")}
-     *      )
+    /**
+     * un utilisateur à un batiment
+     * @ORM\OneToOne(targetEntity="Batiment")
+     * @ORM\JoinColumn(name="batiment_id", referencedColumnName="id")
      */
     private $batiment;
 
-    /* @ORM\ManyToMany(targetEntity="Poste")
-     * @ORM\JoinTable(name="utilisateur_poste",
-     *      joinColumns={@JoinColumn(name="id_utilisateur", referencedColumnName="id")},
-     *      inverseJoinColumns={@JoinColumn(name="id_poste", referencedColumnName="id")}
-     *      )
+
+    /**
+     * un utilisateur à un poste
+     * @ORM\OneToOne(targetEntity="Poste")
+     * @ORM\JoinColumn(name="poste_id", referencedColumnName="id")
      */
     private $poste;
 
@@ -260,4 +262,118 @@ class Utilisateur extends BaseUser {
     {
         return $this->dateCreation;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getResponsableN1()
+    {
+        return $this->responsableN1;
+    }
+
+    /**
+     * @param mixed $responsableN1
+     */
+    public function setResponsableN1($responsableN1)
+    {
+        $this->responsableN1 = $responsableN1;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContrat()
+    {
+        return $this->contrat;
+    }
+
+    /**
+     * @param mixed $contrat
+     */
+    public function setContrat($contrat)
+    {
+        $this->contrat = $contrat;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTypeHoraire()
+    {
+        return $this->typeHoraire;
+    }
+
+    /**
+     * @param mixed $typeHoraire
+     */
+    public function setTypeHoraire($typeHoraire)
+    {
+        $this->typeHoraire = $typeHoraire;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSecteur()
+    {
+        return $this->secteur;
+    }
+
+    /**
+     * @param mixed $secteur
+     */
+    public function setSecteur($secteur)
+    {
+        $this->secteur = $secteur;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBatiment()
+    {
+        return $this->batiment;
+    }
+
+    /**
+     * @param mixed $batiment
+     */
+    public function setBatiment($batiment)
+    {
+        $this->batiment = $batiment;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPoste()
+    {
+        return $this->poste;
+    }
+
+    /**
+     * @param mixed $poste
+     */
+    public function setPoste($poste)
+    {
+        $this->poste = $poste;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDossier()
+    {
+        return $this->dossier;
+    }
+
+    /**
+     * @param mixed $dossier
+     */
+    public function setDossier($dossier)
+    {
+        $this->dossier = $dossier;
+    }
+
+
 }
