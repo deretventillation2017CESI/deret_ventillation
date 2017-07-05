@@ -23,7 +23,7 @@ class VentilationController extends Controller {
      */
     public function indexAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
-      
+
         $ventilation = $em->getRepository('AppBundle:Ventilation')->findBy(
             array("utilisateur" => $this->getUser()->getId(), "dateSaisie" => new \DateTime()));
         $activites = $em->getRepository('AppBundle:Activite')->findBy(
