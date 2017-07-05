@@ -154,13 +154,14 @@ class VentilationController extends Controller {
     {
         $em = $this->getDoctrine()->getManager();
 
-        $ventilation = $em->getRepository('AppBundle:Ventilation')->find($id);
+        $ventilation = $em->getRepository('AppBundle:Ventilation')->findBy(
+            array("utilisateur" => $this->getUser()->getId(), "dateSaisie" => new \DateTime()));
         $activites = $em->getRepository('AppBundle:Activite')->findBy(
-            array("ventilation" => $id));
+            array("user"=>$this->getUser()->getId(),"date"=> new \DateTime()));
         $autreactivites = $em->getRepository('AppBundle:AutreActivite')->findBy(
-            array("ventilation" => $id));
+            array("user"=>$this->getUser()->getId(),"date"=> new \DateTime()));
         $anomalies = $em->getRepository('AppBundle:Anomalies')->findBy(
-            array("ventilation" => $id));
+            array("user"=>$this->getUser()->getId(),"date"=> new \DateTime()));
 
         $tempsActivite = 0;
         $tempsAutreActivite = 0;
@@ -177,6 +178,10 @@ class VentilationController extends Controller {
         }
 
         $tempsJournalier = $tempsActivite+$tempsAutreActivite+$tempsAnomalie;
+
+        if($request->request->get('typeActivite')){
+            return $this->redirectToRoute('ventilation_new', array('id' => $request->request->get('typeActivite')));
+        }
 
         return $this->render('ventilation/voir.html.twig', array(
             "ventilation" => $ventilation,
