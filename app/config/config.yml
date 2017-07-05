@@ -100,10 +100,10 @@ assetic:
                 - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.js
         bootstrap_datepicker_js:
             inputs:
-                - %kernel.root_dir%/../vendor/vojtys/bootstrap-datepicker/src/client-side/js/bootstrap-datepicker.min.js
+                - %kernel.root_dir%/../vendor/components/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js
         bootstrap_datepicker_css:
             inputs:
-                - %kernel.root_dir%/../vendor/vojtys/bootstrap-datepicker/src/client-side/css/bootstrap-datepicker3.min.css
+                - %kernel.root_dir%/../vendor/components/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css
         bootstrap_css:
             inputs:
                 - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.css
