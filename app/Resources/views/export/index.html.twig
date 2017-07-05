@@ -10,7 +10,7 @@
     </div>
     
     <div class="row text-center" style='margin-top: 2%;'>
-        <form action="{{ path('export_index') }}" method="post" class="form-inline">
+        <form action="{{ path('export_download') }}" method="post" class="form-inline">
             <div class="form-group">
                 <label for="date_debut">Date de début</label>
 {#                <input id="date_debut" name="date_debut" type="text" class="datepicker form-control" data-provide="datepicker-inline">#}
@@ -28,7 +28,7 @@
     </div>
           
     <div class="row text-center" style='margin-top: 2%;'>
-        {% for key, value in tabHeureActivite %}
+        {#{% for key, value in tabHeureActivite %}
             {{ key }} - {{ value }}
         {% endfor %}
         
@@ -38,7 +38,7 @@
         
         {% for key, value in tabHeureAutresActivites %}
             {{ key }} - {{ value }}
-        {% endfor %}
+        {% endfor %}#}
     </div>
 
     <script type="text/javascript">
