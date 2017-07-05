@@ -98,12 +98,14 @@ class VentilationController extends Controller {
         $dateFin= new \DateTime();
          $dateFin->modify('-2 day');
         $ventilationsRetards = $em->getRepository("AppBundle:Ventilation")->findByNotValidationAndDateMax($dateFin);
-        $ventilations = $em->getRepository("AppBundle:Ventilation")->findByNotValidationAndDateMin($dateFin);
+        $ventilations = $em->getRepository("AppBundle:Ventilation")->findByNotValidationAndDateMin($dateFin);     
+       $ventilationsControlees = $em->getRepository("AppBundle:Ventilation")->findByValidationAndDateMin($dateFin);
         $ventilationsArchives = $em->getRepository("AppBundle:Ventilation")->findByAllDateMinMax($dateDebut,$dateFin);
         return $this->render('ventilation/responsable.html.twig', array(
             'ventilations' => $ventilations,
             'ventilationsRetards' => $ventilationsRetards,
-            'ventilationsArchives' => $ventilationsArchives
+            'ventilationsArchives' => $ventilationsArchives,
+            'ventilationsControlees' =>$ventilationsControlees
         ));
     }
 
@@ -119,6 +121,23 @@ class VentilationController extends Controller {
 
         $ventilation = $em->getRepository("AppBundle:Ventilation")->find($id);
         $ventilation->setValidation(true);
+        $em->persist($ventilation);
+        $em->flush();
+
+        return $this->redirectToRoute("ventilation_responsable");
+    }
+        /**
+    * Creates a new ventilation entity.
+    *
+    * @Route("/devalidation/{id}", name="ventilation_devalidation")
+    * @Method({"GET", "POST"})
+    */
+    public function devalidationAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $ventilation = $em->getRepository("AppBundle:Ventilation")->find($id);
+        $ventilation->setValidation(false);
         $em->persist($ventilation);
         $em->flush();
 

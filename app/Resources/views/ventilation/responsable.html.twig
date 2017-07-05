@@ -71,6 +71,38 @@
             {% endfor %}
         </table>
     </div>
+         <div class="row">
+        <h1>Liste des ventilations contrôlées</h1>
+        <table border="1" class="table table-striped">
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Date de saisie</th>
+                <th>Temps</th>
+                <th>Validation</th>
+            </tr>
+
+            {% for ventilation in ventilationsControlees %}
+                {% set temps = 0 %}
+                <tr>
+                    <td>{{ ventilation.utilisateur.nom }}</td>
+                    <td>{{ ventilation.utilisateur.prenom }}</td>
+                    <td>{{ ventilation.dateSaisie|date("d/m/Y") }}</td>
+                    {% for activite in ventilation.activites %}
+                        {% set temps = temps + activite.temps %}
+                    {% endfor %}
+                    {% for autreactivite in ventilation.autreactivites %}
+                        {% set temps = temps + autreactivite.temps %}
+                    {% endfor %}
+                    {% for anomalie in ventilation.anomalies %}
+                        {% set temps = temps + anomalie.temps %}
+                    {% endfor %}
+                    <td>{{ temps }}</td>
+                    <td><a href="{{ path('ventilation_devalidation', {'id' : ventilation.id}) }}"><button>Dévalider</button></a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
             <div class="row">
         <h1>Liste des ventilations archivées</h1>
         <table border="1" class="table table-striped">
