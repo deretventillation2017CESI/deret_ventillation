@@ -6,6 +6,17 @@
         });
     });
 </script>
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    <div>
+        <div class="row text-left" style="margin-top: 2%;">
+            <a href="{{ path('utilisateur_index') }}">
+                <button type="button" class="btn btn-primary">
+                    <span class=" glyphicon glyphicon-arrow-left"></span> Retour
+                </button>
+            </a>
+        </div>
+    </div>
+{% endif %}
 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
 <div class="row">
     <div class="col-lg-6">
@@ -89,6 +100,7 @@
     </div>
 </div>
 <br>
+
 <div>
     <input class="form-control btn-primary" type="submit" value="{{ 'registration.submit'|trans }}"/>
 </div>
