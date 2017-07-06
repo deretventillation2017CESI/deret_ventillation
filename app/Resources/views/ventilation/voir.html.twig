@@ -3,10 +3,14 @@
 {% block title %}Liste des ventilations{% endblock %}
 
 {% block main %}
-
     {% if ventilation %}
-        <h1>Saisie du salarié : {{ ventilation[0].utilisateur.nom }} {{ ventilation[0].utilisateur.prenom }}</h1>
-        <h2>Date : {{ ventilation[0].dateSaisie|date("d/m/y") }}</h2>
+        <h1>Saisie du salarié : {{ ventilation.utilisateur.nom }} {{ ventilation.utilisateur.prenom }}</h1>
+        <h2>Date : {{ ventilation.dateSaisie|date("d/m/y") }}</h2>
+        <div class="row text-center">
+            <a href="{{ path('activite_resp', {'id' : ventilation.id}) }}"><button class="btn btn-primary">Activités</button></a>
+            <a href="{{ path('autreactivite_resp', {'id' : ventilation.id}) }}"><button class="btn btn-primary">Autre activités</button></a>
+            <a href="{{ path('anomalie_resp', {'id' : ventilation.id}) }}"><button class="btn btn-primary">Anomalies</button></a>
+        </div>
         <div class="row">
             <div class="col-lg-12">
                 <h1>Activité journalière saisie</h1>

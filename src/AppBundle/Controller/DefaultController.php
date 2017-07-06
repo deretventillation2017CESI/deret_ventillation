@@ -55,6 +55,37 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("ventilation/responsable/activite_resp/{id}", name="activite_resp")
+     */
+    public function indexActiviteRespAction(Request $request,$id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $ventilation = $em->getRepository('AppBundle:Ventilation')->find($id);
+        $user = $em->getRepository('AppBundle:Utilisateur')->find($ventilation->getUtilisateur());
+
+
+        if($request->request->get("metier"))
+        {
+            $activite = new Activite();
+            $activite->setMetier($_POST['metier']);
+            $activite->setCommentaire($_POST['commentaire']);
+            $activite->setQuantite($_POST['quantite']);
+            $activite->setTemps($_POST['temps']);
+            $activite->setTypeProduit(($_POST['typeProduit']));
+            $activite->setUser($user);
+            $activite->setDate(new \DateTime());
+            $activite->setVentilation($ventilation);
+
+            $em->persist($activite);
+            $em->flush();
+
+            return $this->redirectToRoute('ventilation_voir', array("id" => $id));
+        }
+        return $this->render('activite/index.html.twig');
+    }
+
+    /**
      * @Route("activite/{id}/edit", name="activite_edit")
      * @Method({"GET", "POST"})
      */
@@ -139,6 +170,35 @@ class DefaultController extends Controller
         }
 
         return $this->render('autre_activite/index.html.twig');
+    }
+
+    /**
+     * @Route("ventilation/responsable/autreactivite_resp/{id}", name="autreactivite_resp")
+     */
+    public function indexAutreActiviteRespAction(Request $request,$id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $ventilation = $em->getRepository('AppBundle:Ventilation')->find($id);
+        $user = $em->getRepository('AppBundle:Utilisateur')->find($ventilation->getUtilisateur());
+
+
+        if($request->request->get("metier"))
+        {
+            $autreActivite = new AutreActivite();
+            $autreActivite->setActivite($_POST['metier']);
+            $autreActivite->setCommentaire($_POST['commentaire']);
+            $autreActivite->setTemps($_POST['temps']);
+            $autreActivite->setUser($user);
+            $autreActivite->setDate(new \DateTime());
+            $autreActivite->setVentilation($ventilation);
+
+            $em->persist($autreActivite);
+            $em->flush();
+
+            return $this->redirectToRoute('ventilation_voir', array("id" => $id));
+        }
+        return $this->render('activite/index.html.twig');
     }
 
     /**
@@ -229,6 +289,40 @@ class DefaultController extends Controller
         }
 
         return $this->render('anomalie/index.html.twig');
+    }
+
+    /**
+     * @Route("ventilation/responsable/anomalie_resp/{id}", name="anomalie_resp")
+     */
+    public function indexAnomalieRespAction(Request $request,$id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $ventilation = $em->getRepository('AppBundle:Ventilation')->find($id);
+        $user = $em->getRepository('AppBundle:Utilisateur')->find($ventilation->getUtilisateur());
+
+
+        if($request->request->get("metier"))
+        {
+            $anomalie = new Anomalies();
+            $anomalie->setAnomalie($_POST['metier']);
+            $anomalie->setCommentaire($_POST['commentaire']);
+            $anomalie->setTemps($_POST['temps']);
+            $anomalie->setTypeProduit($_POST['typeProduit']);
+            $anomalie->setQuantite($_POST['quantite']);
+            $anomalie->setCodeDefaut($_POST['code']);
+            $anomalie->setFabricant($_POST['fabricant']);
+            $anomalie->setReference($_POST['reference']);
+            $anomalie->setUser($user);
+            $anomalie->setDate(new \DateTime());
+            $anomalie->setVentilation($ventilation);
+
+            $em->persist($anomalie);
+            $em->flush();
+
+            return $this->redirectToRoute('ventilation_voir', array("id" => $id));
+        }
+        return $this->render('activite/index.html.twig');
     }
 
     /**
