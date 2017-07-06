@@ -100,8 +100,12 @@
     </div>
 </div>
 <br>
-
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    <div>
+        <input class="form-control btn-primary" type="submit" value="{{ 'registration.submit'|trans }}"/>
+    </div>
+{% endif %}
 <div>
-    <input class="form-control btn-primary" type="submit" value="{{ 'registration.submit'|trans }}"/>
+
 </div>
 {{ form_end(form) }}

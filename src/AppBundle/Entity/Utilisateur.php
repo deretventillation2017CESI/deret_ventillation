@@ -54,28 +54,28 @@ class Utilisateur extends BaseUser {
 
     /**
      * un utilisateur à un contrat
-     * @ORM\OneToOne(targetEntity="Contrat")
+     * @ORM\ManyToOne(targetEntity="Contrat")
      * @ORM\JoinColumn(name="contrat_id", referencedColumnName="id")
      */
     private $contrat;
 
     /**
      * un utilisateur à une PlageHoraire
-     * @ORM\OneToOne(targetEntity="PlageHoraire")
+     * @ORM\ManyToOne(targetEntity="PlageHoraire")
      * @ORM\JoinColumn(name="plage_horaire_id", referencedColumnName="id")
      */
     private $typeHoraire;
 
     /**
      * un utilisateur à un secteur
-     * @ORM\OneToOne(targetEntity="Secteur")
+     * @ORM\ManyToOne(targetEntity="Secteur")
      * @ORM\JoinColumn(name="secteur_id", referencedColumnName="id")
      */
     private $secteur;
 
     /**
      * un utilisateur à un batiment
-     * @ORM\OneToOne(targetEntity="Batiment")
+     * @ORM\ManyToOne(targetEntity="Batiment")
      * @ORM\JoinColumn(name="batiment_id", referencedColumnName="id")
      */
     private $batiment;
@@ -83,7 +83,7 @@ class Utilisateur extends BaseUser {
 
     /**
      * un utilisateur à un poste
-     * @ORM\OneToOne(targetEntity="Poste")
+     * @ORM\ManyToOne(targetEntity="Poste")
      * @ORM\JoinColumn(name="poste_id", referencedColumnName="id")
      */
     private $poste;
