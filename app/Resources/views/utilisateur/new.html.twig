@@ -1,16 +1,108 @@
-{% extends 'base.html.twig' %}
+{% extends 'default/layout.html.twig' %}
 
-{% block body %}
-    <h1>Utilisateur creation</h1>
+{% block title %}Création d'un utilisateur{% endblock %}
+{% block main -%}
+    <div>
+        <div class="row text-left" style="margin-top: 2%;">
+            <a href="{{ path('utilisateur_index') }}">
+                <button type="button" class="btn btn-primary">
+                    <span class=" glyphicon glyphicon-arrow-left"></span> Retour
+                </button>
+            </a>
+        </div>
+    </div>
 
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <input type="submit" value="Create"/>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 titre text-center">
+            <h1>Création d'un utilisateur</h1>
+        </div>
+    </div>
+    {{ form_start(form, {'method': 'post', 'action': path('utilisateur_new'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+    <div class="row">
+        <div class="col-lg-6">
+            <label class="col-2 col-form-label" for="usr">Email:</label>
+            {{ form_widget(form.email, {'attr': {'class': 'form-control col-md-4'}}) }}
+        </div>
+        <div class="col-lg-6">
+            <label class="col-2 col-form-label" for="usr">Nom d'utilisateur:</label>
+            {{ form_widget(form.username, {'attr': {'class': 'form-control col-md-4'}}) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <label class="col-2 col-form-label" for="usr">Nom:</label>
+            {{ form_widget(form.nom, {'attr': {'class': 'form-control col-md-4'}}) }}
+        </div>
+        <div class="col-lg-6">
+            <label class="col-2 col-form-label" for="usr">Prénom:</label>
+            {{ form_widget(form.prenom, {'attr': {'class': 'form-control col-md-4'}}) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            {{ form_widget(form.statut, {'attr': {'class': 'form-check-input col-md-4'}}) }}
+            <label class="form-check-label" for="usr">statut</label>
+        </div>
+        <div class="col-lg-6">
+            <label class="col-2 col-form-label" for="usr">Identifiant IGE:</label>
+            {{ form_widget(form.identifiantIGE, {'attr': {'class': 'form-control col-md-4'}}) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            {{ form_widget(form.responsable, {'attr': {'class': 'form-check-input col-md-4'}}) }}
+            <label class="form-check-label" for="usr">Responsable</label>
+        </div>
+        <div class="col-lg-6">
+            <label class="col-2 col-form-label" for="usr">Nombre d'heures théoriques:</label>
+            {{ form_widget(form.nbHeureTheoriqueSession, {'attr': {'class': 'form-control col-md-4'}}) }}
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <label class="col-2 col-form-label" for="usr">Date de créations:</label>
+            {{ form_widget(form.dateCreation) }}
+        </div>
+        <div class="col-lg-6">
+            <label class="col-2 col-form-label" for="usr">Contrat:</label>
+            {{ form_widget(form.contrat, {'attr': {'class': 'form-control col-md-4'}}) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <label class="col-2 col-form-label" for="usr">Secteur:</label>
+            {{ form_widget(form.secteur, {'attr': {'class': 'form-control col-md-4'}}) }}
+        </div>
+        <div class="col-lg-6">
+            <label class="col-2 col-form-label" for="ugsr">Poste:</label>
+            {{ form_widget(form.poste, {'attr': {'class': 'form-control col-md-4'}}) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <label class="col-2 col-form-label" for="usr">Bâtiment:</label>
+            {{ form_widget(form.batiment, {'attr': {'class': 'form-control col-md-4'}}) }}
+        </div>
+        <div class="col-lg-6">
+            <label class="col-2 col-form-label" for="usr">Plage horaire:</label>
+            {{ form_widget(form.typeHoraire, {'attr': {'class': 'form-control col-md-4'}}) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <label class="col-2 col-form-label" for="usr">Mot de passe:</label>
+            {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control col-md-4'}}) }}
+        </div>
+        <div class="col-lg-6">
+            <label class="col-2 col-form-label" for="usr">Confirmer le mot de passe:</label>
+            {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control col-md-4'}}) }}
+        </div>
+    </div>
+    <br>
+    <div>
+        <input class="form-control btn-primary" type="submit" value="Enregistrer"/>
+    </div>
+
     {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('utilisateur_index') }}">Back to the list</a>
-        </li>
-    </ul>
 {% endblock %}

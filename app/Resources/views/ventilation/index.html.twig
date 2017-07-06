@@ -31,8 +31,13 @@
                     <td>{{ activite.quantite }}</td>
                     <td>{{ activite.temps }}</td>
                     <td>{{ activite.commentaire }}</td>
-                    <td><a href="{{ path('activite_edit', {'id': activite.id}) }}"><button class="btn btn-warning">Editer</button><a/></td>
-                    <td><a href="{{ path('activite_delete', {'id' : activite.id, 'idVentilation' : ventilation[0].id}) }}"><button class="btn btn-danger">Supprimer</button><a/></td>
+                    <td><a href="{{ path('activite_edit', {'id': activite.id}) }}">
+                            <button class="btn btn-warning">Editer</button>
+                        </a></td>
+                    <td>
+                        <a href="{{ path('activite_delete', {'id' : activite.id, 'idVentilation' : ventilation[0].id}) }}">
+                            <button class="btn btn-danger">Supprimer</button>
+                        </a></td>
                 </tr>
             {% endfor %}
             </table>
@@ -54,8 +59,13 @@
                         <td>{{ autreactivite.activite }}</td>
                         <td>{{ autreactivite.temps }}</td>
                         <td>{{ autreactivite.commentaire }}</td>
-                        <td><a href="{{ path('autreactivite_edit', {'id':autreactivite.id}) }}"><button class="btn btn-warning">Editer</button><a/></td>
-                        <td><a href="{{ path('autreactivite_delete', {'id' : autreactivite.id, 'idVentilation' : ventilation[0].id}) }}"><button class="btn btn-danger">Supprimer</button><a/></td>
+                        <td><a href="{{ path('autreactivite_edit', {'id':autreactivite.id}) }}">
+                                <button class="btn btn-warning">Editer</button>
+                            </a></td>
+                        <td>
+                            <a href="{{ path('autreactivite_delete', {'id' : autreactivite.id, 'idVentilation' : ventilation[0].id}) }}">
+                                <button class="btn btn-danger">Supprimer</button>
+                            </a></td>
                     </tr>
                 {% endfor %}
             </table>
@@ -89,8 +99,13 @@
                             <td>{{ anomalie.quantite }}</td>
                             <td>{{ anomalie.temps }}</td>
                             <td>{{ anomalie.commentaire }}</td>
-                            <td><a href="{{ path('anomalie_edit', {'id' : anomalie.id}) }}"><button class="btn btn-warning">Editer</button><a/></td>
-                            <td><a href="{{ path('anomalie_delete', {'id' : anomalie.id, 'idVentilation' : ventilation[0].id}) }}"><button class="btn btn-danger">Supprimer</button><a/></td>
+                            <td><a href="{{ path('anomalie_edit', {'id' : anomalie.id}) }}">
+                                    <button class="btn btn-warning">Editer</button>
+                                </a></td>
+                            <td>
+                                <a href="{{ path('anomalie_delete', {'id' : anomalie.id, 'idVentilation' : ventilation[0].id}) }}">
+                                    <button class="btn btn-danger">Supprimer</button>
+                                </a></td>
                         </tr>
                     {% endfor %}
                 </table>
