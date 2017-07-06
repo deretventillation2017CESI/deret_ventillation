@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class RegistrationType extends AbstractType
 {
@@ -16,7 +17,15 @@ class RegistrationType extends AbstractType
         $builder->add('identifiantIGE');
         $builder->add('responsable');
         $builder->add('nbHeureTheoriqueSession');
-        $builder->add('dateCreation');
+        $builder->add('dateCreation', DateType::class, array(
+            'widget' => 'choice',
+            // this is actually the default format for single_text
+            'format' => 'yyyy-MM-dd',
+            // do not render as type="date", to avoid HTML5 date pickers
+            'html5' => false,
+
+            // add a class that can be selected in JavaScript
+            'attr' => ['class' => 'js-datepicker'],));
         $builder->add('contrat');
         $builder->add('secteur');
         $builder->add('poste');

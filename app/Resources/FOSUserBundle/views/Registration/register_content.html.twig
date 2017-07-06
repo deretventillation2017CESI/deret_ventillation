@@ -1,5 +1,11 @@
 {% trans_default_domain 'FOSUserBundle' %}
-
+<script>
+    $(document).ready(function () {
+        $('.js-datepicker').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+    });
+</script>
 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
 <div class="row">
     <div class="col-lg-6">
