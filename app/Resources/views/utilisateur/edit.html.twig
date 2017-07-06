@@ -1,0 +1,97 @@
+{% extends 'default/layout.html.twig' %}
+
+{% block title %}Modification d'un poste{% endblock %}
+
+{% block main -%}
+    {{ form_start(edit_form) }}
+    <div class="row text-left" style="margin-top: 2%;">
+        <a href="{{ path('utilisateur_index') }}">
+            <button type="button" class="btn btn-primary">
+                <span class=" glyphicon glyphicon-arrow-left"></span> Retour
+            </button>
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 titre text-center">
+            <h1>Modification d'un utilisateur</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <label class="col-2 col-form-label" for="usr">Nom:</label>
+            {{ form_widget(edit_form.nom, {'attr': {'class': 'form-control col-md-4'}}) }}
+        </div>
+        <div class="col-lg-6">
+            <label class="col-2 col-form-label" for="usr">Prénom:</label>
+            {{ form_widget(edit_form.prenom, {'attr': {'class': 'form-control col-md-4'}}) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            {{ form_widget(edit_form.statut, {'attr': {'class': 'form-check-input col-md-4'}}) }}
+            <label class="form-check-label" for="usr">statut</label>
+        </div>
+        <div class="col-lg-6">
+            <label class="col-2 col-form-label" for="usr">Identifiant IGE:</label>
+            {{ form_widget(edit_form.identifiantIGE, {'attr': {'class': 'form-control col-md-4'}}) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            {{ form_widget(edit_form.responsable, {'attr': {'class': 'form-check-input col-md-4'}}) }}
+            <label class="form-check-label" for="usr">Responsable</label>
+        </div>
+        <div class="col-lg-6">
+            <label class="col-2 col-form-label" for="usr">Nombre d'heures théoriques:</label>
+            {{ form_widget(edit_form.nbHeureTheoriqueSession, {'attr': {'class': 'form-control col-md-4'}}) }}
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <label class="col-2 col-form-label" for="usr">Date de créations:</label>
+            {{ form_widget(edit_form.dateCreation) }}
+        </div>
+        <div class="col-lg-6">
+            <label class="col-2 col-form-label" for="usr">Contrat:</label>
+            {{ form_widget(edit_form.contrat, {'attr': {'class': 'form-control col-md-4'}}) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <label class="col-2 col-form-label" for="usr">Secteur:</label>
+            {{ form_widget(edit_form.secteur, {'attr': {'class': 'form-control col-md-4'}}) }}
+        </div>
+        <div class="col-lg-6">
+            <label class="col-2 col-form-label" for="usr">Poste:</label>
+            {{ form_widget(edit_form.poste, {'attr': {'class': 'form-control col-md-4'}}) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <label class="col-2 col-form-label" for="usr">Bâtiment:</label>
+            {{ form_widget(edit_form.batiment, {'attr': {'class': 'form-control col-md-4'}}) }}
+        </div>
+        <div class="col-lg-6">
+            <label class="col-2 col-form-label" for="usr">Plage horaire:</label>
+            {{ form_widget(edit_form.typeHoraire, {'attr': {'class': 'form-control col-md-4'}}) }}
+        </div>
+    </div>
+    <div class="row text-center">
+        <br/><br/>
+        <button type="submit" class="btn btn-info">
+            <span class="glyphicon glyphicon-pencil"></span> Modifier
+        </button>
+        {{ form_end(edit_form) }}
+    </div>
+    <div class="row text-center">
+        {{ form_start(delete_form) }}
+        <br/>
+        <button type="submit" class="btn btn-danger">
+            <span class=" glyphicon glyphicon-remove"></span> Supprimer
+        </button>
+
+        {{ form_end(delete_form) }}
+    </div>
+{% endblock %}

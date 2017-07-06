@@ -1,0 +1,70 @@
+{% extends 'default/layout.html.twig' %}
+
+{% block title %}Details d'un utilisateur{% endblock %}
+
+{% block main -%}
+    <div class="row text-left" style="margin-top: 2%;">
+        <a href="{{ path('utilisateur_index') }}">
+            <button type="button" class="btn btn-primary">
+                <span class=" glyphicon glyphicon-arrow-left"></span> Retour
+            </button>
+        </a>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 titre text-center">
+            <h1>Details d'un utilisateur</h1>
+        </div>
+    </div>
+
+    <table class="table" style="margin-top: 2%;">
+        <tbody>
+        <tr class="hidden">
+            <th>Id</th>
+            <td>{{ utilisateur.id }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ utilisateur.nom }}</td>
+        </tr>
+        <tr>
+            <th>Prenom</th>
+            <td>{{ utilisateur.prenom }}</td>
+        </tr>
+        <tr>
+            <th>Statut</th>
+            <td>{% if utilisateur.statut %}Yes{% else %}No{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Identifiant IGE</th>
+            <td>{{ utilisateur.identifiantIGE }}</td>
+        </tr>
+        <tr>
+            <th>Responsable</th>
+            <td>{% if utilisateur.responsable %}Oui{% else %}Non{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Nbheure theorique session</th>
+            <td>{{ utilisateur.nbHeureTheoriqueSession }}</td>
+        </tr>
+        <tr>
+            <th>Date de creation</th>
+            <td>{% if utilisateur.dateCreation %}{{ utilisateur.dateCreation|date('Y-m-d H:i:s') }}{% endif %}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="row text-center">
+        <a href="{{ path('utilisateur_edit', { 'id': utilisateur.id }) }}">
+            <button type="button" class="btn btn-info">
+                <span class="glyphicon glyphicon-pencil"></span> Modifier
+            </button>
+        </a>
+        {{ form_start(delete_form) }}
+        <br/>
+        <button type="submit" class="btn btn-danger">
+            <span class=" glyphicon glyphicon-remove"></span> Supprimer
+        </button>
+        {{ form_end(delete_form) }}
+    </div>
+
+{% endblock %}
