@@ -1,4 +1,11 @@
 {% extends 'default/layout.html.twig' %}
+<script>
+    $(document).ready(function () {
+        $('.js-datepicker').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+    });
+</script>
 
 {% block title %}Modification d'un poste{% endblock %}
 

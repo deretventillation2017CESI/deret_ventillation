@@ -19,7 +19,15 @@ class UtilisateurType extends AbstractType
             ->add('identifiantIGE')
             ->add('responsable')
             ->add('nbHeureTheoriqueSession')
-            ->add('dateCreation')
+            ->add('dateCreation', DateType::class, array(
+                'widget' => 'choice',
+                // this is actually the default format for single_text
+                'format' => 'yyyy-MM-dd',
+                // do not render as type="date", to avoid HTML5 date pickers
+                'html5' => false,
+
+                // add a class that can be selected in JavaScript
+                'attr' => ['class' => 'js-datepicker'],))
             ->add('contrat')
             ->add('typeHoraire')
             ->add('secteur')
