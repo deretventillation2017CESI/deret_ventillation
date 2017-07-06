@@ -17,8 +17,13 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
- 
-        return $this->render('default/index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        if($this->getUser() != null){
+            $user = $em->getRepository('AppBundle:Utilisateur')->find($this->getUser()->getId());
+
+            return $this->render('default/index.html.twig', array("responsable" => $user->getResponsable()));
+        }
+        return $this->render('default/index.html.twig', array("responsable" => false));
     }
 
     /**
@@ -51,7 +56,7 @@ class DefaultController extends Controller
 
             return $this->redirectToRoute('ventilation_index');
         }
-        return $this->render('activite/index.html.twig');
+        return $this->render('activite/index.html.twig', array('ventilation' => false));
     }
 
     /**
@@ -82,7 +87,7 @@ class DefaultController extends Controller
 
             return $this->redirectToRoute('ventilation_voir', array("id" => $id));
         }
-        return $this->render('activite/index.html.twig');
+        return $this->render('activite/index.html.twig',array('ventilation' => $id));
     }
 
     /**
@@ -169,7 +174,7 @@ class DefaultController extends Controller
             return $this->redirectToRoute('ventilation_index');
         }
 
-        return $this->render('autre_activite/index.html.twig');
+        return $this->render('autre_activite/index.html.twig', array('ventilation' => false));
     }
 
     /**
@@ -288,11 +293,12 @@ class DefaultController extends Controller
             return $this->redirectToRoute('ventilation_index');
         }
 
-        return $this->render('anomalie/index.html.twig');
+        return $this->render('anomalie/index.html.twig', array('ventilation' => false));
     }
 
     /**
      * @Route("ventilation/responsable/anomalie_resp/{id}", name="anomalie_resp")
+     * @Method({"GET", "POST"})
      */
     public function indexAnomalieRespAction(Request $request,$id)
     {
@@ -322,7 +328,7 @@ class DefaultController extends Controller
 
             return $this->redirectToRoute('ventilation_voir', array("id" => $id));
         }
-        return $this->render('activite/index.html.twig');
+        return $this->render('activite/index.html.twig', array('ventilation' => 'toto'));
     }
 
     /**

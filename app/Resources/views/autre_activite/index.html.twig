@@ -35,8 +35,13 @@
                 <label>Commentaire</label>
                 <textarea name="commentaire"></textarea>
             </div>
-            <input type="submit" value="Enregistrer"></input>
+            <input class="btn btn-success" type="submit" value="Enregistrer"></input>
         </form>
+        {% if ventilation %}
+            <a href="{{ path('ventilation_voir', {'id' : ventilation}) }}"><button class="btn btn-info">Retour</button></a>
+        {% else %}
+            <a href="{{ path('ventilation_index') }}"><button class="btn btn-info">Retour</button></a>
+        {% endif %}
     </div>
 
    

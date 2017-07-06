@@ -14,8 +14,11 @@
 
         <div class="row">
             <a class="btn btn-primary col-md-2" href="{{ path('ventilation_index') }}" role="button" title="Saisir une ventilation">Saisir</a>
-            <a class="btn btn-primary col-md-2 col-md-offset-1" href="{{ path('dossier_index') }}" role="button">Administration</a>
-            <a class="btn btn-primary col-md-2 col-md-offset-1" href="#" role="button">Extraction</a>
+            {% if responsable %}
+            <a class="btn btn-primary col-md-2 col-md-offset-1" href="{{ path('ventilation_responsable') }}" role="button">Contrôler ventilations</a>
+            {#<a class="btn btn-primary col-md-2 col-md-offset-1" href="{{ path('dossier_index') }}" role="button">Administration</a>#}
+            <a class="btn btn-primary col-md-2 col-md-offset-1" href="{{ path("export_index") }}" role="button">Extraction</a>
+            {% endif %}
         </div>
     {% else %}
         <div>
