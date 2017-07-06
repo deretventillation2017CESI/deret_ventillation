@@ -97,14 +97,13 @@ class VentilationController extends Controller {
         $dateDebut->modify('-1 month');
         $dateFin= new \DateTime();
          $dateFin->modify('-2 day');
-        $ventilationsRetards = $em->getRepository("AppBundle:Ventilation")->findByNotValidationAndDateMax($dateFin);
+        $ventilationsRetards = $em->getRepository("AppBundle:Ventilation")->findByNotValidationAndDateMaxMin($dateDebut,$dateFin);
         $ventilations = $em->getRepository("AppBundle:Ventilation")->findByNotValidationAndDateMin($dateFin);     
        $ventilationsControlees = $em->getRepository("AppBundle:Ventilation")->findByValidationAndDateMin($dateFin);
-        $ventilationsArchives = $em->getRepository("AppBundle:Ventilation")->findByAllDateMinMax($dateDebut,$dateFin);
+        //$ventilationsArchives = $em->getRepository("AppBundle:Ventilation")->findByAllDateMinMax($dateDebut,$dateFin);
         return $this->render('ventilation/responsable.html.twig', array(
             'ventilations' => $ventilations,
             'ventilationsRetards' => $ventilationsRetards,
-            'ventilationsArchives' => $ventilationsArchives,
             'ventilationsControlees' =>$ventilationsControlees
         ));
     }
