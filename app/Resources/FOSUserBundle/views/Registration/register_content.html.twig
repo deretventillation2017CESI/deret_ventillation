@@ -1,45 +1,89 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-<div class="form-group row">
-    <label for="example-text-input" class="col-2 col-form-label"> Email:</label>
-
-</div>
-
-</div>
-{{ form_label(form.email) }}
-    {{ form_widget(form.email) }}
-
-    {{ form_label(form.username) }}
-    {{ form_widget(form.username) }}
-
-    {{ form_label(form.nom) }}
-    {{ form_widget(form.nom) }}
-
-    {{ form_label(form.prenom) }}
-    {{ form_widget(form.prenom) }}
-
-    {{ form_label(form.statut) }}
-    {{ form_widget(form.statut) }}
-
-    {{ form_label(form.identifiantIGE) }}
-    {{ form_widget(form.identifiantIGE) }}
-
-    {{ form_label(form.responsable) }}
-    {{ form_widget(form.responsable) }}
-
-    {{ form_label(form.nbHeureTheoriqueSession) }}
-    {{ form_widget(form.nbHeureTheoriqueSession) }}
-
-    {{ form_label(form.dateCreation) }}
-    {{ form_widget(form.dateCreation) }}
-
-    {{ form_label(form.plainPassword.first) }}
-    {{ form_widget(form.plainPassword.first) }}
-
-    {{ form_label(form.plainPassword.second) }}
-    {{ form_widget(form.plainPassword.second) }}
-    <div>
-        <input type="submit" value="{{ 'registration.submit'|trans }}" />
+<div class="row">
+    <div class="col-lg-6">
+        <label class="col-2 col-form-label" for="usr">Email:</label>
+        {{ form_widget(form.email, {'attr': {'class': 'form-control col-md-4'}}) }}
     </div>
+    <div class="col-lg-6">
+        <label class="col-2 col-form-label" for="usr">Nom d'utilisateur:</label>
+        {{ form_widget(form.username, {'attr': {'class': 'form-control col-md-4'}}) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <label class="col-2 col-form-label" for="usr">Nom:</label>
+        {{ form_widget(form.nom, {'attr': {'class': 'form-control col-md-4'}}) }}
+    </div>
+    <div class="col-lg-6">
+        <label class="col-2 col-form-label" for="usr">Prénom:</label>
+        {{ form_widget(form.prenom, {'attr': {'class': 'form-control col-md-4'}}) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        {{ form_widget(form.statut, {'attr': {'class': 'form-check-input col-md-4'}}) }}
+        <label class="form-check-label" for="usr">statut</label>
+    </div>
+    <div class="col-lg-6">
+        <label class="col-2 col-form-label" for="usr">Identifiant IGE:</label>
+        {{ form_widget(form.identifiantIGE, {'attr': {'class': 'form-control col-md-4'}}) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        {{ form_widget(form.responsable, {'attr': {'class': 'form-check-input col-md-4'}}) }}
+        <label class="form-check-label" for="usr">Responsable</label>
+    </div>
+    <div class="col-lg-6">
+        <label class="col-2 col-form-label" for="usr">Nombre d'heures théoriques:</label>
+        {{ form_widget(form.nbHeureTheoriqueSession, {'attr': {'class': 'form-control col-md-4'}}) }}
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <label class="col-2 col-form-label" for="usr">Date de créations:</label>
+        {{ form_widget(form.dateCreation) }}
+    </div>
+    <div class="col-lg-6">
+        <label class="col-2 col-form-label" for="usr">Contrat:</label>
+        {{ form_widget(form.contrat, {'attr': {'class': 'form-control col-md-4'}}) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <label class="col-2 col-form-label" for="usr">Secteur:</label>
+        {{ form_widget(form.secteur, {'attr': {'class': 'form-control col-md-4'}}) }}
+    </div>
+    <div class="col-lg-6">
+        <label class="col-2 col-form-label" for="usr">Poste:</label>
+        {{ form_widget(form.poste, {'attr': {'class': 'form-control col-md-4'}}) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <label class="col-2 col-form-label" for="usr">Bâtiment:</label>
+        {{ form_widget(form.batiment, {'attr': {'class': 'form-control col-md-4'}}) }}
+    </div>
+    <div class="col-lg-6">
+        <label class="col-2 col-form-label" for="usr">Plage horaire:</label>
+        {{ form_widget(form.typeHoraire, {'attr': {'class': 'form-control col-md-4'}}) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <label class="col-2 col-form-label" for="usr">Mot de passe:</label>
+        {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control col-md-4'}}) }}
+    </div>
+    <div class="col-lg-6">
+        <label class="col-2 col-form-label" for="usr">Confirmer le mot de passe:</label>
+        {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control col-md-4'}}) }}
+    </div>
+</div>
+<br>
+<div>
+    <input class="form-control btn-primary" type="submit" value="{{ 'registration.submit'|trans }}"/>
+</div>
 {{ form_end(form) }}
