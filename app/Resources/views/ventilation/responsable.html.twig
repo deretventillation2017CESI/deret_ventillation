@@ -31,8 +31,8 @@
                         {% set temps = temps + anomalie.temps %}
                     {% endfor %}
                     <td>{{ temps }}</td>
-                    <td><a href="{{ path('ventilation_voir', {'id' : ventilation.id}) }}"><button>Voir</button></a></td>
-                    <td><a href="{{ path('ventilation_validation', {'id' : ventilation.id}) }}"><button>Valider</button></a></td>
+                    <td><a href="{{ path('ventilation_voir', {'id' : ventilation.id}) }}"><button class="btn btn-primary">Voir</button></a></td>
+                    <td><a href="{{ path('ventilation_validation', {'id' : ventilation.id}) }}"><button class="btn btn-success">Valider</button></a></td>
                 </tr>
             {% endfor %}
         </table>
@@ -65,8 +65,8 @@
                         {% set temps = temps + anomalie.temps %}
                     {% endfor %}
                     <td>{{ temps }}</td>
-                    <td><a href="{{ path('ventilation_voir', {'id' : ventilation.id}) }}"><button>Voir</button></a></td>
-                    <td><a href="{{ path('ventilation_validation', {'id' : ventilation.id}) }}"><button>Valider</button></a></td>
+                    <td><a href="{{ path('ventilation_voir', {'id' : ventilation.id}) }}"><button class="btn btn-primary">Voir</button></a></td>
+                    <td><a href="{{ path('ventilation_validation', {'id' : ventilation.id}) }}"><button class="btn btn-success">Valider</button></a></td>
                 </tr>
             {% endfor %}
         </table>
@@ -79,7 +79,7 @@
                 <th>Prénom</th>
                 <th>Date de saisie</th>
                 <th>Temps</th>
-                <th>Validation</th>
+                <th>Dévalider ?</th>
             </tr>
 
             {% for ventilation in ventilationsControlees %}
@@ -98,7 +98,7 @@
                         {% set temps = temps + anomalie.temps %}
                     {% endfor %}
                     <td>{{ temps }}</td>
-                    <td><a href="{{ path('ventilation_devalidation', {'id' : ventilation.id}) }}"><button>Dévalider</button></a></td>
+                    <td><a href="{{ path('ventilation_devalidation', {'id' : ventilation.id}) }}"><button class="btn btn-danger">Dévalider</button></a></td>
                 </tr>
             {% endfor %}
         </table>
@@ -111,6 +111,8 @@
                 <th>Prénom</th>
                 <th>Date de saisie</th>
                 <th>Temps</th>
+                <th>Inspecter</th>
+                <th>Validation</th>
             </tr>
 
             {% for ventilation in ventilationsArchives %}
@@ -129,7 +131,8 @@
                         {% set temps = temps + anomalie.temps %}
                     {% endfor %}
                     <td>{{ temps }}</td>
-                  
+                    <td><a href="{{ path('ventilation_voir', {'id' : ventilation.id}) }}"><button class="btn btn-primary">Voir</button></a></td>
+                    <td><a href="{{ path('ventilation_validation', {'id' : ventilation.id}) }}"><button class="btn btn-success">Valider</button></a></td>
                 </tr>
             {% endfor %}
         </table>

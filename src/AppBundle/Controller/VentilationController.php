@@ -147,21 +147,20 @@ class VentilationController extends Controller {
     /**
      * Creates a new ventilation entity.
      *
-     * @Route("/voir/{id}", name="ventilation_voir")
+     * @Route("/responsable/voir/{id}", name="ventilation_voir")
      * @Method({"GET", "POST"})
      */
     public function voirAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $ventilation = $em->getRepository('AppBundle:Ventilation')->findBy(
-            array("utilisateur" => $this->getUser()->getId(), "dateSaisie" => new \DateTime()));
+        $ventilation = $em->getRepository('AppBundle:Ventilation')->find($id);
         $activites = $em->getRepository('AppBundle:Activite')->findBy(
-            array("user"=>$this->getUser()->getId(),"date"=> new \DateTime()));
+            array("user"=>$ventilation->getUtilisateur()->getId(),"ventilation" => $id));
         $autreactivites = $em->getRepository('AppBundle:AutreActivite')->findBy(
-            array("user"=>$this->getUser()->getId(),"date"=> new \DateTime()));
+            array("user"=>$ventilation->getUtilisateur()->getId(),"ventilation"=> $id));
         $anomalies = $em->getRepository('AppBundle:Anomalies')->findBy(
-            array("user"=>$this->getUser()->getId(),"date"=> new \DateTime()));
+            array("user"=>$ventilation->getUtilisateur()->getId(),"ventilation"=> $id));
 
         $tempsActivite = 0;
         $tempsAutreActivite = 0;
@@ -178,10 +177,6 @@ class VentilationController extends Controller {
         }
 
         $tempsJournalier = $tempsActivite+$tempsAutreActivite+$tempsAnomalie;
-
-        if($request->request->get('typeActivite')){
-            return $this->redirectToRoute('ventilation_new', array('id' => $request->request->get('typeActivite')));
-        }
 
         return $this->render('ventilation/voir.html.twig', array(
             "ventilation" => $ventilation,
