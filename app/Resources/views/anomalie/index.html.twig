@@ -49,10 +49,7 @@
                 </div>
                 <div class="metier col-lg-4">
                     <label>Fabricant</label>
-                    <select name="fabricant">
-                        <option value="Diors">Diors</option>
-                        <option value="Diors">Hermès</option>
-                    </select>
+                    <input name="fabricant"></input>
                 </div>
             </div>
             <div class="row">
@@ -107,8 +104,13 @@
                 <label>Commentaire</label>
                 <textarea name="commentaire"></textarea>
             </div>
-            <input type="submit" value="Enregistrer"></input>
+            <input class="btn btn-success"type="submit" value="Enregistrer"></input>
         </form>
+        {% if ventilation %}
+            <a href="{{ path('ventilation_voir', {'id' : ventilation}) }}"><button class="btn btn-info">Retour</button></a>
+        {% else %}
+            <a href="{{ path('ventilation_index') }}"><button class="btn btn-info">Retour</button></a>
+        {% endif %}
     </div>
    
 {% endblock %}
