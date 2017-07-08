@@ -6,23 +6,24 @@
        </div>
     </div>
     <div class="row">
-        <h2>Bienvue sur la plateforme de saisie des ventilations.</h2>
-        <p>Depuis cette plateforme vous pouvez faire la saisie dela ventillation des heures
-            que vous avez réalisé dans les entrepôts de deret logistique.</p>
+        <h2>Bienvenue sur la plateforme de saisie des ventilations.</h2>
+        <p>Depuis cette plateforme vous pouvez faire la saisie de la ventilation des heures
+            que vous avez réalisé dans les entrepôts de DERET logistique.</p>
     </div>
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 
         <div class="row">
             <a class="btn btn-primary col-md-2" href="{{ path('ventilation_index') }}" role="button" title="Saisir une ventilation">Saisir</a>
             {% if responsable %}
-            <a class="btn btn-primary col-md-2 col-md-offset-1" href="{{ path('ventilation_responsable') }}" role="button">Contrôler ventilations</a>
-            {#<a class="btn btn-primary col-md-2 col-md-offset-1" href="{{ path('dossier_index') }}" role="button">Administration</a>#}
-            <a class="btn btn-primary col-md-2 col-md-offset-1" href="{{ path("export_index") }}" role="button">Extraction</a>
+                <a class="btn btn-primary col-md-2 col-md-offset-1" href="{{ path("utilisateur_index") }}" role="button">Utilisateurs</a>
+                <a class="btn btn-primary col-md-2 col-md-offset-1" href="{{ path('ventilation_responsable') }}" role="button">Contrôler ventilations</a>
+                {#<a class="btn btn-primary col-md-2 col-md-offset-1" href="{{ path('dossier_index') }}" role="button">Administration</a>#}
+                <a class="btn btn-primary col-md-2 col-md-offset-1" href="{{ path("export_index") }}" role="button">Extraction</a>
             {% endif %}
         </div>
     {% else %}
         <div>
-            <blockquote>Veuillez vous connecter pour accéder aux fonctionalité de l'application.</blockquote>
+            <blockquote>Veuillez vous connecter pour accéder aux fonctionalités de l'application.</blockquote>
         </div>
     {% endif %}
    

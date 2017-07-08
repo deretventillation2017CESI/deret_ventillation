@@ -18,6 +18,7 @@ class VentilationRepository extends \Doctrine\ORM\EntityRepository {
     public function findAllTempsPasseeVentilation($user, $id) {
 
         $dateless = new \DateTime("-1 day");
+        $dateless = new \DateTime("-1 day");
         $datemore = new \DateTime("+1 day");
 
 
@@ -65,14 +66,12 @@ class VentilationRepository extends \Doctrine\ORM\EntityRepository {
                         ->getQuery()->getResult();
     }
 
-    public function findByAllDateMinMax($dateDebut, $dateFin) {
+    public function findByAllDateMinMax($dateDebut) {
         return $this->createQueryBuilder('t')
                         ->where("t.validation = ?1")
                         ->andWhere("t.dateSaisie > ?2")
-                        ->andWhere("t.dateSaisie < ?3")
                         ->setParameter(1, true)
                         ->setParameter(2, $dateDebut)
-                        ->setParameter(3, $dateFin)
                 ->getQuery()
                         ->getResult();
     }

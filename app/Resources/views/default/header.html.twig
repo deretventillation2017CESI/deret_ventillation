@@ -43,17 +43,17 @@
                         </li>
                         #}
                         <li>
-                            <a href="{{ path('fos_user_profile_show') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Bonjour {{ app.user.username }}</a>
+                            <a href="{{ path('fos_user_profile_show') }}"><span class="" aria-hidden="true"></span> Bonjour {{ app.user.username }}</a>
                         </li>
                         <li>                           
-                            <a href="{{ path('fos_user_security_logout') }}"> <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Déconnexion</a>
+                            <a href="{{ path('fos_user_security_logout') }}"> <span class="" aria-hidden="true"></span> Déconnexion</a>
                         </li>
                     </ul>
                 {% else %}
                     <ul  class="nav navbar-nav navbar-right">
-                        <li><a href="{{ path('fos_user_security_login') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Connexion</a></li>
+                        <li><a href="{{ path('fos_user_security_login') }}"><span class="" aria-hidden="true"></span> Connexion</a></li>
                 {% endif %}
-                        <li>{{ "now"|date("d/m/Y")}}</li>
+                        {#<li>{{ "now"|date("d/m/Y")}}</li>#}
                     </ul>
             </div>
         </div>

@@ -100,9 +100,10 @@ class VentilationController extends Controller {
         $ventilationsRetards = $em->getRepository("AppBundle:Ventilation")->findByNotValidationAndDateMaxMin($dateDebut,$dateFin);
         $ventilations = $em->getRepository("AppBundle:Ventilation")->findByNotValidationAndDateMin($dateFin);     
        $ventilationsControlees = $em->getRepository("AppBundle:Ventilation")->findByValidationAndDateMin($dateFin);
-        //$ventilationsArchives = $em->getRepository("AppBundle:Ventilation")->findByAllDateMinMax($dateDebut,$dateFin);
+        $ventilationsArchives = $em->getRepository("AppBundle:Ventilation")->findByAllDateMinMax($dateDebut);
         return $this->render('ventilation/responsable.html.twig', array(
             'ventilations' => $ventilations,
+            'ventilationsArchives' => $ventilationsArchives,
             'ventilationsRetards' => $ventilationsRetards,
             'ventilationsControlees' =>$ventilationsControlees
         ));

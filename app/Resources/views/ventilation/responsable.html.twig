@@ -71,8 +71,9 @@
             {% endfor %}
         </table>
     </div>
-         <div class="row">
-        <h1>Liste des ventilations contrôlées</h1>
+
+    <div class="row">
+        <h1>Liste des ventilations archivés</h1>
         <table border="1" class="table table-striped">
             <tr>
                 <th>Nom</th>
@@ -82,7 +83,7 @@
                 <th>Dévalider ?</th>
             </tr>
 
-            {% for ventilation in ventilationsControlees %}
+            {% for ventilation in ventilationsArchives %}
                 {% set temps = 0 %}
                 <tr>
                     <td>{{ ventilation.utilisateur.nom }}</td>

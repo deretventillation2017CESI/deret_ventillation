@@ -328,7 +328,7 @@ class DefaultController extends Controller
 
             return $this->redirectToRoute('ventilation_voir', array("id" => $id));
         }
-        return $this->render('activite/index.html.twig', array('ventilation' => 'toto'));
+        return $this->render('anomalie/index.html.twig', array('ventilation' => '$id'));
     }
 
     /**
